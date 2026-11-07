@@ -168,6 +168,11 @@ window.__ModuleLoader__.load({
         headingStack: FONT_MIST_HEAD,
         headWeight: 600,
         headTracking: '.06em',
+        // Body Chinese (思源黑体) sits at x-height .54; Franklin trails it at
+        // .49. Lift the Latin to the Chinese measure so the English stops
+        // reading a size smaller than the Chinese beside it.
+        xHeight: 0.54,
+        headXHeight: 0.54,
         code: 'sepia(.08) saturate(.78)',
         tokens: {
           '--dsw-alias-bg-base': { light: '#F8FAFC', dark: '#0E1218' },
@@ -202,6 +207,11 @@ window.__ModuleLoader__.load({
         headingStack: FONT_MOSS_HEAD,
         headWeight: 400,
         headTracking: '.05em',
+        // Gill Sans (.45) against 思源黑体 (.54), and Bodoni (.38) against
+        // 小标宋 (.46) 鈥?both pairs leave the English visibly undersized, so
+        // each is normalised to the Chinese face it is set beside.
+        xHeight: 0.54,
+        headXHeight: 0.46,
         code: 'saturate(.9) sepia(.04)',
         tokens: {
           '--dsw-alias-bg-base': { light: '#F9FBF7', dark: '#0E1310' },
@@ -701,6 +711,13 @@ window.__ModuleLoader__.load({
       const heading = palette.headingStack ?? (palette.heading === 'serif' ? FONT_SERIF : null)
       const tracking = palette.headTracking ?? '.02em'
       const css = [`body{--dsw-font-family:${stack}!important}`]
+      if (palette.xHeight) {
+        // font-size-adjust equalises x-height across faces: the Latin is grown
+        // to the Chinese measure, the Chinese (already at that measure) is left
+        // alone. Anything with its own cast 鈥?code, quotes 鈥?is opted out
+        // further down, or the terminal face would balloon.
+        css.push(`body{font-size-adjust:${palette.xHeight}}`)
+      }
       if (heading && (palette.headingStack || palette.font !== 'serif')) {
         // Markdown headings are real h1–h3, but the hero headline is a plain span
         // inside the shell's titleGroup — without its own selector the title font
@@ -711,7 +728,7 @@ window.__ModuleLoader__.load({
           'body h3',
           'body [class*="titleGroup"]>span:first-child',
         ]
-        css.push(`${targets.join(',')}{font-family:${heading}!important;letter-spacing:${tracking};font-weight:${palette.headWeight ?? 600};font-synthesis:none}`)
+        css.push(`${targets.join(',')}{font-family:${heading}!important;letter-spacing:${tracking};font-weight:${palette.headWeight ?? 600};font-synthesis:none${palette.headXHeight ? `;font-size-adjust:${palette.headXHeight}` : ''}}`)
       }
       return css.join('\n')
     }
@@ -749,6 +766,7 @@ window.__ModuleLoader__.load({
         // same screen face, so the two press runs still read as one machine.
         parts.push(
           `body pre,body pre code,body code,body kbd,body samp{font-family:${FONT_CRT}!important}`,
+          'body pre,body pre code,body code,body kbd,body samp{font-size-adjust:none}',
           'body pre{font-size:.96em;line-height:1.6;letter-spacing:.01em}',
           'body :not(pre)>code{font-size:1.02em;letter-spacing:.02em}',
         )
@@ -770,7 +788,7 @@ window.__ModuleLoader__.load({
         // A quotation is a different press run: 仿宋, upright, one notch smaller.
         // Never italic — CJK italics are synthesised obliques and read as errors.
         parts.push(
-          `body blockquote{font-family:${FONT_QUOTE};font-style:normal;font-size:.97em;letter-spacing:.01em}`,
+          `body blockquote{font-family:${FONT_QUOTE};font-style:normal;font-size:.97em;letter-spacing:.01em;font-size-adjust:none}`,
           'body blockquote em,body blockquote i{font-style:normal;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}',
         )
       }

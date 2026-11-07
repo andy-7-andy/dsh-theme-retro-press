@@ -1,6 +1,6 @@
 {
   "name": "dsh-theme-retro-press",
-  "version": "3.8.0",
+  "version": "3.8.1",
   "description": "Retro Press — a theme workshop for the DeepSeek Harness Web client: twelve print-shop and CRT palettes, each with its own paper, rules, type pairing and drawn whale mark, plus a dark-mode phosphor layer for code.",
   "type": "module",
   "license": "MIT",
