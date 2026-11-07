@@ -31,6 +31,15 @@ window.__ModuleLoader__.load({
     const FONT_MONO =
       'ui-monospace,"Cascadia Mono","SFMono-Regular",Consolas,"Noto Serif SC","Songti SC","华文中宋",monospace'
     /**
+     * The reading mono. Code and every fixed-pitch body use this one face:
+     * Cascadia Mono has a squared dot on the i, a tailed l, a single-storey g and
+     * enough stem weight to hold 12.5px on a dark scanline. VT323, Share Tech
+     * Mono and Courier Prime all lost their hairlines at that size, which is why
+     * they are now allowed to title only — never to set body or code.
+     */
+    const FONT_CODE =
+      '"Cascadia Mono","Cascadia Code",Consolas,"Source Han Sans SC","思源黑体","Microsoft YaHei",monospace'
+    /**
      * The pixel layer. VT323 is a digitisation of DEC's VT320 screen font, and
      * DotGothic16 is the one pixel face that also carries Han glyphs — together
      * they are the only pair that gives 显像管 a screen it can title on.
@@ -108,22 +117,20 @@ window.__ModuleLoader__.load({
       '"Space Grotesk","思源黑体","Source Han Sans SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif'
 
     /**
-     * 显像管 — VT323 for the tube's own screen font, and Courier Prime for the
+     * 显像管 — VT323 for the tube's own screen font, and the reading mono for the
      * body: a typewriter setting that survives scanlines without glowing.
      */
     const FONT_CRT_HEAD =
       '"VT323","Share Tech Mono","Cascadia Mono",Consolas,"Source Han Sans SC","思源黑体",sans-serif'
-    const FONT_CRT_BODY =
-      '"Courier Prime","Courier New","Cascadia Mono",Consolas,"Source Han Sans SC","思源黑体",monospace'
+    const FONT_CRT_BODY = FONT_CODE
 
     /**
      * 荧光屏 — DotGothic16 is a pixel face that also draws Han, so the heading is
-     * pixels in both scripts; Share Tech Mono keeps the body fixed-pitch.
+     * pixels in both scripts; the body is set in the reading mono, not in pixels.
      */
     const FONT_PHOS_HEAD =
       '"DotGothic16","VT323","Share Tech Mono","思源黑体","Source Han Sans SC",sans-serif'
-    const FONT_PHOS_BODY =
-      '"Share Tech Mono","VT323","Cascadia Mono","思源黑体","Source Han Sans SC",monospace'
+    const FONT_PHOS_BODY = FONT_CODE
 
     /**
      * 打孔卡 — Archivo set 700 and tracked out like a keypunch field label, with
@@ -141,8 +148,7 @@ window.__ModuleLoader__.load({
      */
     const FONT_FLOPPY_HEAD =
       '"Silkscreen","DotGothic16","VT323","思源黑体","Source Han Sans SC",sans-serif'
-    const FONT_FLOPPY_BODY =
-      '"Share Tech Mono","VT323","Cascadia Mono","思源黑体","Source Han Sans SC",monospace'
+    const FONT_FLOPPY_BODY = FONT_CODE
 
     /**
      * Palettes. Color tokens carry both schemes; `font`, `heading`, `code` and
@@ -242,7 +248,11 @@ window.__ModuleLoader__.load({
         },
       },
       {
-        /** A cyanotype plate: engraved Bodoni and 经典宋体简 on bone paper. */
+        /**
+         * A cyanotype: the paper itself carries the blue. Light mode is a sheet
+         * pulled from the wash — pale Prussian blue with a darker blue image;
+         * dark mode is the same sheet seen wet, #0A1E33 to the edge.
+         */
         id: 'cobalt',
         nameKey: 'cobaltName',
         descKey: 'cobaltDesc',
@@ -255,20 +265,20 @@ window.__ModuleLoader__.load({
         sectionRule: '3px double var(--dsw-alias-border-l2)',
         code: 'sepia(.1) saturate(.7) contrast(1.02)',
         tokens: {
-          '--dsw-alias-bg-base': { light: '#F3F0E4', dark: '#0A1E33' },
-          '--dsw-alias-bg-layer-1': { light: '#FAF8EE', dark: '#0F2740' },
-          '--dsw-alias-bg-layer-2': { light: '#E7E2D2', dark: '#14314E' },
-          '--dsw-alias-bg-overlay': { light: '#FDFBF3', dark: '#112B45' },
-          '--dsw-alias-border-l1': { light: '#D3CDBA', dark: '#1E3A56' },
-          '--dsw-alias-border-l2': { light: '#ABA48C', dark: '#2F5474' },
-          '--dsw-alias-brand-primary': { light: '#1B3FA6', dark: '#9CC2EC' },
-          '--dsw-alias-label-primary': { light: '#141C2E', dark: '#DCE9F6' },
-          '--dsw-alias-label-secondary': { light: '#4E5668', dark: '#93A9C0' },
-          '--dsw-alias-state-error-primary': { light: '#A3352C', dark: '#E07C6C' },
-          '--dsw-alias-state-idle-primary': { light: '#8A8B85', dark: '#647A93' },
-          '--dsw-alias-state-success-primary': { light: '#2C6357', dark: '#7FBFA6' },
-          '--dsw-alias-state-warn-primary': { light: '#86621A', dark: '#D9B36A' },
-          '--dsw-specific-sidebar-fill': { light: '#EDE9DB', dark: '#081828' },
+          '--dsw-alias-bg-base': { light: '#DCE6F0', dark: '#0A1E33' },
+          '--dsw-alias-bg-layer-1': { light: '#EAF1F8', dark: '#0F2740' },
+          '--dsw-alias-bg-layer-2': { light: '#CFDBE9', dark: '#14314E' },
+          '--dsw-alias-bg-overlay': { light: '#F3F8FD', dark: '#112B45' },
+          '--dsw-alias-border-l1': { light: '#B6C6D9', dark: '#1E3A56' },
+          '--dsw-alias-border-l2': { light: '#8CA1B9', dark: '#2F5474' },
+          '--dsw-alias-brand-primary': { light: '#17457E', dark: '#9CC2EC' },
+          '--dsw-alias-label-primary': { light: '#0F1F2E', dark: '#DCE9F6' },
+          '--dsw-alias-label-secondary': { light: '#43566B', dark: '#93A9C0' },
+          '--dsw-alias-state-error-primary': { light: '#9E3A2E', dark: '#E07C6C' },
+          '--dsw-alias-state-idle-primary': { light: '#76899C', dark: '#647A93' },
+          '--dsw-alias-state-success-primary': { light: '#2A6355', dark: '#7FBFA6' },
+          '--dsw-alias-state-warn-primary': { light: '#7C5B12', dark: '#D9B36A' },
+          '--dsw-specific-sidebar-fill': { light: '#D3DFEC', dark: '#081828' },
         },
       },
       {
@@ -303,7 +313,7 @@ window.__ModuleLoader__.load({
         },
       },
       {
-        /** A tube: VT323 screen type over a Courier Prime body. */
+        /** A tube: VT323 screen type over the reading mono. */
         id: 'crt',
         nameKey: 'crtName',
         descKey: 'crtDesc',
@@ -333,7 +343,7 @@ window.__ModuleLoader__.load({
         },
       },
       {
-        /** P1 green: DotGothic16 pixels in both scripts over Share Tech Mono. */
+        /** P1 green: DotGothic16 pixels in both scripts over the reading mono. */
         id: 'phosphor',
         nameKey: 'phosphorName',
         descKey: 'phosphorDesc',
@@ -394,7 +404,7 @@ window.__ModuleLoader__.load({
         },
       },
       {
-        /** An 8-bit disk label: Silkscreen with DotGothic16, Share Tech Mono body. */
+        /** An 8-bit disk label: Silkscreen with DotGothic16 over the reading mono. */
         id: 'c64',
         nameKey: 'c64Name',
         descKey: 'c64Desc',
@@ -522,17 +532,17 @@ window.__ModuleLoader__.load({
         inkName: '铅字',
         inkDesc: '白纸一版墨：小标宋 + Archivo Black 报头，正文 Libre Franklin 与思源黑体',
         cobaltName: '蓝晒纸',
-        cobaltDesc: '骨白纸上的一版钴蓝，深色是蓝晒法：Bodoni 与经典宋体简的铜版刻线',
+        cobaltDesc: '一张晒出来的蓝纸：纸本身就是蓝的，字是更深的普蓝，Bodoni 与经典宋体简刻线',
         risoName: '孔版',
         risoDesc: '黑版加一版荧光粉：Bricolage 800 锁成一块的标题，粉色段落线',
         crtName: '显像管',
-        crtDesc: '琥珀字符的显像管：VT323 屏显标题配 Courier Prime 打字机体正文',
+        crtDesc: '琥珀字符的显像管：VT323 屏显标题，正文用等宽字排得像终端输出',
         phosphorName: '荧光屏',
-        phosphorDesc: 'P1 荧光绿的终端：DotGothic16 像素标题，正文 Share Tech Mono',
+        phosphorDesc: 'P1 荧光绿的终端：DotGothic16 像素标题，正文用看得清的等宽字',
         ibmName: '打孔卡',
         ibmDesc: '大型机的深蓝与青白：Archivo 宽字距标题配仿宋，正文 Bitter',
         c64Name: '软盘',
-        c64Desc: '八位家用机的紫蓝：Silkscreen 像素标题配 DotGothic16，正文 Share Tech Mono',
+        c64Desc: '八位家用机的紫蓝：Silkscreen 像素标题配 DotGothic16，正文用看得清的等宽字',
       },
       en: {
         sectionTitle: 'Retro theme',
@@ -584,17 +594,17 @@ window.__ModuleLoader__.load({
         inkName: 'Lead type',
         inkDesc: 'One ink on white: a 小标宋 and Archivo Black nameplate, Libre Franklin and 思源黑体 in the body',
         cobaltName: 'Cyanotype',
-        cobaltDesc: 'One cobalt plate on bone paper, cyanotype in the dark: engraved Bodoni and 经典宋体简',
+        cobaltDesc: 'A sheet pulled from the cyanotype wash: blue paper, deeper blue image, engraved Bodoni and 经典宋体简',
         risoName: 'Risograph',
         risoDesc: 'Key plate plus one fluorescent pink drum: Bricolage 800 headings and a pink section rule',
         crtName: 'CRT tube',
-        crtDesc: 'Amber characters on a tube: VT323 screen headings over a Courier Prime body',
+        crtDesc: 'Amber characters on a tube: VT323 screen headings over a readable fixed-pitch body',
         phosphorName: 'Phosphor screen',
-        phosphorDesc: 'P1 green terminal: DotGothic16 pixel headings over Share Tech Mono',
+        phosphorDesc: 'P1 green terminal: DotGothic16 pixel headings over a legible fixed-pitch body',
         ibmName: 'Punch card',
         ibmDesc: 'Mainframe blue with cyan-white type: tracked Archivo caps over 仿宋, Bitter body',
         c64Name: 'Floppy disk',
-        c64Desc: 'Eight-bit violet: Silkscreen pixel headings with DotGothic16, Share Tech Mono body',
+        c64Desc: 'Eight-bit violet: Silkscreen pixel headings with DotGothic16 over a legible fixed-pitch body',
       },
     }
 
@@ -902,7 +912,7 @@ window.__ModuleLoader__.load({
         // The shared terminal voice: both cool palettes print their code on the
         // same screen face, so the two press runs still read as one machine.
         parts.push(
-          `body pre,body pre code,body code,body kbd,body samp{font-family:${FONT_CRT}!important}`,
+          `body pre,body pre code,body code,body kbd,body samp{font-family:${FONT_CODE}!important}`,
           'body pre,body pre code,body code,body kbd,body samp{font-size-adjust:none}',
           'body pre{font-size:.96em;line-height:1.6;letter-spacing:.01em}',
           'body :not(pre)>code{font-size:1.02em;letter-spacing:.02em}',

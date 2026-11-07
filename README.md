@@ -25,19 +25,19 @@ Retro Press 是一间开在 DeepSeek Harness 里的复古印制车间。九套�
 | 1 | 鼠尾草 | Sage | 干鼠尾草与亚麻白：Fraunces 软衬线标题 + Alegreya 书写体正文，中文华文中宋 |
 | 2 | 牛皮纸 | Kraft paper | 牛皮纸米黄、铁锈褐字：Bookman 信封标题 + Georgia 正文，中文姚体与宋体 |
 | 3 | 铅字 | Lead type | 白纸一版墨：小标宋 + Archivo Black 报头，正文 Libre Franklin 与思源黑体 |
-| 4 | 蓝晒纸 | Cyanotype | 骨白纸上一版钴蓝，深色是蓝晒法：Bodoni 与经典宋体简的铜版刻线 |
+| 4 | 蓝晒纸 | Cyanotype | 一张晒出来的蓝纸：纸本身是蓝的，字是更深的普蓝，Bodoni 与经典宋体简刻线 |
 | 5 | 孔版 | Risograph | 黑版 + 一版荧光粉：Bricolage 800 锁成一块的标题，粉色段落线 |
-| 6 | 显像管 | CRT tube | 琥珀字符的显像管：VT323 屏显标题 + Courier Prime 打字机体正文 |
-| 7 | 荧光屏 | Phosphor screen | P1 荧光绿终端：DotGothic16 像素标题 + Share Tech Mono 正文 |
+| 6 | 显像管 | CRT tube | 琥珀字符的显像管：VT323 屏显标题 + 看得清的等宽正文 |
+| 7 | 荧光屏 | Phosphor screen | P1 荧光绿终端：DotGothic16 像素标题 + 看得清的等宽正文 |
 | 8 | 打孔卡 | Punch card | 大型机的深蓝与青白：Archivo 宽字距标题 + 仿宋，正文 Bitter |
-| 9 | 软盘 | Floppy disk | 八位家用机的紫蓝：Silkscreen 像素标题 + DotGothic16，正文 Share Tech Mono |
+| 9 | 软盘 | Floppy disk | 八位家用机的紫蓝：Silkscreen 像素标题 + DotGothic16，等宽正文 |
 
 ## 三种排印声音（细节）
 
 配色只是底子，真正分开这三套的是排印。三套都按 13.5px 正文、1.75 行高排过，长段落读得下去，标题才敢做大。
 
 - **铅字** —— 只有一种墨。标题小标宋 + Archivo Black，正文思源黑体 + Libre Franklin。没有第二色：链接、按钮、标记全用同一个墨色，浓淡只由字重和 2px 实墨段落线给出。
-- **蓝晒纸** —— 骨白纸上一版钴蓝，标题 Bodoni + 经典宋体简。深色模式是蓝晒法：普鲁士蓝底，字像曝光出来的纸白。
+- **蓝晒纸** —— 纸本身就是蓝的：浅色是一张从显影液里捞出来的淡蓝纸、字是更深的普蓝；深色是还没干的那张，`#0A1E33` 到底。标题 Bodoni + 经典宋体简。
 - **孔版** —— 黑版 + 一版荧光粉。Bricolage 800 把标题锁成一块墨，粉色只落在第二版该落的地方：3px 段落线、链接、按钮、标记的套印错位。
 
 ## 质感
@@ -81,13 +81,15 @@ Retro Press 是一间开在 DeepSeek Harness 里的复古印制车间。九套�
 | 西文标题（孔版） | Bricolage Grotesque | Archivo → Franklin Gothic Medium |
 | 西文正文（孔版） | Space Grotesk | 思源黑体 → 微软雅黑 |
 | 西文标题（显像管） | VT323 | Share Tech Mono → Cascadia Mono |
-| 西文正文（显像管） | Courier Prime | Courier New → Consolas |
-| 西文（荧光屏） | DotGothic16 / Share Tech Mono | VT323 → Cascadia Mono |
+| 西文正文（显像管） | Cascadia Mono | Consolas → 思源黑体 |
+| 西文（荧光屏） | DotGothic16 / Cascadia Mono | VT323 → 思源黑体 |
 | 西文标题（打孔卡） | Archivo 700 | Libre Franklin → Franklin Gothic |
 | 西文正文（打孔卡） | Bitter | Archivo → 思源黑体 |
 | 西文标题（软盘） | Silkscreen | DotGothic16 → VT323 |
-| 西文正文（软盘） | Share Tech Mono | VT323 → Consolas |
+| 西文正文（软盘） | Cascadia Mono | Consolas → 思源黑体 |
 
+> **代码与等宽正文只有一张脸**：所有配色的代码块、行内代码，以及显像管／荧光屏／软盘的正文，都用 **Cascadia Mono**；VT323、Share Tech Mono、Courier Prime 只做标题，它们在 12.5px 上会掉笔画。
+>
 > VT323、Share Tech Mono、Courier Prime、Space Grotesk、Bricolage Grotesque、Bitter、Fraunces、Alegreya、Archivo、Libre Franklin、DotGothic16、Silkscreen 都是 SIL OFL 字体，可从 [Google Fonts](https://fonts.google.com/) 免费安装；装上之后字形才完整，不装则按栈回退，功能不受影响。方正小标宋、方正姚体、华文中宋、经典宋体简是商业字库，需要自行授权。
 
 ## 安装
