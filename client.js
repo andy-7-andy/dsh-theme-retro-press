@@ -67,31 +67,34 @@ window.__ModuleLoader__.load({
     const FONT_QUOTE =
       '"仿宋_GB2312","FangSong_GB2312","仿宋","FangSong","STFangsong","华文仿宋",serif'
     /**
-     * Cool indigo headings: Franklin Gothic Medium is the American job-print
-     * gothic — same skeleton as a Hei, harder than YaHei's Latin, and it sits
-     * on cool white like a stamped imprint. CJK falls through to 思源黑体.
+     * Cool indigo headings: Archivo is the American newspaper grotesque — narrow
+     * and upright, with a .56 x-height, so at 13.5px it never thins out the way
+     * the system Franklin cut does. Set at 700 so the page reads as printed
+     * black rather than as a screen default.
      */
     const FONT_MIST_HEAD =
-      '"Franklin Gothic Medium","Franklin Gothic Book","Source Han Sans SC","思源黑体","Microsoft YaHei","PingFang SC","DengXian",sans-serif'
+      '"Archivo","Libre Franklin","Franklin Gothic Medium","Source Han Sans SC","思源黑体","Microsoft YaHei","PingFang SC","DengXian",sans-serif'
     /**
-     * Cool indigo body: on this cool white a Song text face thins out at 13.5px,
-     * while 思源黑体 holds an even grey — so the whole page is set in one grotesque
-     * family, Franklin on the headings and the Han Sans underneath it.
+     * Cool indigo body: one grotesque family across Latin and Han, Archivo at
+     * 500 over 思源黑体. The medium weight is what keeps the column from looking
+     * hairline-thin on cool white.
      */
     const FONT_MIST_BODY =
-      '"Source Han Sans SC","思源黑体","Noto Sans SC","Microsoft YaHei","PingFang SC","DengXian","SimHei",sans-serif'
+      '"Archivo","Libre Franklin","Source Han Sans SC","思源黑体","Noto Sans SC","Microsoft YaHei","PingFang SC","DengXian","SimHei",sans-serif'
     /**
-     * Moss headings keep Bodoni (the hairline display face of a title page),
-     * now over 方正小标宋 rather than the Goudy body stack.
+     * Moss headings: Playfair Display keeps Bodoni's didone contrast but lifts
+     * the x-height from .38 to .50, so an English heading no longer reads a size
+     * under the 小标宋 beside it.
      */
     const FONT_MOSS_HEAD =
-      '"Bodoni MT",Elephant,"Bookman Old Style",Georgia,"方正小标宋简体","FZXiaoBiaoSong-B05S","华文中宋","Noto Serif SC","Songti SC",SimSun,serif'
+      '"Playfair Display","Bodoni MT",Elephant,"方正小标宋简体","FZXiaoBiaoSong-B05S","华文中宋","Noto Serif SC","Songti SC",SimSun,serif'
     /**
-     * Moss body: Gill Sans is of the same Arts-and-Crafts circle as the green
-     * plates, and reads lighter than YaHei's Latin at 13.5px. CJK on 思源黑体.
+     * Moss body: the Arts-and-Crafts green plates argued for Gill Sans, but at
+     * 13.5px its .45 x-height reads a size small and its light strokes cannot
+     * carry the Playfair heading above it. Archivo does the hauling; CJK on 思源黑体.
      */
     const FONT_MOSS_BODY =
-      '"Gill Sans MT",GillSans,"Gill Sans","Source Han Sans SC","思源黑体","Microsoft YaHei","PingFang SC","DengXian",sans-serif'
+      '"Archivo","Gill Sans MT","Gill Sans","Source Han Sans SC","思源黑体","Microsoft YaHei","PingFang SC","DengXian",sans-serif'
 
     /**
      * Palettes. Color tokens carry both schemes; `font`, `heading`, `code` and
@@ -166,13 +169,12 @@ window.__ModuleLoader__.load({
         heading: 'sans',
         fontStack: FONT_MIST_BODY,
         headingStack: FONT_MIST_HEAD,
-        headWeight: 600,
+        headWeight: 700,
         headTracking: '.06em',
-        // Body Chinese (思源黑体) sits at x-height .54; Franklin trails it at
-        // .49. Lift the Latin to the Chinese measure so the English stops
-        // reading a size smaller than the Chinese beside it.
-        xHeight: 0.54,
-        headXHeight: 0.54,
+        // Archivo carries a .56 x-height of its own and the Han is at .54, so
+        // the pair needs no font-size-adjust fudge — only a medium body weight,
+        // which is what stops the column reading thin.
+        bodyWeight: 500,
         code: 'sepia(.08) saturate(.78)',
         tokens: {
           '--dsw-alias-bg-base': { light: '#F8FAFC', dark: '#0E1218' },
@@ -205,13 +207,12 @@ window.__ModuleLoader__.load({
         heading: 'serif',
         fontStack: FONT_MOSS_BODY,
         headingStack: FONT_MOSS_HEAD,
-        headWeight: 400,
+        headWeight: 600,
         headTracking: '.05em',
-        // Gill Sans (.45) against 思源黑体 (.54), and Bodoni (.38) against
-        // 小标宋 (.46) 鈥?both pairs leave the English visibly undersized, so
-        // each is normalised to the Chinese face it is set beside.
-        xHeight: 0.54,
-        headXHeight: 0.46,
+        // Playfair's .50 x-height already clears 小标宋's .46, and Archivo's .56
+        // clears 思源黑体's .54: no adjust needed, just a medium body weight so
+        // the lighter green page still holds its grey.
+        bodyWeight: 500,
         code: 'saturate(.9) sepia(.04)',
         tokens: {
           '--dsw-alias-bg-base': { light: '#F9FBF7', dark: '#0E1310' },
@@ -524,9 +525,9 @@ window.__ModuleLoader__.load({
         sageName: '鼠尾草',
         sageDesc: '鼠尾草绿、亚麻白，华文中宋配 Goudy 的老铅字',
         mistName: '靛蓝',
-        mistDesc: '冷白、靛蓝，全黑体页：Franklin 标题配思源黑体正文',
+        mistDesc: '冷白、靛蓝，全黑体页：Archivo 700 标题配 Archivo 500 与思源黑体正文',
         mossName: '苔绿',
-        mossDesc: '浅灰绿、苔绿，宋体标题配黑体正文，西文 Bodoni + Gill Sans',
+        mossDesc: '浅灰绿、苔绿，Playfair 标题配 Archivo 正文，中文小标宋与思源黑体',
         crtName: '显像管',
         crtDesc: '深色走琥珀字符，浅色保持素净',
         indigoName: '铜青',
@@ -592,9 +593,9 @@ window.__ModuleLoader__.load({
         sageName: 'Sage linen',
         sageDesc: 'Sage green, linen white, set in old letterpress Latin',
         mistName: 'Cool indigo',
-        mistDesc: 'Cool white and indigo, all-grotesque page: Franklin headings over Han Sans text',
+        mistDesc: 'Cool white and indigo, all-grotesque page: Archivo 700 headings over Archivo 500 and Han Sans text',
         mossName: 'Moss green',
-        mossDesc: 'Pale grey-green and moss, Song headings over Hei text, Bodoni over Gill Sans',
+        mossDesc: 'Pale grey-green and moss: Playfair headings over an Archivo body, XiaoBiaoSong and Han Sans underneath',
         crtName: 'CRT amber',
         crtDesc: 'Amber characters in the dark, plain grey in daylight',
         indigoName: 'Brass indigo',
@@ -711,6 +712,11 @@ window.__ModuleLoader__.load({
       const heading = palette.headingStack ?? (palette.heading === 'serif' ? FONT_SERIF : null)
       const tracking = palette.headTracking ?? '.02em'
       const css = [`body{--dsw-font-family:${stack}!important}`]
+      if (palette.bodyWeight) {
+        // A medium body weight is the other half of "the Latin reads too thin":
+        // 思源黑体 has a real 500, so the Han is set to it rather than synthesised.
+        css.push(`body{font-weight:${palette.bodyWeight}}`)
+      }
       if (palette.xHeight) {
         // font-size-adjust equalises x-height across faces: the Latin is grown
         // to the Chinese measure, the Chinese (already at that measure) is left
