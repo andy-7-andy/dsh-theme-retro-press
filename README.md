@@ -59,7 +59,9 @@ Retro Press 是一间开在 DeepSeek Harness 里的复古印制车间。九套�
 
 ## 字体
 
-主题**不打包**西文字体以外的任何字体：Cutive Mono 作为代码与等宽正文的唯一字面，随包内嵌（base64，SIL OFL，见 `assets/OFL-CutiveMono.txt`），装不装字体都长一个样。中文与其余西文字面只**引用**字体名，缺失时按栈内顺序回退，不会崩、不会变方块。
+**西文全部随包**。九套用到的 13 个拉丁字面（Fraunces、Alegreya、Archivo 400/700、Archivo Black、Libre Franklin、Playfair Display、Bricolage Grotesque、Space Grotesk、VT323、DotGothic16、Silkscreen、Bitter，加上等宽的 Cutive Mono）以 latin 子集 WOFF2 内嵌在 `client.js` 里，家族名带 ` RP` 后缀，排在每个字体栈最前。不装任何字体、不联网，西文与数字都长同一个样。
+
+**汉字仍走系统**。方正小标宋、华文中宋、方正姚体、仿宋_GB2312、经典宋体简都是商业字库，不能随包分发，只能"引用 + 回退"——没装时汉字落到思源黑体/宋体，西文不受影响。
 
 | 角色 | 首选 | 回退 |
 |---|---|---|
@@ -90,7 +92,7 @@ Retro Press 是一间开在 DeepSeek Harness 里的复古印制车间。九套�
 
 > **代码与等宽正文只有一张脸**：所有配色的代码块、行内代码，以及显像管／荧光屏／软盘的正文，都用 **Cutive Mono**；VT323、Share Tech Mono、Courier Prime 只做标题，它们在 12.5px 上会掉笔画。**这一枚字随包内嵌**（`Cutive Mono RP`，base64 TTF，78 kB），不需要另外安装。
 >
-> VT323、Share Tech Mono、Courier Prime、Space Grotesk、Bricolage Grotesque、Bitter、Fraunces、Alegreya、Archivo、Libre Franklin、DotGothic16、Silkscreen 都是 SIL OFL 字体，可从 [Google Fonts](https://fonts.google.com/) 免费安装；装上之后字形才完整，不装则按栈回退，功能不受影响。方正小标宋、方正姚体、华文中宋、经典宋体简是商业字库，需要自行授权。
+> 全部内嵌字面都是 SIL Open Font License 1.1，版权与许可证原文合并放在 `assets/OFL-web-fonts.txt`（Cutive Mono 另见 `assets/OFL-CutiveMono.txt`）。方正小标宋、方正姚体、华文中宋、经典宋体简、仿宋_GB2312 是商业字库，需要自行授权，主题只写名字不携带。
 
 ## 安装
 
@@ -112,7 +114,7 @@ Extras that come with every palette: paper grain or scanlines, square or rounded
 
 Three of them are single-ink editorial poster pages: **Lead type** (小标宋 + Archivo Black, no accent colour at all), **Cyanotype** (a Bodoni/经典宋体简 plate, Prussian blue in the dark) and **Risograph** (a Bricolage 800 block headline with one fluorescent pink second drum). Each changes the typographic voice, not just the hue.
 
-Fonts are referenced, never bundled: missing faces fall back down the stack instead of breaking. The Latin faces above are SIL OFL; 方正小标宋, 方正姚体, 华文中宋 and 经典宋体简 are commercial typefaces you must license yourself.
+Every Latin face above is **bundled**: latin-subset WOFF2 data URIs inside `client.js`, family names suffixed ` RP`, first in each stack — so the nine palettes look identical on a machine with no fonts installed. They are SIL OFL 1.1; the licences travel with the package (`assets/OFL-web-fonts.txt`). The Han faces (方正小标宋, 方正姚体, 华文中宋, 经典宋体简, 仿宋_GB2312) are commercial and are referenced by name only — without them the Chinese falls back down the stack, while the Latin stays exact.
 
 ## License
 

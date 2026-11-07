@@ -1,6 +1,6 @@
 {
   "name": "dsh-theme-retro-press",
-  "version": "3.10.3",
+  "version": "3.11.0",
   "description": "Retro Press — a theme workshop for the DeepSeek Harness Web client: nine palettes named after the objects they are printed on (sage, kraft paper, lead type, cyanotype, risograph, CRT, phosphor, punch card, floppy), each with its own Latin-Han type pairing.",
   "type": "module",
   "license": "MIT",

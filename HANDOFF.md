@@ -1,6 +1,6 @@
 # Retro Press 交接文档（HANDOFF）
 
-> 最后更新：2026-11-08 · 包版本 **3.10.3**（九套配色，实物命名，每套一对字面；蓝晒纸的纸是蓝的，Cutive Mono 以 base64 随包内嵌）· 3.8.4 为 npm 上的 latest，3.10.0 待发 · 仓库 https://github.com/andy-7-andy/dsh-theme-retro-press
+> 最后更新：2026-11-08 · 包版本 **3.11.0**（九套配色，实物命名，每套一对字面；蓝晒纸的纸是蓝的；13 个拉丁字面以 latin 子集 WOFF2 随包内嵌，家族名带 RP 后缀）· 3.8.4 为 npm 上的 latest，3.10.0 待发 · 仓库 https://github.com/andy-7-andy/dsh-theme-retro-press
 
 这份文档写给"下一次接手的人（或下一个会话的 AI）"。目标是：**不用重读历史对话，也能改一个配色、发一个版本**。
 
@@ -240,6 +240,7 @@ token 是 granular token（Read and write (publish and stage) + All packages + O
 
 - **3.10.2 收尾：蓝晒纸浅色改成真蓝纸（底 DCE6F0、正文 0F1F2E、品牌 17457E）；代码与显像管/荧光屏/软盘正文统一 FONT_CODE = Cutive Mono（打字机 slab，安装于用户字体目录），VT323、Share Tech Mono、Courier Prime 只留标题；代码字号 13px/1.68。
 - **3.10.3 把 Cutive Mono 打进包**：client.js 末尾 `const CUTIVE_MONO_DATA`（base64 TTF，106,672 字符），`fontFaceCss()` 生成 `@font-face{font-family:"Cutive Mono RP"…url(data:font/ttf;base64,…)}`，排进 `render()` 的第一段；家族名带 `RP` 后缀，避免与本机安装的同名字体打架。许可原文 `assets/OFL-CutiveMono.txt`，已进 `package.json` 的 `files`。client.js 75k → 184k，`npm pack` 14 files / 371 kB。验证方法：静态页只用 `"Cutive Mono RP"` 单家族渲染（本机没有这个族名），字形出现即内嵌成功。
+- **3.11.0 西文全部随包**：Fraunces / Alegreya / Archivo(400,700) / Archivo Black / Libre Franklin / Playfair Display / Bricolage Grotesque / Space Grotesk / VT323 / DotGothic16 / Silkscreen / Bitter 的 **latin 子集 WOFF2**（共 231 kB，base64 后 309 kB）以 `const WEB_FONTS_CSS` 内嵌，`fontFaceCss()` 返回「Cutive 的 TTF + 这 13 条 @font-face」；每个字体栈首位换成 `"X RP"`。单字重像素字面（VT323/Silkscreen/DotGothic16）声明 `font-weight:100 900`，避免 500 被合成加粗。抓取与嵌入脚本：`D:Systemsdshworkspace	heme-designetch-webfonts.js`（走 fonts.googleapis.com css2 + Chrome UA，只取 `/* latin */` 块）与 `embed-webfonts.js`（重写字体栈 + 追加常量，注意**替换字体栈要用负向后顾 `(?<!"X RP",)"X"` 才幂等**，否则重复插入）。许可合并成 `assets/OFL-web-fonts.txt`（12 个家族的 OFL 原文）。汉字仍是商业字库，只写名字。client.js 494 kB，npm pack 15 files / 607 kB。
 
 ### 待办（按优先级）
 

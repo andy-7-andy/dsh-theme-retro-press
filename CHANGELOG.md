@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.11.0
+
+- **西文字面全部随包**：Fraunces / Alegreya / Archivo（400+700）/ Archivo Black / Libre Franklin / Playfair Display / Bricolage Grotesque / Space Grotesk / VT323 / DotGothic16 / Silkscreen / Bitter，各取 **latin 子集 WOFF2**（共 231 kB），以 data URI 内嵌成 `@font-face`，家族名统一加 ` RP` 后缀（`"Fraunces RP"` …），排在每个字体栈的第一位。装没装字体，九套都长同一个样。
+- 单一字重的像素字面（VT323 / Silkscreen / DotGothic16）声明为 `font-weight:100 900`，让 500 的标题直接落在原字重上，不再被合成加粗糊成一块。
+- **汉字不进包**：方正小标宋、华文中宋、方正姚体、仿宋_GB2312、经典宋体简都是商业字库，仍是"引用 + 系统回退"。装没装中文字面，差别只在汉字；西文与数字现在是一致。
+- 许可：12 个家族都是 SIL OFL 1.1，版权与原文合并进 `assets/OFL-web-fonts.txt`。
+- 体积：`client.js` 184 kB → **494 kB**；`npm pack` 15 files / 607 kB。
+
 ## 3.10.3
 
 - **Cutive Mono 打进包里**：以 base64 TTF（78 kB）内嵌成 `@font-face`，家族名 `Cutive Mono RP`，随插件注入的样式表一起加载。不需要安装、不需要联网、不需要额外的 CSP 例外——换台机器也一样长。SIL OFL 1.1，许可原文随包（`assets/OFL-CutiveMono.txt`）。
