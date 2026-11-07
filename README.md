@@ -59,7 +59,7 @@ Retro Press 是一间开在 DeepSeek Harness 里的复古印制车间。九套�
 
 ## 字体
 
-主题只**引用**字体名，不打包、不分发任何字体文件。字体缺失时按栈内顺序回退，不会崩、不会变方块。
+主题**不打包**西文字体以外的任何字体：Cutive Mono 作为代码与等宽正文的唯一字面，随包内嵌（base64，SIL OFL，见 `assets/OFL-CutiveMono.txt`），装不装字体都长一个样。中文与其余西文字面只**引用**字体名，缺失时按栈内顺序回退，不会崩、不会变方块。
 
 | 角色 | 首选 | 回退 |
 |---|---|---|
@@ -88,7 +88,7 @@ Retro Press 是一间开在 DeepSeek Harness 里的复古印制车间。九套�
 | 西文标题（软盘） | Silkscreen | DotGothic16 → VT323 |
 | 西文正文（软盘） | Cutive Mono | Courier Prime → 思源黑体 |
 
-> **代码与等宽正文只有一张脸**：所有配色的代码块、行内代码，以及显像管／荧光屏／软盘的正文，都用 **Cutive Mono**；VT323、Share Tech Mono、Courier Prime 只做标题，它们在 12.5px 上会掉笔画。
+> **代码与等宽正文只有一张脸**：所有配色的代码块、行内代码，以及显像管／荧光屏／软盘的正文，都用 **Cutive Mono**；VT323、Share Tech Mono、Courier Prime 只做标题，它们在 12.5px 上会掉笔画。**这一枚字随包内嵌**（`Cutive Mono RP`，base64 TTF，78 kB），不需要另外安装。
 >
 > VT323、Share Tech Mono、Courier Prime、Space Grotesk、Bricolage Grotesque、Bitter、Fraunces、Alegreya、Archivo、Libre Franklin、DotGothic16、Silkscreen 都是 SIL OFL 字体，可从 [Google Fonts](https://fonts.google.com/) 免费安装；装上之后字形才完整，不装则按栈回退，功能不受影响。方正小标宋、方正姚体、华文中宋、经典宋体简是商业字库，需要自行授权。
 

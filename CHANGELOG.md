@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.10.3
+
+- **Cutive Mono 打进包里**：以 base64 TTF（78 kB）内嵌成 `@font-face`，家族名 `Cutive Mono RP`，随插件注入的样式表一起加载。不需要安装、不需要联网、不需要额外的 CSP 例外——换台机器也一样长。SIL OFL 1.1，许可原文随包（`assets/OFL-CutiveMono.txt`）。
+- 字体栈变成 `"Cutive Mono RP" → "Cutive Mono" → "Courier Prime" → Consolas`：本机装了原版也优先用包内这份，字形不会有版本差。
+- 包体积：`client.js` 75 kB → 184 kB；`npm pack` 14 files。
+
 ## 3.10.2
 
 - **代码字面换成 Cutive Mono**（打字机 slab）：Cascadia Mono 够清楚但太像系统字，没有性格。Cutive 是有字幅宽、`1` / `l` / `I` 一望即辨、横画带打字机衬线的老稿纸字面，13px 在纸色和深色扫描线上都站得住。代码块 `13px / 1.68`，行内代码 `1.05em`、字距 `.03em`。

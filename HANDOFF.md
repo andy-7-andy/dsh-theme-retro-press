@@ -1,6 +1,6 @@
 # Retro Press 交接文档（HANDOFF）
 
-> 最后更新：2026-11-07 · 包版本 **3.10.2**（九套配色，实物命名，每套一对字面；蓝晒纸的纸是蓝的，代码统一 Cutive Mono）· 3.8.4 为 npm 上的 latest，3.10.0 待发 · 仓库 https://github.com/andy-7-andy/dsh-theme-retro-press
+> 最后更新：2026-11-08 · 包版本 **3.10.3**（九套配色，实物命名，每套一对字面；蓝晒纸的纸是蓝的，Cutive Mono 以 base64 随包内嵌）· 3.8.4 为 npm 上的 latest，3.10.0 待发 · 仓库 https://github.com/andy-7-andy/dsh-theme-retro-press
 
 这份文档写给"下一次接手的人（或下一个会话的 AI）"。目标是：**不用重读历史对话，也能改一个配色、发一个版本**。
 
@@ -151,7 +151,7 @@ FONT_SERIF / FONT_SANS / FONT_MONO   老配色的通用栈
 
 - **铅字没有第二色**：`brand` 就是墨色，链接、按钮、标记、段落线全是同一个黑——单色海报的说服力必须由字重和规则线给出。段落线 `2px solid label-primary`。
 - **蓝晒纸的纸本身就是蓝的**：浅色 `#DCE6F0` 淡蓝纸 + `#0F1F2E` 普蓝字（正文对比 13.2:1），深色 `#0A1E33` 湿版蓝晒。段落线 `3px double`。3.10.1 修的就是这一条——原来浅色是骨白纸，跟卡上的蓝条对不上。
-- **代码与等宽正文只有一个字面**：`FONT_CODE` = Cutive Mono（打字机 slab，字幅宽、1/l/I 分明，13px 在纸色与深色上都立得住；先试的 Cascadia Mono 被判定太像系统字，没有性格）。VT323 / Share Tech Mono / Courier Prime 只允许做标题，不许排正文和代码——它们在这个字号上会掉笔画，这是 3.10.2 换掉的第二个问题。
+- **代码与等宽正文只有一个字面**：`FONT_CODE` 首选 `"Cutive Mono RP"`（3.10.3 起以 base64 TTF 内嵌在 client.js 末尾，SIL OFL，78 kB，换机器也长一样），其后才是本机安装的 Cutive Mono。Cutive Mono（打字机 slab，字幅宽、1/l/I 分明，13px 在纸色与深色上都立得住；先试的 Cascadia Mono 被判定太像系统字，没有性格）。VT323 / Share Tech Mono / Courier Prime 只允许做标题，不许排正文和代码——它们在这个字号上会掉笔画，这是 3.10.2 换掉的第二个问题。
 - **孔版是双色印刷**：粉色只落在「第二版会落的地方」——段落线、链接、按钮、标记套印。段落线 `3px solid brand`。
 - 九套都 `texture: paper|scan`、`bodyWeight:400`（鼠尾草 500），正文按 13.5px / 1.75 行高排；终端三套 `headWeight:500`，否则浅色下标题压不住正文。
 - 字体是**真的装在本机**才敢用：Archivo/Archivo Black、Libre Franklin、Space Grotesk、Bricolage、Bitter、Fraunces、Alegreya、Georgia、Bookman Old Style、Bodoni MT、VT323、Share Tech Mono、Courier Prime、Silkscreen、DotGothic16，汉字有思源黑体（含 900）、方正小标宋、华文中宋、经典宋体简、方正姚体、仿宋_GB2312。**思源宋体未装，别往栈里放。**
@@ -239,14 +239,15 @@ token 是 granular token（Read and write (publish and stage) + All packages + O
 - **3.10.0 收成九套 + 全部以实物命名 + 每套一对字面**：删 `seal` / `sage` / `mist` / `indigo` / `eink` / `darkroom`；`moss` 接手"鼠尾草"之名，`amber`→牛皮纸、`ink`→铅字、`cobalt`→蓝晒纸、`phosphor`→荧光屏、`ibm`→打孔卡、`c64`→软盘；九对字面见 §4.5；`assets/palettes.png` 重出为九宫格（每张卡用自己的标题字面），`assets/posters.png` 撤下待真机重拍
 
 - **3.10.2 收尾：蓝晒纸浅色改成真蓝纸（底 DCE6F0、正文 0F1F2E、品牌 17457E）；代码与显像管/荧光屏/软盘正文统一 FONT_CODE = Cutive Mono（打字机 slab，安装于用户字体目录），VT323、Share Tech Mono、Courier Prime 只留标题；代码字号 13px/1.68。
+- **3.10.3 把 Cutive Mono 打进包**：client.js 末尾 `const CUTIVE_MONO_DATA`（base64 TTF，106,672 字符），`fontFaceCss()` 生成 `@font-face{font-family:"Cutive Mono RP"…url(data:font/ttf;base64,…)}`，排进 `render()` 的第一段；家族名带 `RP` 后缀，避免与本机安装的同名字体打架。许可原文 `assets/OFL-CutiveMono.txt`，已进 `package.json` 的 `files`。client.js 75k → 184k，`npm pack` 14 files / 371 kB。验证方法：静态页只用 `"Cutive Mono RP"` 单家族渲染（本机没有这个族名），字形出现即内嵌成功。
 
 ### 待办（按优先级）
 
-1. **上线 3.10.0**：代码与文档已就绪，先让用户**完全退出 DSH 再启动**看九套实际效果，确认后走 §5 的暂存发布（3.8.4 是当前 latest）。
+1. **上线 3.10.3**：代码与文档已就绪，先让用户**完全退出 DSH 再启动**看实际效果，确认后走 §5 的暂存发布（3.8.4 是当前 latest）。
 2. **真机重拍配图**：重启后用真实界面重出 `assets/posters.png`（现在 README 里那段没有图），比手搭 mock 可信。
 3. **市场 PR**：分支与条目已备好，2026-11-08 13:02 之后开 PR（见 §6）。条目描述要改成「九套 + 实物命名」，开 PR 前记得在 fork 里同步那版 yml。
 4. **3.8.3 暂存区**：仍留着一个被取代的 staged 包，去 https://www.npmjs.com/settings/andy-7/staged-packages 点 Reject 清掉。
-5. **字体分发决策**：是否把 Archivo / Bricolage / DotGothic16 等 OFL 字体打进包（现在只写名字 + 回退）。
+5. **其余 OFL 字面是否也内嵌**：目前只打包了 Cutive Mono。Archivo / Bricolage / DotGothic16 / VT323 / Silkscreen 仍是"写名字 + 回退"；若市场用户反馈字形不对，按同一套 `fontFaceCss()` 模式再加（每个约 30–120 kB）。
 
 ---
 
