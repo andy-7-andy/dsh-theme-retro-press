@@ -6,6 +6,10 @@ Twelve palettes for the DeepSeek Harness Web client — a print shop and a row o
 
 ---
 
+> 发版与上架流程见 [docs/发布流程-RELEASE.md](docs/发布流程-RELEASE.md)。
+
+---
+
 ## 这是什么
 
 Retro Press 是一间开在 DeepSeek Harness 里的复古印制车间。十二套配色，从木刻朱印的暖白纸，到显像管的磷光绿——每一套都有自己的纸、自己的规则线、自己的字体配对，还有一枚按该套配色重绘的 DeepSeek 鲸鱼标记。
