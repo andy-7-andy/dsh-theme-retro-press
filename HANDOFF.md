@@ -12,11 +12,11 @@
 
 - npm 包名：`dsh-theme-retro-press`
 - 展示名：复古油墨 / Retro Press
-- 源目录：`D:\Systems\dsh\plugins\retro-press`（**这是唯一真身**，其它位置都是联接）
+- 源目录：`D:\内容与发行\插件发行\复古油墨主题-dsh-theme-retro-press`（**这是唯一真身**，其它位置都是联接）
 - 依赖方式：桌面 profile 用 `link:` + 两条 Junction
 
 ```
-profiles\desktop\package.json      "dsh-theme-retro-press": "link:D:/Systems/dsh/plugins/retro-press"
+profiles\desktop\package.json      "dsh-theme-retro-press": "link:D:/内容与发行/插件发行/复古油墨主题-dsh-theme-retro-press"
 profiles\desktop\node_modules\dsh-theme-retro-press   -> 源目录（Junction）
 profiles\node_modules\dsh-theme-retro-press           -> 源目录（Junction）
 ```
@@ -133,7 +133,7 @@ FONT_SERIF / FONT_SANS / FONT_MONO   老配色的通用栈
 详见 `docs/发布流程-RELEASE.md`，这里给最小步骤：
 
 ```powershell
-cd D:\Systems\dsh\plugins\retro-press
+cd D:\内容与发行\插件发行\复古油墨主题-dsh-theme-retro-press
 
 # 1. 改版本号 + CHANGELOG（用 node 改，别用 PowerShell 文本重定向，见 §7）
 # 2. 语法与健康检查
@@ -223,7 +223,7 @@ $ud=Join-Path $env:TEMP ('edge-'+[guid]::NewGuid().ToString('N').Substring(0,8))
 ## 10. 一分钟自检
 
 ```powershell
-cd D:\Systems\dsh\plugins\retro-press
+cd D:\内容与发行\插件发行\复古油墨主题-dsh-theme-retro-press
 node --check client.js
 powershell -NoProfile -ExecutionPolicy Bypass -File D:\Systems\dsh\plugins\health-check.ps1
 # 期望：HEALTHY + "OK source dsh-theme-retro-press <version>"

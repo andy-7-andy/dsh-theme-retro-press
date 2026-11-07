@@ -24,7 +24,7 @@ npm 为这种情况提供了「暂存发布（staged publish）」：
 
 ## 一、发版前检查清单
 
-在 `D:\Systems\dsh\plugins\retro-press` 下：
+在 `D:\内容与发行\插件发行\复古油墨主题-dsh-theme-retro-press` 下：
 
 ```powershell
 # 1. 版本号：三处要一致
@@ -50,7 +50,7 @@ npm pack --dry-run
 ## 二、GitHub 侧
 
 ```powershell
-cd D:\Systems\dsh\plugins\retro-press
+cd D:\内容与发行\插件发行\复古油墨主题-dsh-theme-retro-press
 git add -A
 git commit -m "Retro Press <版本>: <一句话>"
 git push origin main
@@ -84,7 +84,7 @@ gh release create v<版本> --repo andy-7-andy/dsh-theme-retro-press `
 ### 3.2 上传到暂存区
 
 ```powershell
-cd D:\Systems\dsh\plugins\retro-press
+cd D:\内容与发行\插件发行\复古油墨主题-dsh-theme-retro-press
 $tok='npm_xxxxxxxx'
 npm stage publish . --registry=https://registry.npmjs.org/ `
   --//registry.npmjs.org/:_authToken=$tok --access public
@@ -129,7 +129,7 @@ dsh plugin add dsh-theme-retro-press
 ```
 
 或本地开发：把 `profiles\desktop\package.json` 里的依赖写成
-`"dsh-theme-retro-press": "link:D:/Systems/dsh/plugins/retro-press"`，
+`"dsh-theme-retro-press": "link:D:/内容与发行/插件发行/复古油墨主题-dsh-theme-retro-press"`，
 并在 `dsh.profile.bundles` 数组里加同名条目。
 
 ---
@@ -179,5 +179,5 @@ dsh plugin add dsh-theme-retro-press
 - Node/npm：`D:\程序库\NodeJS\`，npm 11.19.0
 - 执行策略已设为 `CurrentUser = RemoteSigned`（否则 `npm.ps1` 加载不了）
 - npm 默认 registry 是 `registry.npmmirror.com`，**发版必须显式 `--registry=https://registry.npmjs.org/`**
-- 插件源目录：`D:\Systems\dsh\plugins\retro-press`
+- 插件源目录：`D:\内容与发行\插件发行\复古油墨主题-dsh-theme-retro-press`
 - 桌面 profile：`D:\Systems\dsh\profiles\desktop\`（`node_modules\dsh-theme-retro-press` 是指向源目录的 Junction）
