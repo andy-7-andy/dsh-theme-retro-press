@@ -9,6 +9,7 @@
 - **孔版 `riso`**：黑版 + 一版荧光粉。标题 **思源黑体 900 + Archivo Black**，负字距锁成一块墨；正文 **Space Grotesk + 思源黑体**。粉色只落在第二版该落的地方：段落线（3px）、链接、按钮、标记的套印错位。
 - 三套各有一个**自己的标记画法**：墨黑＝实心墨块里反白鲸鱼；钴蓝＝鲸鱼加四角裁切标记；孔版＝黑版与粉版错位套印。
 - 新增 palette 字段 `headCaps`（标题转大写）、`sectionRule`（按配色覆盖段落底线，排在默认细线之后）；`PALETTE_FINISH` 补三套默认（墨黑 square/double、钴蓝 round/hairline、孔版 square/hairline）。
+- **补齐宿主其余别名**：宿主一共定义 119 个 `--dsw-alias-*`，此前只覆盖 14 个，剩下的（`brand-primary-new-colorprimary-new-color`、`button-primary-*`、`bg-layer-3`、`label-tertiary`、`state-*-secondary/tertiary`、`menu-*`、`specific-*` 等）一直回落到宿主默认的蓝灰，于是"配色卡上是一套、装上去是另一套"。现在用调色板自己的墨色按 `color-mix()` 推导出这 100 多个别名（`ALIAS_BRIDGE`），浅色深色都跟着 token 走，按钮、链接、选中态、代码块、气泡、滚动条才真正是这套油墨。
 
 ## 3.8.4
 

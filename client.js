@@ -881,6 +881,154 @@ window.__ModuleLoader__.load({
       return `body{${light.join(';')}}\nbody[data-ds-dark-theme]{${dark.join(';')}}`
     }
 
+    /**
+     * The host defines 119 `--dsw-alias-*` colours; a palette only carries 14.
+     * Every alias we leave alone falls back to the host's bluish defaults — which
+     * is why a palette could paint half a page and still read as "the default
+     * theme". These are the remaining aliases, derived from the palette's own
+     * inks so both modes follow the swatch instead of the host.
+     */
+    const BRAND = 'var(--dsw-alias-brand-primary)'
+    const BG = 'var(--dsw-alias-bg-base)'
+    const L1 = 'var(--dsw-alias-bg-layer-1)'
+    const L2 = 'var(--dsw-alias-bg-layer-2)'
+    const TXT = 'var(--dsw-alias-label-primary)'
+    const TXT2 = 'var(--dsw-alias-label-secondary)'
+    const LINE = 'var(--dsw-alias-border-l2)'
+    const ERR = 'var(--dsw-alias-state-error-primary)'
+    const OK = 'var(--dsw-alias-state-success-primary)'
+    const WARN = 'var(--dsw-alias-state-warn-primary)'
+    /** a tint of `a` over `b`; percentages are the weight of `a`. */
+    const tint = (a, pct, b) => `color-mix(in srgb, ${a} ${pct}%, ${b})`
+    /** a wash of `a` that keeps whatever is underneath visible. */
+    const wash = (a, pct) => `color-mix(in srgb, ${a} ${pct}%, transparent)`
+
+    const ALIAS_BRIDGE = [
+      ['--dsw-alias-brand-primary-new-colorprimary-new-color', BRAND],
+      ['--dsw-alias-brand-primary-invert', BG],
+      ['--dsw-alias-brand-text', TXT],
+      ['--dsw-alias-link', BRAND],
+      ['--dsw-alias-markdown-citation', BRAND],
+      ['--dsw-alias-markdown-tag', BRAND],
+      ['--dsw-alias-markdown-placeholder', tint(TXT2, 70, BG)],
+
+      ['--dsw-alias-bg-layer-3', tint(L2, 70, L1)],
+      ['--dsw-alias-bg-document-preview', BG],
+      ['--dsw-alias-bg-document-selection', wash(BRAND, 22)],
+      ['--dsw-alias-label-document-preview', TXT2],
+      ['--dsw-alias-bg-module-platform', L2],
+      ['--dsw-alias-bg-multi-select', tint(BRAND, 10, BG)],
+      ['--dsw-alias-bg-skeleton', wash(TXT, 6)],
+      ['--dsw-alias-bg-mask-1', wash(TXT, 24)],
+      ['--dsw-alias-bg-mask-2', wash(TXT, 12)],
+      ['--dsw-alias-bg-mask-3', wash(TXT, 48)],
+      ['--dsw-alias-bg-mask-photo', wash(TXT, 88)],
+      ['--dsw-alias-bg-mask-drop', wash(BG, 70)],
+
+      ['--dsw-alias-border-l3', wash(LINE, 78)],
+      ['--dsw-alias-border-l4', wash(LINE, 55)],
+      ['--dsw-alias-border-l2-darkmode-thin', LINE],
+      ['--dsw-alias-border-inverted', wash(BG, 12)],
+      ['--dsw-alias-border-inverted2', wash(BG, 22)],
+
+      ['--dsw-alias-button-primary-fill', BRAND],
+      ['--dsw-alias-button-primary-hover', tint(BRAND, 88, TXT)],
+      ['--dsw-alias-button-primary-dimmed', tint(BRAND, 30, BG)],
+      ['--dsw-alias-button-contrast-fill', TXT],
+      ['--dsw-alias-button-elevated-fill', L1],
+      ['--dsw-alias-button-floating-fill', L1],
+      ['--dsw-alias-button-floating-hover', L2],
+      ['--dsw-alias-button-ghost-active-fill', L2],
+      ['--dsw-alias-button-ghost-active-hover', L1],
+      ['--dsw-alias-button-ghost-active-border', LINE],
+      ['--dsw-alias-button-info-fill', BRAND],
+      ['--dsw-alias-button-info-hover', tint(BRAND, 85, TXT)],
+      ['--dsw-alias-button-tool-bar-fill', wash(TXT, 34)],
+      ['--dsw-alias-button-tool-bar-hover', wash(TXT, 42)],
+      ['--dsw-alias-button-tool-bar-fill-invisible', wash(TXT, 24)],
+
+      ['--dsw-alias-interactive-bg-hover', wash(TXT, 7)],
+      ['--dsw-alias-interactive-bg-active', wash(TXT, 12)],
+      ['--dsw-alias-interactive-bg-hover-solid', L2],
+      ['--dsw-alias-interactive-bg-hover-accent', wash(BRAND, 12)],
+      ['--dsw-alias-interactive-bg-hover-danger', wash(ERR, 10)],
+
+      ['--dsw-alias-label-tertiary', tint(TXT2, 70, BG)],
+      ['--dsw-alias-label-caption', tint(TXT2, 62, BG)],
+      ['--dsw-alias-label-dimmed', tint(TXT, 55, BG)],
+      ['--dsw-alias-label-primary-dimmed', tint(TXT, 62, BG)],
+      ['--dsw-alias-label-primary-foreground', BG],
+      ['--dsw-alias-label-primary-inverted', BG],
+      ['--dsw-alias-label-primary-bluish', TXT],
+      ['--dsw-alias-label-deep-diving', TXT],
+      ['--dsw-alias-label-deep-diving-shimmer', wash(TXT, 45)],
+      ['--dsw-alias-label-shimmer', wash(TXT, 40)],
+
+      ['--dsw-alias-state-error-secondary', tint(ERR, 72, BG)],
+      ['--dsw-alias-state-success-secondary', tint(OK, 72, BG)],
+      ['--dsw-alias-state-success-tertiary', tint(OK, 12, BG)],
+      ['--dsw-alias-state-warn-secondary', tint(WARN, 72, BG)],
+      ['--dsw-alias-state-warn-tertiary', tint(WARN, 12, BG)],
+      ['--dsw-alias-state-warn-label', WARN],
+      ['--dsw-alias-state-business-primary', BRAND],
+      ['--dsw-alias-state-business-tertiary', tint(BRAND, 10, BG)],
+      ['--dsw-alias-state-done-primary', OK],
+
+      ['--dsw-alias-code-diff-added', OK],
+      ['--dsw-alias-code-diff-deleted', ERR],
+      ['--dsw-alias-file-diff-added-bg', tint(OK, 10, BG)],
+      ['--dsw-alias-file-diff-added-gutter', tint(OK, 14, BG)],
+      ['--dsw-alias-file-diff-added-marker', OK],
+      ['--dsw-alias-file-diff-deleted-bg', tint(ERR, 9, BG)],
+      ['--dsw-alias-file-diff-deleted-gutter', tint(ERR, 13, BG)],
+      ['--dsw-alias-file-diff-deleted-marker', ERR],
+
+      ['--dsw-alias-markdown-code-block', L2],
+      ['--dsw-alias-markdown-code-block-banner', tint(TXT, 6, L2)],
+      ['--dsw-alias-markdown-inline-code', tint(TXT, 7, L2)],
+      ['--dsw-alias-markdown-code-segment-selected', tint(BRAND, 14, L2)],
+      ['--dsw-alias-markdown-code-segment-unselected', tint(TXT, 4, L2)],
+
+      ['--dsw-alias-scrollbar-bg-l1', wash(LINE, 45)],
+      ['--dsw-alias-scrollbar-bg-l2', wash(LINE, 60)],
+      ['--dsw-alias-scrollbar-hover-l1', wash(TXT2, 70)],
+      ['--dsw-alias-scrollbar-hover-l2', wash(TXT2, 85)],
+
+      ['--dsw-alias-switch-thumb', L1],
+      ['--dsw-alias-toast-bg', TXT],
+      ['--dsw-alias-toast-label', BG],
+      ['--dsw-alias-tooltip-bg', TXT],
+      ['--dsw-alias-tooltip-key-bg', tint(BG, 16, TXT)],
+      ['--dsw-alias-turn-trigger-bg', L2],
+      ['--dsw-alias-turn-trigger-bg-hover', tint(TXT, 8, L2)],
+      ['--dsw-menu-surface-fill', L1],
+      ['--dsw-alias-menu-icon', TXT2],
+      ['--dsw-alias-menu-group-header-fill', tint(TXT, 4, L1)],
+
+      ['--dsw-specific-bubble', tint(BRAND, 8, L1)],
+      ['--dsw-specific-bubble-highlight', tint(BRAND, 14, BG)],
+      ['--dsw-specific-input-major', L2],
+      ['--dsw-specific-login-input', L2],
+      ['--dsw-specific-menu', L1],
+      ['--dsw-specific-selector', L2],
+      ['--dsw-specific-sidebar-nav-item-active', L2],
+      ['--dsw-specific-sidebar-nav-item-active-accent', BRAND],
+      ['--dsw-specific-tip', tint(BRAND, 8, BG)],
+
+      ['--dsw-alias-illustration-background', L1],
+      ['--dsw-alias-illustration-surface', L2],
+      ['--dsw-alias-illustration-backing', LINE],
+      ['--dsw-alias-illustration-detail', LINE],
+      ['--dsw-alias-illustration-inset', L2],
+      ['--dsw-alias-illustration-shadow', 'var(--dsw-alias-border-l1)'],
+    ]
+
+    /** The host's other 100-odd aliases, re-derived so nothing falls back to blue. */
+    function bridgeCss() {
+      const decls = ALIAS_BRIDGE.map(([name, value]) => `${name}:${value}!important`)
+      return `body{${decls.join(';')}}`
+    }
+
     /** Type pairing: the palette's own, or one chosen override. */
     function fontCss(state, palette) {
       const bodyOf = (kind) => (kind === 'serif' ? FONT_SERIF : kind === 'mono' ? FONT_MONO : FONT_SANS)
@@ -1700,9 +1848,13 @@ window.__ModuleLoader__.load({
           const palette = paletteOf(state.palette)
           applyColors(palette)
           if (finishDisposer) finishDisposer()
-          const sheet = colorsInSheet
-            ? `${tokenDeclarations(palette)}\n${finishCss(state, palette)}`
-            : finishCss(state, palette)
+          const sheet = [
+            bridgeCss(),
+            colorsInSheet ? tokenDeclarations(palette) : '',
+            finishCss(state, palette),
+          ]
+            .filter(Boolean)
+            .join('\n')
           finishDisposer = installStyles('finish', sheet)
         }
 

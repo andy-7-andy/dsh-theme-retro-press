@@ -153,6 +153,14 @@ FONT_SERIF / FONT_SANS / FONT_MONO   老配色的通用栈
 - 三套都 `texture:'paper'`、`bodyWeight:400`，正文按 13.5px / 1.75 行高排，长段落先能读，标题才敢做重。
 - 字体是**真的装在本机**才敢用：Archivo Black、Libre Franklin、Space Grotesk、Bodoni MT、方正小标宋、华文中宋、思源黑体（含 900）都实测过；思源宋体未装，别往栈里放。
 
+### 4.6 宿主有 119 个别名，配色只给 14 个（3.9.0 修）
+
+宿主在 `body` / `body[data-ds-dark-theme]` 上定义了 **119 个 `--dsw-alias-*` 和 `--dsw-specific-*`**（从 `app.asar` 里 `body{--dsw-alias-bg-base:…}` 那段能整段抽出来）。配色只提供 14 个，其余 100 多个会回落到宿主默认的蓝灰色 —— 表现就是**配色卡上是一套、装上去是另一套**，尤其 `--dsw-alias-brand-primary-new-colorprimary-new-color`（宿主默认 `#4176e6` 蓝）被大量组件用作品牌色，而 `button-primary-fill`、`bg-layer-3`、`label-tertiary`、`state-*-secondary/tertiary`、`menu-*`、`specific-*` 也全都没被接管。
+
+3.9.0 起由 `ALIAS_BRIDGE`（client.js 里）把这 100 多个别名用调色板自己的墨色 `color-mix()` 推导出来，统一带 `!important` 打进 `body{}`，浅色/深色自动跟随（因为引用的是会随模式变的 token，不需要再写深色块）。改配色时**只要改 14 个 token，其余会自动跟着走**；要加新别名就补一条 `[名称, 表达式]`。
+
+排查口诀：界面上出现"不属于这套油墨"的颜色（默认蓝、灰白面板），先查它用的是哪个 alias，再看 `ALIAS_BRIDGE` 里有没有这一条。
+
 
 
 ---
