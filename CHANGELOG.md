@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.12.0
+
+- **加了一层压印（letterpress）**：以前只有"纸纹"——一条平铺的背景条纹。现在按凸版印刷的三个事实重做：纸有齿、纸不匀、字被压进纸里。三样都用 CSS 实现，没有 canvas、没有运行时解码。
+  - **纸的齿**：逐像素生成的 160px 噪点砖，浅色下 `multiply` 叠一层（`.38` / `.55`），深色下换成反相的煤灰砖走 `screen`——同一套叠法在奶油纸和黑纸上都成立，不会像单纯 `screen` 那样把深色页刷白。
+  - **纸不匀**：400px 的低频斑块 `multiply` 进底色，整页不再是一个平面色值。
+  - **墨与压痕**：正文加 `0 0 .2–.3px` 的墨晕；标题加 1px 的浅色高光和 -0.5px 的暗边，读起来像字被压进纸里；重压档再给标题加 `.08px` 描边。
+- **新增设置项「压印」**：随配色 / 平印 / 轻压 / 重压。默认随配色——铅字与孔版是**重压**（铅字本来就该有压痕，孔版本来就吃墨厚），鼠尾草、牛皮纸、蓝晒纸、打孔卡是**轻压**，三套屏幕（显像管、荧光屏、软盘）是**平印**，屏幕不该有纸的齿。
+- 两张砖（齿与斑）以 PNG data URI 随包，约 21 kB；生成脚本在仓库外的 `theme-design`（`make-paper-tiles.js`）。
+- 体积：`client.js` 494 kB → 538 kB。
+
 ## 3.11.0
 
 - **西文字面全部随包**：Fraunces / Alegreya / Archivo（400+700）/ Archivo Black / Libre Franklin / Playfair Display / Bricolage Grotesque / Space Grotesk / VT323 / DotGothic16 / Silkscreen / Bitter，各取 **latin 子集 WOFF2**（共 231 kB），以 data URI 内嵌成 `@font-face`，家族名统一加 ` RP` 后缀（`"Fraunces RP"` …），排在每个字体栈的第一位。装没装字体，九套都长同一个样。

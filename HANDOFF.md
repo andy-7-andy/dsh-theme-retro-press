@@ -1,6 +1,6 @@
 # Retro Press 交接文档（HANDOFF）
 
-> 最后更新：2026-11-08 · 包版本 **3.11.0**（九套配色，实物命名，每套一对字面；蓝晒纸的纸是蓝的；13 个拉丁字面以 latin 子集 WOFF2 随包内嵌，家族名带 RP 后缀）· 3.8.4 为 npm 上的 latest，3.10.0 待发 · 仓库 https://github.com/andy-7-andy/dsh-theme-retro-press
+> **3.12.0** — 加了一层压印（纸齿 / 纸不匀 / 墨晕与压痕），九套按实物给了默认强度。3.11.0 起西文全部随包（含 Cutive Mono），汉字仍是引用。**npm 上 latest 仍是 3.8.4**，3.10.x–3.12.0 全部未发。
 
 这份文档写给"下一次接手的人（或下一个会话的 AI）"。目标是：**不用重读历史对话，也能改一个配色、发一个版本**。
 
@@ -167,6 +167,18 @@ FONT_SERIF / FONT_SANS / FONT_MONO   老配色的通用栈
 
 
 ---
+
+### 4.7 压印（3.12.0）
+
+凸版印刷在屏幕上只有三件事可以做，全做了：
+
+1. **纸的齿** —— `PAPER_TILES.grain`（160px 逐像素噪点，`make-paper-tiles.js` 生成）走 `body::after`，浅色 `multiply`、深色换 `PAPER_TILES.soot`（反相砖）走 `screen`。**不要用 `screen` 叠浅色砖**：screen(0.98, 任意) ≈ 白，整页会刷白（踩过）。
+2. **纸不匀** —— `PAPER_TILES.mottle`（400px 低频斑块）`multiply` 进 body 底色。
+3. **墨与压痕** —— 正文 `text-shadow:0 0 .2/.3px`；标题 `0 1px 0 纸色, 0 -.5px 0 rgba(0,0,0,.1)`；重压再加 `-webkit-text-stroke:.08px`。
+
+- 开关：`state.press` ∈ `PRESSES = ['auto','off','soft','strong']`；每套默认在 `PALETTE_FINISH[id].press`（铅字/孔版 = strong，crt/phosphor/c64 = off，其余 soft）。
+- 代码在 `client.js` 的 `// <press>` … `// </press>` 之间，`pressCss(level)` 是纯字符串函数 —— 所以能在不重启 DSH 的情况下静态验证：`theme-design/make-press-live.js` 会把这段切出来、换成 `file://` 砖、套到 mock 上出图 `D:/tmp/rp/press-live2.png`。
+- 调试口诀：**看不见 → 先单独渲染那张砖**（140px 缩放后噪点会被平滑掉）；**太脏 → 降密度不是降对比**（同样的 3% 变暗，密而稀看感差很多）。
 
 ## 5. 发版流程（重要，npm 有坑）
 
