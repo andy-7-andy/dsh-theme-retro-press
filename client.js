@@ -24,38 +24,22 @@ window.__ModuleLoader__.load({
     const FONT_SERIF =
       '"Songti SC","STSong","SimSun","Noto Serif CJK SC",Georgia,"Times New Roman",serif'
     /**
-     * Mono: Latin on Cascadia/Consolas, CJK on 思源宋体. Without an explicit CJK
+     * Mono: Latin on Cascadia/Consolas, CJK on 华文中宋. Without an explicit CJK
      * face the generic monospace fallback lands on SimSun, whose thin strokes
-     * disappear on the dark scanline themes; 思源宋体 keeps the Song skeleton
-     * but carries a Medium weight, so the horizontals survive the scanlines.
+     * disappear on the dark scanline themes.
      */
     const FONT_MONO =
       'ui-monospace,"Cascadia Mono","SFMono-Regular",Consolas,"Noto Serif SC","Songti SC","华文中宋",monospace'
     /**
-     * CRT layer — the terminal voice of the theme. VT323 is a digitisation of
-     * DEC's VT320 screen font: fixed-pitch, slightly squared bowls, one weight.
-     * It is used only for code and short machine text; CJK falls through to
-     * 思源黑体, because a Song fallback would fight the pixel grid.
+     * The pixel layer. VT323 is a digitisation of DEC's VT320 screen font, and
+     * DotGothic16 is the one pixel face that also carries Han glyphs — together
+     * they are the only pair that gives 显像管 a screen it can title on.
      */
     const FONT_CRT =
       '"VT323","Share Tech Mono","Cascadia Mono",Consolas,"Source Han Sans SC","思源黑体",monospace'
     /**
-     * Sage body: Latin on Goudy Old Style — the warm Arts-and-Crafts book face
-     * of early twentieth-century presses — and CJK on 华文中宋, whose crisp
-     * thick-thin is the Chinese counterpart of that old-press cut.
-     */
-    const FONT_SAGE_BODY =
-      '"Goudy Old Style",Centaur,Garamond,"Century Schoolbook",Georgia,"华文中宋","STZhongsong","宋体","SimSun","Noto Serif SC","Source Han Serif SC","Songti SC","STSong",serif'
-    /**
-     * Sage headings: Latin on Bodoni MT for the hairline contrast of an old
-     * title page, CJK on 方正小标宋 — a display Song cut made for title lines.
-     */
-    const FONT_SAGE_HEAD =
-      '"Bodoni MT",Elephant,"Bookman Old Style",Georgia,"方正小标宋简体","FZXiaoBiaoSong-B05S","华文中宋","Noto Serif SC","Songti SC",SimSun,serif'
-    /**
-     * Hei (黑体) — the modern print gothic. 思源黑体 (Source Han Sans SC) is
-     * installed at user level here and leads the stack; YaHei, DengXian and
-     * SimHei remain as fallbacks for machines that lack it.
+     * Hei (黑体) — the modern print gothic, used wherever a page needs a neutral
+     * CJK body that will not compete with a display head.
      */
     const FONT_HEI =
       '"Source Han Sans SC","思源黑体","Microsoft YaHei","Noto Sans CJK SC","PingFang SC","DengXian","SimHei",sans-serif'
@@ -66,80 +50,99 @@ window.__ModuleLoader__.load({
      */
     const FONT_QUOTE =
       '"仿宋_GB2312","FangSong_GB2312","仿宋","FangSong","STFangsong","华文仿宋",serif'
+
     /**
-     * Cool indigo headings: Bricolage Grotesque at its display optical size —
-     * angled terminals, a squeezed counter, close to a newspaper nameplate of
-     * the 1970s. Set at 700 with negative tracking so it locks up as a line.
+     * Nine pages, nine type voices. Each pair is chosen so that the Latin and
+     * the Han share one skeleton — a Didone next to a Song, a pixel next to a
+     * pixel — instead of dropping a modern grotesque under an old face.
      */
-    const FONT_MIST_HEAD =
-      '"Bricolage Grotesque","Archivo","Franklin Gothic Medium","Source Han Sans SC","思源黑体","Microsoft YaHei","PingFang SC",sans-serif'
+
     /**
-     * Cool indigo body: Bitter is a slab — thick horizontals, square feet, the
-     * look of type pushed into paper. It holds a .56 x-height, so at 13.5px it
-     * reads heavier than any grotesque without being bold.
+     * 鼠尾草 — Fraunces (SOFT/WONK on) rounds the serif corners until the face
+     * reads hand-cut; 华文中宋 carries the same thick-thin into the Han. Body is
+     * Alegreya, whose strokes start and finish like a pen, over 华文中宋.
      */
-    const FONT_MIST_BODY =
-      '"Bitter","Archivo","Source Han Sans SC","思源黑体","Noto Sans SC","Microsoft YaHei","PingFang SC","SimHei",serif'
+    const FONT_SAGE_HEAD =
+      '"Fraunces","Playfair Display","Bodoni MT","华文中宋","STZhongsong","Noto Serif SC","Songti SC",serif'
+    const FONT_SAGE_BODY =
+      '"Alegreya","EB Garamond","Archivo","华文中宋","STZhongsong","Source Han Sans SC","思源黑体","Microsoft YaHei",serif'
+
     /**
-     * Moss headings: Fraunces, the soft/wonky revival. SOFT rounds the serif
-     * corners, WONK turns on the deliberate asymmetries — the face reads hand-cut
-     * rather than engraved, which is the point on a 铜版 green.
+     * 牛皮纸 — Bookman Old Style: the heavy, wide-footed American book face that
+     * sat on every kraft envelope of the 1960s. 方正姚体 has the same wide,
+     * flat-sided build. Georgia and 华文中宋 hold the body.
      */
-    const FONT_MOSS_HEAD =
-      '"Fraunces","Playfair Display","Bodoni MT","方正小标宋简体","FZXiaoBiaoSong-B05S","华文中宋","Noto Serif SC","Songti SC",serif'
+    const FONT_KRAFT_HEAD =
+      '"Bookman Old Style","Bookman","Georgia","方正姚体","FZYaoti","华文中宋","STZhongsong","Songti SC",serif'
+    const FONT_KRAFT_BODY =
+      '"Georgia","Bookman Old Style","Century Schoolbook","华文中宋","STZhongsong","Source Han Sans SC","思源黑体",serif'
+
     /**
-     * Moss body: Alegreya is a calligraphic old-style — the strokes start and
-     * finish the way a pen would, so long paragraphs keep a handwriting pulse
-     * that a book Garamond loses at 13.5px.
-     */
-    const FONT_MOSS_BODY =
-      '"Alegreya","EB Garamond","Archivo","Source Han Sans SC","思源黑体","Microsoft YaHei","PingFang SC",serif'
-    /**
-     * Editorial-poster family (3.9.0). Three single-ink pages, each with one
-     * typographic idea instead of one colour idea: a newspaper masthead, a
-     * cyanotype plate, and a two-drum risograph print.
-     *
-     * Ink headings: Archivo Black is the poster grotesque — tight, flat-sided,
-     * built for a nameplate. The Han under it is 方正小标宋, a display Song cut
-     * for exactly this job: hairlines thick enough to survive 34px, wedge
-     * terminals that hold the line. Latin uppercase, Han as drawn.
+     * 铅字 — Archivo Black is the poster grotesque, flat-sided and tight, and
+     * 方正小标宋 is the display Song cut for the same job: hairlines that hold
+     * at 34px. Body is Libre Franklin (1912 newspaper) over 思源黑体.
      */
     const FONT_INK_HEAD =
       '"Archivo Black","Archivo","Franklin Gothic Heavy","方正小标宋简体","FZXiaoBiaoSong-B05S","Noto Serif SC","Songti SC",serif'
-    /**
-     * Ink body: Libre Franklin is the 1912 newspaper grotesque — a large
-     * x-height and open counters, so 13.5px stays readable in a narrow column
-     * where a book face would go grey.
-     */
     const FONT_INK_BODY =
       '"Libre Franklin","Archivo","Franklin Gothic Book","Source Han Sans SC","思源黑体","Microsoft YaHei","PingFang SC",sans-serif'
+
     /**
-     * Cobalt headings: Bodoni MT — the Didone of engraved title pages, where
-     * the hairline serifs are the point. The Han is 华文中宋, whose sharp
-     * thick–thin is the Chinese equivalent of that engraving.
+     * 蓝晒纸 — Bodoni MT, the Didone of engraved title pages, where the hairline
+     * serifs are the point; 经典宋体简 is the Chinese cut with the same contrast.
+     * Body stays a neutral grotesque so the plate does the talking.
      */
     const FONT_COBALT_HEAD =
-      '"Bodoni MT","Playfair Display","华文中宋","STZhongsong","经典宋体简","Songti SC","Noto Serif SC",serif'
-    /**
-     * Cobalt body: Archivo at text size — a neutral grotesque that lets the
-     * Didone headings do the talking; the Han stays 思源黑体 for the same reason.
-     */
+      '"Bodoni MT","Playfair Display","经典宋体简","华文中宋","STZhongsong","Songti SC","Noto Serif SC",serif'
     const FONT_COBALT_BODY =
       '"Archivo","思源黑体","Source Han Sans SC","Microsoft YaHei","PingFang SC",sans-serif'
+
     /**
-     * Riso headings: Archivo Black again, but set at 900 with negative tracking
-     * so it locks up as a solid block — the drum-printed poster voice. The Han
-     * is 思源黑体 Heavy: on a risograph the headline is a slab of ink, not a
-     * drawn letter.
+     * 孔版 — Bricolage Grotesque at display size: angled terminals, a squeezed
+     * counter, the nameplate of a 1970s drum-printed poster. Set 800 with
+     * negative tracking so it locks up; 思源黑体 Heavy is the slab of ink under it.
      */
     const FONT_RISO_HEAD =
-      '"Archivo Black","Archivo","Franklin Gothic Heavy","思源黑体","Source Han Sans SC","Microsoft YaHei",sans-serif'
-    /**
-     * Riso body: Space Grotesk, whose slightly off-square bowls read as
-     * machine-set rather than typeset — the right register under a 900 block.
-     */
+      '"Bricolage Grotesque","Archivo","Franklin Gothic Medium","思源黑体","Source Han Sans SC","Microsoft YaHei",sans-serif'
     const FONT_RISO_BODY =
       '"Space Grotesk","思源黑体","Source Han Sans SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif'
+
+    /**
+     * 显像管 — VT323 for the tube's own screen font, and Courier Prime for the
+     * body: a typewriter setting that survives scanlines without glowing.
+     */
+    const FONT_CRT_HEAD =
+      '"VT323","Share Tech Mono","Cascadia Mono",Consolas,"Source Han Sans SC","思源黑体",sans-serif'
+    const FONT_CRT_BODY =
+      '"Courier Prime","Courier New","Cascadia Mono",Consolas,"Source Han Sans SC","思源黑体",monospace'
+
+    /**
+     * 荧光屏 — DotGothic16 is a pixel face that also draws Han, so the heading is
+     * pixels in both scripts; Share Tech Mono keeps the body fixed-pitch.
+     */
+    const FONT_PHOS_HEAD =
+      '"DotGothic16","VT323","Share Tech Mono","思源黑体","Source Han Sans SC",sans-serif'
+    const FONT_PHOS_BODY =
+      '"Share Tech Mono","VT323","Cascadia Mono","思源黑体","Source Han Sans SC",monospace'
+
+    /**
+     * 打孔卡 — Archivo set 700 and tracked out like a keypunch field label, with
+     * 仿宋 in the Han (the cut a typed form actually used). Bitter's slab feet
+     * hold the body at 13.5px.
+     */
+    const FONT_PUNCH_HEAD =
+      '"Archivo","Libre Franklin","Franklin Gothic Medium","仿宋_GB2312","FangSong_GB2312","仿宋","Noto Sans SC",sans-serif'
+    const FONT_PUNCH_BODY =
+      '"Bitter","Archivo","Source Han Sans SC","思源黑体","Microsoft YaHei","PingFang SC",serif'
+
+    /**
+     * 软盘 — Silkscreen for the 8-bit label, DotGothic16 for its Han, and Share
+     * Tech Mono underneath: a machine that only ever showed one weight.
+     */
+    const FONT_FLOPPY_HEAD =
+      '"Silkscreen","DotGothic16","VT323","思源黑体","Source Han Sans SC",sans-serif'
+    const FONT_FLOPPY_BODY =
+      '"Share Tech Mono","VT323","Cascadia Mono","思源黑体","Source Han Sans SC",monospace'
 
     /**
      * Palettes. Color tokens carry both schemes; `font`, `heading`, `code` and
@@ -147,126 +150,19 @@ window.__ModuleLoader__.load({
      */
     const PALETTES = [
       {
-        id: 'seal',
-        nameKey: 'sealName',
-        descKey: 'sealDesc',
-        texture: 'paper',
-        font: 'serif',
-        heading: 'serif',
-        code: 'sepia(.3) saturate(.82) contrast(1.02)',
-        tokens: {
-          '--dsw-alias-bg-base': { light: '#F7F4EC', dark: '#14120F' },
-          '--dsw-alias-bg-layer-1': { light: '#FFFDF8', dark: '#1C1916' },
-          '--dsw-alias-bg-layer-2': { light: '#EFEADF', dark: '#262119' },
-          '--dsw-alias-bg-overlay': { light: '#FFFEFA', dark: '#221E1A' },
-          '--dsw-alias-border-l1': { light: '#DDD5C6', dark: '#332E27' },
-          '--dsw-alias-border-l2': { light: '#B9AF9C', dark: '#4C4438' },
-          '--dsw-alias-brand-primary': { light: '#B23A2E', dark: '#E4695A' },
-          '--dsw-alias-label-primary': { light: '#1E1B16', dark: '#F2ECE0' },
-          '--dsw-alias-label-secondary': { light: '#5F584C', dark: '#ADA294' },
-          '--dsw-alias-state-error-primary': { light: '#A62B22', dark: '#E0685C' },
-          '--dsw-alias-state-idle-primary': { light: '#8A8375', dark: '#8B8377' },
-          '--dsw-alias-state-success-primary': { light: '#3F5F42', dark: '#7E9C77' },
-          '--dsw-alias-state-warn-primary': { light: '#8A6118', dark: '#D9A959' },
-          '--dsw-specific-sidebar-fill': { light: '#F0EBE0', dark: '#191612' },
-        },
-      },
-      {
-        id: 'sage',
-        nameKey: 'sageName',
-        descKey: 'sageDesc',
-        texture: 'paper',
-        font: 'serif',
-        heading: 'serif',
-        fontStack: FONT_SAGE_BODY,
-        headingStack: FONT_SAGE_HEAD,
-        headWeight: 400,
-        headTracking: '.045em',
-        code: 'saturate(.92) sepia(.06)',
-        tokens: {
-          '--dsw-alias-bg-base': { light: '#F4F4EA', dark: '#131410' },
-          '--dsw-alias-bg-layer-1': { light: '#FBFBF2', dark: '#1A1B16' },
-          '--dsw-alias-bg-layer-2': { light: '#E8EADD', dark: '#22241C' },
-          '--dsw-alias-bg-overlay': { light: '#FDFDF6', dark: '#20221A' },
-          '--dsw-alias-border-l1': { light: '#D9DCCB', dark: '#2D2F26' },
-          '--dsw-alias-border-l2': { light: '#B9C0A7', dark: '#434735' },
-          '--dsw-alias-brand-primary': { light: '#5F7A4E', dark: '#A6C083' },
-          '--dsw-alias-label-primary': { light: '#232A1F', dark: '#E8EBDD' },
-          '--dsw-alias-label-secondary': { light: '#5B6452', dark: '#A7AE99' },
-          '--dsw-alias-state-error-primary': { light: '#A64B3C', dark: '#E08A72' },
-          '--dsw-alias-state-idle-primary': { light: '#8B9580', dark: '#7E8773' },
-          '--dsw-alias-state-success-primary': { light: '#4E7040', dark: '#9BC07C' },
-          '--dsw-alias-state-warn-primary': { light: '#99703A', dark: '#D9B173' },
-          '--dsw-specific-sidebar-fill': { light: '#ECEEE1', dark: '#0F100C' },
-        },
-      },
-      {
-        /**
-         * Cool white + indigo: the second half of the two-plate pair. Nothing
-         * warm in the substrate — the white leans blue and the type is set Hei
-         * for headings over a Song body, so a cool page never reads as ivory.
-         */
-        id: 'mist',
-        nameKey: 'mistName',
-        descKey: 'mistDesc',
-        texture: 'paper',
-        font: 'serif',
-        heading: 'sans',
-        fontStack: FONT_MIST_BODY,
-        headingStack: FONT_MIST_HEAD,
-        headWeight: 700,
-        headTracking: '-.01em',
-        // Bricolage is variable on two axes: the display optical size is what
-        // gives the headline its angled cuts, and a slightly narrow width keeps
-        // it in the job-print register instead of the fashion-poster one.
-        headVariation: "'opsz' 96,'wdth' 88",
-        // Bricolage carries a .56 x-height of its own and the Han is at .54, so
-        // the pair needs no font-size-adjust fudge — only a medium body weight,
-        // which is what stops the column reading thin.
-        bodyWeight: 450,
-        code: 'sepia(.08) saturate(.78)',
-        tokens: {
-          '--dsw-alias-bg-base': { light: '#F8FAFC', dark: '#0E1218' },
-          '--dsw-alias-bg-layer-1': { light: '#FDFEFF', dark: '#151A21' },
-          '--dsw-alias-bg-layer-2': { light: '#F1F3F6', dark: '#1B222B' },
-          '--dsw-alias-bg-overlay': { light: '#FFFFFF', dark: '#19212B' },
-          '--dsw-alias-border-l1': { light: '#DCE0E6', dark: '#232A34' },
-          '--dsw-alias-border-l2': { light: '#B7BEC9', dark: '#3B4552' },
-          '--dsw-alias-brand-primary': { light: '#546DA1', dark: '#9FB4DE' },
-          '--dsw-alias-label-primary': { light: '#242A31', dark: '#E7EBF1' },
-          '--dsw-alias-label-secondary': { light: '#6B7078', dark: '#9BA3AE' },
-          '--dsw-alias-state-error-primary': { light: '#A64438', dark: '#DE8478' },
-          '--dsw-alias-state-idle-primary': { light: '#8E939B', dark: '#6F7681' },
-          '--dsw-alias-state-success-primary': { light: '#4E7A5A', dark: '#86B596' },
-          '--dsw-alias-state-warn-primary': { light: '#8A6A2A', dark: '#D9B172' },
-          '--dsw-specific-sidebar-fill': { light: '#F1F3F6', dark: '#10151B' },
-        },
-      },
-      {
-        /**
-         * Pale grey-green + moss: the same two-plate idea turned green, with the
-         * type pairing flipped — Song display headings over a Hei body — so the
-         * pair reads as two presses rather than one palette recoloured.
-         */
+        /** Dried sage on linen: soft-cut Fraunces over a calligraphic Alegreya, 华文中宋 in both. */
         id: 'moss',
         nameKey: 'mossName',
         descKey: 'mossDesc',
         texture: 'paper',
-        font: 'sans',
-        heading: 'serif',
-        fontStack: FONT_MOSS_BODY,
-        headingStack: FONT_MOSS_HEAD,
+        headingStack: FONT_SAGE_HEAD,
+        fontStack: FONT_SAGE_BODY,
         headWeight: 600,
         headTracking: '.005em',
-        // Fraunces is the "wonky" revivals axis set: SOFT rounds the corners of
-        // the serifs, WONK switches on the deliberate asymmetries (the R leg,
-        // the g ear). Both default to 0, which is why the sober face looks plain.
         headVariation: "'SOFT' 60,'WONK' 1,'opsz' 40",
-        // Fraunces' .50 x-height clears 小标宋's .46, and Alegreya's .48 clears
-        // 思源黑体 — no adjust needed, just a medium body weight so the pale green
-        // page still holds its grey.
         bodyWeight: 500,
-        code: 'saturate(.9) sepia(.04)',
+        sectionRule: '1px solid var(--dsw-alias-border-l2)',
+        code: 'saturate(.92) sepia(.06)',
         tokens: {
           '--dsw-alias-bg-base': { light: '#F9FBF7', dark: '#0E1310' },
           '--dsw-alias-bg-layer-1': { light: '#FEFFFC', dark: '#141A15' },
@@ -285,62 +181,17 @@ window.__ModuleLoader__.load({
         },
       },
       {
-        id: 'crt',
-        nameKey: 'crtName',
-        descKey: 'crtDesc',
-        texture: 'scan',
-        font: 'mono',
-        heading: 'mono',
-        code: 'sepia(.3) saturate(1.15) brightness(1.02)',
-        tokens: {
-          '--dsw-alias-bg-base': { light: '#F4F5F3', dark: '#1A1915' },
-          '--dsw-alias-bg-layer-1': { light: '#FCFDFC', dark: '#23221A' },
-          '--dsw-alias-bg-layer-2': { light: '#E9EBE7', dark: '#2A2920' },
-          '--dsw-alias-bg-overlay': { light: '#FFFFFF', dark: '#26251B' },
-          '--dsw-alias-border-l1': { light: '#D6D9D3', dark: '#3A3826' },
-          '--dsw-alias-border-l2': { light: '#AFB4AC', dark: '#56543A' },
-          '--dsw-alias-brand-primary': { light: '#1F7A55', dark: '#F0B44C' },
-          '--dsw-alias-label-primary': { light: '#14171A', dark: '#F7EED8' },
-          '--dsw-alias-label-secondary': { light: '#5A6058', dark: '#BDB08A' },
-          '--dsw-alias-state-error-primary': { light: '#B23A3A', dark: '#E36B4E' },
-          '--dsw-alias-state-idle-primary': { light: '#868C84', dark: '#928A6A' },
-          '--dsw-alias-state-success-primary': { light: '#1F7A55', dark: '#8FC46A' },
-          '--dsw-alias-state-warn-primary': { light: '#8A6A12', dark: '#E8C05A' },
-          '--dsw-specific-sidebar-fill': { light: '#EDEFEB', dark: '#1C1B15' },
-        },
-      },
-      {
-        id: 'indigo',
-        nameKey: 'indigoName',
-        descKey: 'indigoDesc',
-        texture: 'paper',
-        font: 'sans',
-        heading: 'serif',
-        code: 'sepia(.16) saturate(.86)',
-        tokens: {
-          '--dsw-alias-bg-base': { light: '#F3EFE4', dark: '#0F1319' },
-          '--dsw-alias-bg-layer-1': { light: '#FBF8F0', dark: '#151A22' },
-          '--dsw-alias-bg-layer-2': { light: '#E8E2D2', dark: '#1D232C' },
-          '--dsw-alias-bg-overlay': { light: '#FEFCF6', dark: '#1A2029' },
-          '--dsw-alias-border-l1': { light: '#D8D1BE', dark: '#2A3240' },
-          '--dsw-alias-border-l2': { light: '#B3A98F', dark: '#414C5E' },
-          '--dsw-alias-brand-primary': { light: '#1F3A5F', dark: '#C8A465' },
-          '--dsw-alias-label-primary': { light: '#1A2028', dark: '#E9E6DD' },
-          '--dsw-alias-label-secondary': { light: '#565F6B', dark: '#A3A9B2' },
-          '--dsw-alias-state-error-primary': { light: '#A3352C', dark: '#DE7060' },
-          '--dsw-alias-state-idle-primary': { light: '#8B8E8A', dark: '#7C838D' },
-          '--dsw-alias-state-success-primary': { light: '#2F6B5E', dark: '#7FA89A' },
-          '--dsw-alias-state-warn-primary': { light: '#82631A', dark: '#D6AE6A' },
-          '--dsw-specific-sidebar-fill': { light: '#EDE8DA', dark: '#131922' },
-        },
-      },
-      {
+        /** Kraft buff and rust ink: a Bookman envelope face with 姚体 under it. */
         id: 'amber',
         nameKey: 'amberName',
         descKey: 'amberDesc',
-        texture: 'scan',
-        font: 'mono',
-        heading: 'mono',
+        texture: 'paper',
+        headingStack: FONT_KRAFT_HEAD,
+        fontStack: FONT_KRAFT_BODY,
+        headWeight: 700,
+        headTracking: '.008em',
+        bodyWeight: 400,
+        sectionRule: '2px solid var(--dsw-alias-border-l2)',
         code: 'sepia(.24) saturate(1.08) brightness(1.02)',
         tokens: {
           '--dsw-alias-bg-base': { light: '#F2E3C0', dark: '#1A1610' },
@@ -360,147 +211,13 @@ window.__ModuleLoader__.load({
         },
       },
       {
-        id: 'phosphor',
-        nameKey: 'phosphorName',
-        descKey: 'phosphorDesc',
-        texture: 'scan',
-        font: 'mono',
-        heading: 'mono',
-        code: 'saturate(1.1) brightness(1.03)',
-        tokens: {
-          '--dsw-alias-bg-base': { light: '#F0F5EE', dark: '#0B120B' },
-          '--dsw-alias-bg-layer-1': { light: '#F8FCF6', dark: '#101A10' },
-          '--dsw-alias-bg-layer-2': { light: '#E2EADE', dark: '#162216' },
-          '--dsw-alias-bg-overlay': { light: '#FDFFFB', dark: '#131E13' },
-          '--dsw-alias-border-l1': { light: '#CBD8C6', dark: '#223022' },
-          '--dsw-alias-border-l2': { light: '#A6B79F', dark: '#334733' },
-          '--dsw-alias-brand-primary': { light: '#1F6B3A', dark: '#7CFC9A' },
-          '--dsw-alias-label-primary': { light: '#121A12', dark: '#D8F5D8' },
-          '--dsw-alias-label-secondary': { light: '#4D5C4B', dark: '#93B393' },
-          '--dsw-alias-state-error-primary': { light: '#A33A2E', dark: '#E0675A' },
-          '--dsw-alias-state-idle-primary': { light: '#7E8C79', dark: '#6F8A6F' },
-          '--dsw-alias-state-success-primary': { light: '#2F7A44', dark: '#7CFC9A' },
-          '--dsw-alias-state-warn-primary': { light: '#7C6112', dark: '#D8B85A' },
-          '--dsw-specific-sidebar-fill': { light: '#E9F0E6', dark: '#0E160E' },
-        },
-      },
-      {
-        id: 'ibm',
-        nameKey: 'ibmName',
-        descKey: 'ibmDesc',
-        texture: 'scan',
-        font: 'mono',
-        heading: 'mono',
-        code: 'saturate(.92) brightness(1.02)',
-        tokens: {
-          '--dsw-alias-bg-base': { light: '#EEF3F7', dark: '#0B1A2A' },
-          '--dsw-alias-bg-layer-1': { light: '#F8FBFD', dark: '#102234' },
-          '--dsw-alias-bg-layer-2': { light: '#DFE8EF', dark: '#16293D' },
-          '--dsw-alias-bg-overlay': { light: '#FFFFFF', dark: '#14273A' },
-          '--dsw-alias-border-l1': { light: '#C6D3DE', dark: '#23384D' },
-          '--dsw-alias-border-l2': { light: '#9DB0C0', dark: '#35506A' },
-          '--dsw-alias-brand-primary': { light: '#1F4E79', dark: '#A8D8F0' },
-          '--dsw-alias-label-primary': { light: '#0E1720', dark: '#DCEBF7' },
-          '--dsw-alias-label-secondary': { light: '#4B5D6C', dark: '#93AEC4' },
-          '--dsw-alias-state-error-primary': { light: '#A33327', dark: '#E0705A' },
-          '--dsw-alias-state-idle-primary': { light: '#7C8B98', dark: '#6E8598' },
-          '--dsw-alias-state-success-primary': { light: '#1F6B5A', dark: '#6FD3B0' },
-          '--dsw-alias-state-warn-primary': { light: '#8A6414', dark: '#E0B761' },
-          '--dsw-specific-sidebar-fill': { light: '#E6EDF3', dark: '#0D1D2E' },
-        },
-      },
-      {
-        id: 'c64',
-        nameKey: 'c64Name',
-        descKey: 'c64Desc',
-        texture: 'scan',
-        font: 'mono',
-        heading: 'mono',
-        code: 'saturate(1.12) contrast(1.04)',
-        tokens: {
-          '--dsw-alias-bg-base': { light: '#F2F0FA', dark: '#241E4A' },
-          '--dsw-alias-bg-layer-1': { light: '#FAF9FF', dark: '#2C2558' },
-          '--dsw-alias-bg-layer-2': { light: '#E4E0F2', dark: '#342C66' },
-          '--dsw-alias-bg-overlay': { light: '#FFFFFF', dark: '#2F2760' },
-          '--dsw-alias-border-l1': { light: '#CFC8E8', dark: '#443A7A' },
-          '--dsw-alias-border-l2': { light: '#A99ED0', dark: '#5A4E96' },
-          '--dsw-alias-brand-primary': { light: '#4B3FA8', dark: '#9C8CFF' },
-          '--dsw-alias-label-primary': { light: '#1A1630', dark: '#E6E1FF' },
-          '--dsw-alias-label-secondary': { light: '#5B5480', dark: '#B4AAD8' },
-          '--dsw-alias-state-error-primary': { light: '#A33450', dark: '#FF8FA3' },
-          '--dsw-alias-state-idle-primary': { light: '#8A83A8', dark: '#8E86B8' },
-          '--dsw-alias-state-success-primary': { light: '#2F6B5E', dark: '#8CE0B8' },
-          '--dsw-alias-state-warn-primary': { light: '#86621A', dark: '#F0CC7A' },
-          '--dsw-specific-sidebar-fill': { light: '#EAE6F6', dark: '#211B44' },
-        },
-      },
-      {
-        id: 'eink',
-        nameKey: 'einkName',
-        descKey: 'einkDesc',
-        texture: 'paper',
-        font: 'serif',
-        heading: 'serif',
-        code: 'grayscale(.28) contrast(.96)',
-        tokens: {
-          '--dsw-alias-bg-base': { light: '#EDE8DC', dark: '#1C1B18' },
-          '--dsw-alias-bg-layer-1': { light: '#F7F3E9', dark: '#242320' },
-          '--dsw-alias-bg-layer-2': { light: '#E0DACB', dark: '#2C2A25' },
-          '--dsw-alias-bg-overlay': { light: '#FBF7EE', dark: '#282623' },
-          '--dsw-alias-border-l1': { light: '#CFC8B8', dark: '#3A3832' },
-          '--dsw-alias-border-l2': { light: '#A9A292', dark: '#55524A' },
-          '--dsw-alias-brand-primary': { light: '#33302A', dark: '#D8D2C4' },
-          '--dsw-alias-label-primary': { light: '#1B1916', dark: '#EDE8DC' },
-          '--dsw-alias-label-secondary': { light: '#57524A', dark: '#A8A296' },
-          '--dsw-alias-state-error-primary': { light: '#8A3A32', dark: '#D07A6A' },
-          '--dsw-alias-state-idle-primary': { light: '#8C877C', dark: '#8A8578' },
-          '--dsw-alias-state-success-primary': { light: '#3F5A44', dark: '#8FB08A' },
-          '--dsw-alias-state-warn-primary': { light: '#7A6218', dark: '#D6B46A' },
-          '--dsw-specific-sidebar-fill': { light: '#E6E0D2', dark: '#1E1D19' },
-        },
-      },
-      {
-        id: 'darkroom',
-        nameKey: 'darkroomName',
-        descKey: 'darkroomDesc',
-        texture: 'paper',
-        font: 'sans',
-        heading: 'serif',
-        code: 'sepia(.2) saturate(.9)',
-        tokens: {
-          '--dsw-alias-bg-base': { light: '#F5EEEA', dark: '#1A0E0C' },
-          '--dsw-alias-bg-layer-1': { light: '#FDF7F3', dark: '#241412' },
-          '--dsw-alias-bg-layer-2': { light: '#EADFD9', dark: '#2E1A17' },
-          '--dsw-alias-bg-overlay': { light: '#FFFBF8', dark: '#281613' },
-          '--dsw-alias-border-l1': { light: '#D8C7BE', dark: '#3E211C' },
-          '--dsw-alias-border-l2': { light: '#B49E93', dark: '#5C322A' },
-          '--dsw-alias-brand-primary': { light: '#9E2B20', dark: '#C0392B' },
-          '--dsw-alias-label-primary': { light: '#241512', dark: '#F2D9D2' },
-          '--dsw-alias-label-secondary': { light: '#5E463F', dark: '#B99A92' },
-          '--dsw-alias-state-error-primary': { light: '#A32018', dark: '#E05A48' },
-          '--dsw-alias-state-idle-primary': { light: '#8C7A72', dark: '#8A6E66' },
-          '--dsw-alias-state-success-primary': { light: '#4F6B4A', dark: '#8FA87A' },
-          '--dsw-alias-state-warn-primary': { light: '#8A5A12', dark: '#D8A85A' },
-          '--dsw-specific-sidebar-fill': { light: '#EFE4DE', dark: '#1E100E' },
-        },
-      },
-      {
-        /**
-         * 墨黑 — the newspaper itself. No accent colour at all: brand is the
-         * ink, so links, buttons and the mark are all the same black the text
-         * is set in. The page reads by weight and rule, the way a front page
-         * does when the press ran one plate.
-         */
+        /** One ink: a 小标宋 and Archivo Black nameplate, nothing else. */
         id: 'ink',
         nameKey: 'inkName',
         descKey: 'inkDesc',
         texture: 'paper',
-        font: 'sans',
-        heading: 'serif',
-        fontStack: FONT_INK_BODY,
         headingStack: FONT_INK_HEAD,
-        // Archivo Black carries its own weight; asking for 700 on top would
-        // only synthesise a bolder one. Same for 小标宋, which has one cut.
+        fontStack: FONT_INK_BODY,
         headWeight: 400,
         headTracking: '-.006em',
         headCaps: true,
@@ -525,19 +242,13 @@ window.__ModuleLoader__.load({
         },
       },
       {
-        /**
-         * 钴蓝 — a cyanotype. Daylight is a bone sheet printed in one cobalt
-         * ink; dark mode is the same plate under the wash, Prussian blue with
-         * the type showing through as exposed paper. Nothing warm anywhere.
-         */
+        /** A cyanotype plate: engraved Bodoni and 经典宋体简 on bone paper. */
         id: 'cobalt',
         nameKey: 'cobaltName',
         descKey: 'cobaltDesc',
         texture: 'paper',
-        font: 'sans',
-        heading: 'serif',
-        fontStack: FONT_COBALT_BODY,
         headingStack: FONT_COBALT_HEAD,
+        fontStack: FONT_COBALT_BODY,
         headWeight: 400,
         headTracking: '.015em',
         bodyWeight: 400,
@@ -561,22 +272,15 @@ window.__ModuleLoader__.load({
         },
       },
       {
-        /**
-         * 孔版 — two drums, one spot. The black is the key plate; the pink is
-         * the second run, so it appears only where a second run would: section
-         * rules, links, buttons, the mark's misregistration. Everything else
-         * stays ink and paper.
-         */
+        /** Key plate plus one pink drum: Bricolage 800 locked up as a block. */
         id: 'riso',
         nameKey: 'risoName',
         descKey: 'risoDesc',
         texture: 'paper',
-        font: 'sans',
-        heading: 'sans',
-        fontStack: FONT_RISO_BODY,
         headingStack: FONT_RISO_HEAD,
-        headWeight: 900,
-        headTracking: '-.012em',
+        fontStack: FONT_RISO_BODY,
+        headWeight: 800,
+        headTracking: '-.02em',
         headCaps: true,
         bodyWeight: 400,
         sectionRule: '3px solid var(--dsw-alias-brand-primary)',
@@ -598,6 +302,127 @@ window.__ModuleLoader__.load({
           '--dsw-specific-sidebar-fill': { light: '#F1ECE4', dark: '#100C0A' },
         },
       },
+      {
+        /** A tube: VT323 screen type over a Courier Prime body. */
+        id: 'crt',
+        nameKey: 'crtName',
+        descKey: 'crtDesc',
+        texture: 'scan',
+        headingStack: FONT_CRT_HEAD,
+        fontStack: FONT_CRT_BODY,
+        headWeight: 500,
+        headTracking: '.02em',
+        bodyWeight: 400,
+        sectionRule: '1px solid var(--dsw-alias-border-l2)',
+        code: 'sepia(.3) saturate(1.15) brightness(1.02)',
+        tokens: {
+          '--dsw-alias-bg-base': { light: '#F4F5F3', dark: '#1A1915' },
+          '--dsw-alias-bg-layer-1': { light: '#FCFDFC', dark: '#23221A' },
+          '--dsw-alias-bg-layer-2': { light: '#E9EBE7', dark: '#2A2920' },
+          '--dsw-alias-bg-overlay': { light: '#FFFFFF', dark: '#26251B' },
+          '--dsw-alias-border-l1': { light: '#D6D9D3', dark: '#3A3826' },
+          '--dsw-alias-border-l2': { light: '#AFB4AC', dark: '#56543A' },
+          '--dsw-alias-brand-primary': { light: '#1F7A55', dark: '#F0B44C' },
+          '--dsw-alias-label-primary': { light: '#14171A', dark: '#F7EED8' },
+          '--dsw-alias-label-secondary': { light: '#5A6058', dark: '#BDB08A' },
+          '--dsw-alias-state-error-primary': { light: '#B23A3A', dark: '#E36B4E' },
+          '--dsw-alias-state-idle-primary': { light: '#868C84', dark: '#928A6A' },
+          '--dsw-alias-state-success-primary': { light: '#1F7A55', dark: '#8FC46A' },
+          '--dsw-alias-state-warn-primary': { light: '#8A6A12', dark: '#E8C05A' },
+          '--dsw-specific-sidebar-fill': { light: '#EDEFEB', dark: '#1C1B15' },
+        },
+      },
+      {
+        /** P1 green: DotGothic16 pixels in both scripts over Share Tech Mono. */
+        id: 'phosphor',
+        nameKey: 'phosphorName',
+        descKey: 'phosphorDesc',
+        texture: 'scan',
+        headingStack: FONT_PHOS_HEAD,
+        fontStack: FONT_PHOS_BODY,
+        headWeight: 500,
+        headTracking: '.03em',
+        bodyWeight: 400,
+        sectionRule: '1px solid var(--dsw-alias-brand-primary)',
+        code: 'saturate(1.1) brightness(1.03)',
+        tokens: {
+          '--dsw-alias-bg-base': { light: '#F0F5EE', dark: '#0B120B' },
+          '--dsw-alias-bg-layer-1': { light: '#F8FCF6', dark: '#101A10' },
+          '--dsw-alias-bg-layer-2': { light: '#E2EADE', dark: '#162216' },
+          '--dsw-alias-bg-overlay': { light: '#FDFFFB', dark: '#131E13' },
+          '--dsw-alias-border-l1': { light: '#CBD8C6', dark: '#223022' },
+          '--dsw-alias-border-l2': { light: '#A6B79F', dark: '#334733' },
+          '--dsw-alias-brand-primary': { light: '#1F6B3A', dark: '#7CFC9A' },
+          '--dsw-alias-label-primary': { light: '#121A12', dark: '#D8F5D8' },
+          '--dsw-alias-label-secondary': { light: '#4D5C4B', dark: '#93B393' },
+          '--dsw-alias-state-error-primary': { light: '#A33A2E', dark: '#E0675A' },
+          '--dsw-alias-state-idle-primary': { light: '#7E8C79', dark: '#6F8A6F' },
+          '--dsw-alias-state-success-primary': { light: '#2F7A44', dark: '#7CFC9A' },
+          '--dsw-alias-state-warn-primary': { light: '#7C6112', dark: '#D8B85A' },
+          '--dsw-specific-sidebar-fill': { light: '#E9F0E6', dark: '#0E160E' },
+        },
+      },
+      {
+        /** A punch-card field label: tracked Archivo caps over 仿宋, Bitter body. */
+        id: 'ibm',
+        nameKey: 'ibmName',
+        descKey: 'ibmDesc',
+        texture: 'scan',
+        headingStack: FONT_PUNCH_HEAD,
+        fontStack: FONT_PUNCH_BODY,
+        headWeight: 700,
+        headTracking: '.06em',
+        headCaps: true,
+        bodyWeight: 400,
+        sectionRule: '2px solid var(--dsw-alias-border-l2)',
+        code: 'saturate(.92) brightness(1.02)',
+        tokens: {
+          '--dsw-alias-bg-base': { light: '#EEF3F7', dark: '#0B1A2A' },
+          '--dsw-alias-bg-layer-1': { light: '#F8FBFD', dark: '#102234' },
+          '--dsw-alias-bg-layer-2': { light: '#DFE8EF', dark: '#16293D' },
+          '--dsw-alias-bg-overlay': { light: '#FFFFFF', dark: '#14273A' },
+          '--dsw-alias-border-l1': { light: '#C6D3DE', dark: '#23384D' },
+          '--dsw-alias-border-l2': { light: '#9DB0C0', dark: '#35506A' },
+          '--dsw-alias-brand-primary': { light: '#1F4E79', dark: '#A8D8F0' },
+          '--dsw-alias-label-primary': { light: '#0E1720', dark: '#DCEBF7' },
+          '--dsw-alias-label-secondary': { light: '#4B5D6C', dark: '#93AEC4' },
+          '--dsw-alias-state-error-primary': { light: '#A33327', dark: '#E0705A' },
+          '--dsw-alias-state-idle-primary': { light: '#7C8B98', dark: '#6E8598' },
+          '--dsw-alias-state-success-primary': { light: '#1F6B5A', dark: '#6FD3B0' },
+          '--dsw-alias-state-warn-primary': { light: '#8A6414', dark: '#E0B761' },
+          '--dsw-specific-sidebar-fill': { light: '#E6EDF3', dark: '#0D1D2E' },
+        },
+      },
+      {
+        /** An 8-bit disk label: Silkscreen with DotGothic16, Share Tech Mono body. */
+        id: 'c64',
+        nameKey: 'c64Name',
+        descKey: 'c64Desc',
+        texture: 'scan',
+        headingStack: FONT_FLOPPY_HEAD,
+        fontStack: FONT_FLOPPY_BODY,
+        headWeight: 500,
+        headTracking: '.04em',
+        bodyWeight: 400,
+        sectionRule: '1px solid var(--dsw-alias-border-l2)',
+        code: 'saturate(1.12) contrast(1.04)',
+        tokens: {
+          '--dsw-alias-bg-base': { light: '#F2F0FA', dark: '#241E4A' },
+          '--dsw-alias-bg-layer-1': { light: '#FAF9FF', dark: '#2C2558' },
+          '--dsw-alias-bg-layer-2': { light: '#E4E0F2', dark: '#342C66' },
+          '--dsw-alias-bg-overlay': { light: '#FFFFFF', dark: '#2F2760' },
+          '--dsw-alias-border-l1': { light: '#CFC8E8', dark: '#443A7A' },
+          '--dsw-alias-border-l2': { light: '#A99ED0', dark: '#5A4E96' },
+          '--dsw-alias-brand-primary': { light: '#4B3FA8', dark: '#9C8CFF' },
+          '--dsw-alias-label-primary': { light: '#1A1630', dark: '#E6E1FF' },
+          '--dsw-alias-label-secondary': { light: '#5B5480', dark: '#B4AAD8' },
+          '--dsw-alias-state-error-primary': { light: '#A33450', dark: '#FF8FA3' },
+          '--dsw-alias-state-idle-primary': { light: '#8A83A8', dark: '#8E86B8' },
+          '--dsw-alias-state-success-primary': { light: '#2F6B5E', dark: '#8CE0B8' },
+          '--dsw-alias-state-warn-primary': { light: '#86621A', dark: '#F0CC7A' },
+          '--dsw-specific-sidebar-fill': { light: '#EAE6F6', dark: '#211B44' },
+        },
+      },
     ]
 
     /**
@@ -606,27 +431,23 @@ window.__ModuleLoader__.load({
      * The mark is not one of them: every palette draws its own (see MARK_ART).
      */
     const PALETTE_FINISH = {
-      seal: { shape: 'round', rule: 'hairline', density: 'normal' },
-      sage: { shape: 'round', rule: 'hairline', density: 'normal' },
-      mist: { shape: 'round', rule: 'hairline', density: 'normal' },
+      // 鼠尾草 and 牛皮纸 are soft paper pages: rounded corners, hairline rules.
       moss: { shape: 'round', rule: 'double', density: 'normal' },
-      crt: { shape: 'square', rule: 'hairline', density: 'compact' },
-      indigo: { shape: 'round', rule: 'double', density: 'normal' },
       amber: { shape: 'round', rule: 'hairline', density: 'normal' },
-      phosphor: { shape: 'square', rule: 'hairline', density: 'compact' },
-      ibm: { shape: 'square', rule: 'hairline', density: 'compact' },
-      c64: { shape: 'round', rule: 'hairline', density: 'normal' },
-      eink: { shape: 'round', rule: 'hairline', density: 'normal' },
-      darkroom: { shape: 'round', rule: 'double', density: 'normal' },
-      // The poster three: a nameplate is set square with heavy rules, an
-      // engraved plate is set round with hairlines, a drum print is square and
-      // tight. Their section rules travel with the palette (see sectionRule).
+      // 铅字 is a nameplate (square, heavy double rule); 蓝晒纸 an engraved plate
+      // (round, hairline); 孔版 a drum print (square, tight).
       ink: { shape: 'square', rule: 'double', density: 'normal' },
       cobalt: { shape: 'round', rule: 'hairline', density: 'normal' },
       riso: { shape: 'square', rule: 'hairline', density: 'normal' },
+      // The three terminals: square corners, compact rhythm.
+      crt: { shape: 'square', rule: 'hairline', density: 'compact' },
+      phosphor: { shape: 'square', rule: 'hairline', density: 'compact' },
+      ibm: { shape: 'square', rule: 'hairline', density: 'compact' },
+      // 软盘 sits between a disk label and a terminal.
+      c64: { shape: 'round', rule: 'hairline', density: 'normal' },
     }
 
-    const finishOf = (palette) => PALETTE_FINISH[palette?.id] ?? PALETTE_FINISH.seal
+    const finishOf = (palette) => PALETTE_FINISH[palette?.id] ?? PALETTE_FINISH.moss
 
     const TEXTURES = ['auto', 'none', 'paper', 'scan']
     const SHAPES = ['auto', 'round', 'square']
@@ -637,7 +458,7 @@ window.__ModuleLoader__.load({
     const MARKS = ['auto', 'native']
     const GLOWS = ['on', 'off']
     const DEFAULTS = {
-      palette: 'seal',
+      palette: 'moss',
       texture: 'auto',
       shape: 'auto',
       font: 'auto',
@@ -692,37 +513,26 @@ window.__ModuleLoader__.load({
         glowHint: '只在深色模式：代码块带一点磷光与扫描线，像亮着的屏幕；浅色模式始终是纸',
         markHint: '每套配色按自己的风格重绘鲸鱼标记；选原生则用 DeepSeek 原图标',
         // Palette names share one rule: a noun — an ink, a stock, a machine —
-        // never an adjective phrase, so the twelve read as one drawer of plates.
-        sealName: '朱印',
-        sealDesc: '暖白纸、墨黑字，一点朱红',
-        sageName: '鼠尾草',
-        sageDesc: '鼠尾草绿、亚麻白，华文中宋配 Goudy 的老铅字',
-        mistName: '靛蓝',
-        mistDesc: '冷白、靛蓝，报头感：Bricolage 700 标题配 Bitter 石板衬线正文',
-        mossName: '苔绿',
-        mossDesc: '浅灰绿、苔绿，Fraunces 软衬线标题配 Alegreya 书写体正文，中文小标宋与思源黑体',
-        crtName: '显像管',
-        crtDesc: '深色走琥珀字符，浅色保持素净',
-        indigoName: '铜青',
-        indigoDesc: '米白、深靛蓝、铜金，港埠印刷的冷调子',
-        amberName: '琥珀',
-        amberDesc: '米黄纸做底、深褐字，白天的显像管',
-        phosphorName: '磷光',
-        phosphorDesc: '近黑底配 P1 荧光绿，老终端',
-        ibmName: '主机蓝',
-        ibmDesc: '深蓝底、青白字，大型机终端',
-        c64Name: '八位紫',
-        c64Desc: '紫蓝底、米白字，八十年代家用电脑',
-        einkName: '墨水屏',
-        einkDesc: '米灰纸面无彩色，久读最省眼',
-        darkroomName: '暗房红',
-        darkroomDesc: '褐色暗调，安全灯的红',
-        inkName: '墨黑',
-        inkDesc: '只有一种墨：报纸头版，小标宋 + Archivo，粗细全靠字重与规则线',
-        cobaltName: '钴蓝',
-        cobaltDesc: '骨白纸上一版钴蓝，深色是蓝晒法；Bodoni 与华文中宋的铜版刻线',
+        // Nine pages, each named after the object it is printed on. Never an
+        // adjective phrase, so the nine read as one drawer of plates.
+        mossName: '鼠尾草',
+        mossDesc: '干鼠尾草与亚麻白：Fraunces 软衬线标题 + Alegreya 书写体正文，中文用华文中宋',
+        amberName: '牛皮纸',
+        amberDesc: '牛皮纸的米黄与铁锈褐：Bookman 信封标题 + Georgia 正文，中文姚体与宋体',
+        inkName: '铅字',
+        inkDesc: '白纸一版墨：小标宋 + Archivo Black 报头，正文 Libre Franklin 与思源黑体',
+        cobaltName: '蓝晒纸',
+        cobaltDesc: '骨白纸上的一版钴蓝，深色是蓝晒法：Bodoni 与经典宋体简的铜版刻线',
         risoName: '孔版',
-        risoDesc: '黑版 + 一版荧光粉：粗黑标题、粉色段落线，孔版印刷的双色',
+        risoDesc: '黑版加一版荧光粉：Bricolage 800 锁成一块的标题，粉色段落线',
+        crtName: '显像管',
+        crtDesc: '琥珀字符的显像管：VT323 屏显标题配 Courier Prime 打字机体正文',
+        phosphorName: '荧光屏',
+        phosphorDesc: 'P1 荧光绿的终端：DotGothic16 像素标题，正文 Share Tech Mono',
+        ibmName: '打孔卡',
+        ibmDesc: '大型机的深蓝与青白：Archivo 宽字距标题配仿宋，正文 Bitter',
+        c64Name: '软盘',
+        c64Desc: '八位家用机的紫蓝：Silkscreen 像素标题配 DotGothic16，正文 Share Tech Mono',
       },
       en: {
         sectionTitle: 'Retro theme',
@@ -767,36 +577,24 @@ window.__ModuleLoader__.load({
         glowHint:
           'Dark mode only: code blocks pick up a phosphor glow and scanlines, like a lit screen; light mode stays paper',
         markHint: 'Every palette redraws the whale in its own style; Native keeps the stock icon',
-        sealName: 'Vermilion seal',
-        sealDesc: 'Warm white paper, black ink, one vermilion mark',
-        sageName: 'Sage linen',
-        sageDesc: 'Sage green, linen white, set in old letterpress Latin',
-        mistName: 'Cool indigo',
-        mistDesc: 'Cool white and indigo, nameplate register: Bricolage 700 headings over a Bitter slab body',
-        mossName: 'Moss green',
-        mossDesc: 'Pale grey-green and moss: Fraunces soft-serif headings over a calligraphic Alegreya body',
-        crtName: 'CRT amber',
-        crtDesc: 'Amber characters in the dark, plain grey in daylight',
-        indigoName: 'Brass indigo',
-        indigoDesc: 'Rice white, deep indigo and brass, the cool register of a treaty-port press',
-        amberName: 'Daylight amber',
-        amberDesc: 'Amber paper, dark ink — the daylight CRT',
-        phosphorName: 'P1 phosphor',
-        phosphorDesc: 'Near-black with P1 green, an old terminal',
-        ibmName: 'Mainframe blue',
-        ibmDesc: 'Deep blue with cyan-white type, a mainframe terminal',
-        c64Name: 'Eight-bit violet',
-        c64Desc: 'Violet blue with off-white type, a home computer',
-        einkName: 'E-ink',
-        einkDesc: 'Grey paper, no colour, easiest on the eyes',
-        darkroomName: 'Darkroom red',
-        darkroomDesc: 'Brown dark tones and safelight red',
-        inkName: 'Ink only',
-        inkDesc: 'One ink, nothing else: a front page in 小标宋 and Archivo, weight and rules doing all the work',
-        cobaltName: 'Cobalt',
-        cobaltDesc: 'One cobalt plate on bone paper, cyanotype in the dark; engraved Bodoni and 华文中宋',
+        mossName: 'Sage',
+        mossDesc: 'Dried sage on linen: soft-cut Fraunces headings over a calligraphic Alegreya body, 华文中宋 in the Han',
+        amberName: 'Kraft paper',
+        amberDesc: 'Kraft buff with rust ink: Bookman envelope headings over Georgia, 姚体 and 宋体 in the Han',
+        inkName: 'Lead type',
+        inkDesc: 'One ink on white: a 小标宋 and Archivo Black nameplate, Libre Franklin and 思源黑体 in the body',
+        cobaltName: 'Cyanotype',
+        cobaltDesc: 'One cobalt plate on bone paper, cyanotype in the dark: engraved Bodoni and 经典宋体简',
         risoName: 'Risograph',
-        risoDesc: 'Key plate plus one fluorescent pink drum: 900 block headings and a pink section rule',
+        risoDesc: 'Key plate plus one fluorescent pink drum: Bricolage 800 headings and a pink section rule',
+        crtName: 'CRT tube',
+        crtDesc: 'Amber characters on a tube: VT323 screen headings over a Courier Prime body',
+        phosphorName: 'Phosphor screen',
+        phosphorDesc: 'P1 green terminal: DotGothic16 pixel headings over Share Tech Mono',
+        ibmName: 'Punch card',
+        ibmDesc: 'Mainframe blue with cyan-white type: tracked Archivo caps over 仿宋, Bitter body',
+        c64Name: 'Floppy disk',
+        c64Desc: 'Eight-bit violet: Silkscreen pixel headings with DotGothic16, Share Tech Mono body',
       },
     }
 
@@ -1300,19 +1098,6 @@ window.__ModuleLoader__.load({
       return whale(whaleFit(compact ? 20 : 20.6), { fill: MARK_INK.brand })
     }
 
-
-    /** Colonial indigo: a two-plate print, one plate off register. */
-    function indigoArt(id, compact) {
-      const fit = whaleFit(compact ? 19.4 : 20.4)
-      const shift = compact ? 0.85 : 0.7
-      return h(
-        'g',
-        null,
-        whale({ ...fit, x: fit.x + shift, y: fit.y + shift }, { fill: MARK_INK.brand, opacity: 0.42 }),
-        whale(fit, { fill: MARK_INK.brand }),
-      )
-    }
-
     /** Inverted amber: a paper whale knocked out of the disc. */
     function amberArt(id, compact) {
       return h(
@@ -1337,55 +1122,6 @@ window.__ModuleLoader__.load({
           opacity: 0.18,
         }),
         whale(fit, { fill: MARK_INK.brand }),
-      )
-    }
-
-    /** E-ink: one ink, no colour, the whale as printed. */
-    function einkArt(id, compact) {
-      return whale(whaleFit(compact ? 19.6 : 20.8), { fill: MARK_INK.ink })
-    }
-
-    /** Darkroom red: the print rising out of the tray. */
-    function darkroomArt(id, compact) {
-      const fit = whaleFit(compact ? 19.2 : 19.6)
-      return h(
-        'g',
-        null,
-        whale(fit, {
-          fill: MARK_INK.paper,
-          stroke: MARK_INK.paper,
-          strokeWidth: compact ? 2.4 : 2.8,
-          strokeLinejoin: 'round',
-        }),
-        whale(fit, { fill: MARK_INK.brand }),
-        h('rect', {
-          x: 1.6,
-          y: compact ? 19.8 : 19.6,
-          width: 20.8,
-          height: compact ? 1.6 : 1.2,
-          fill: MARK_INK.ink,
-          opacity: 0.5,
-        }),
-      )
-    }
-
-
-
-    /** Cool indigo: the whale above a printed register rule, plate-mark style. */
-    function mistArt(id, compact) {
-      const fit = whaleFit(compact ? 19.2 : 20)
-      return h(
-        'g',
-        null,
-        whale({ ...fit, y: fit.y - (compact ? 0.6 : 0.8) }, { fill: MARK_INK.brand }),
-        h('rect', {
-          x: 2.2,
-          y: compact ? 20.2 : 20.4,
-          width: 19.6,
-          height: compact ? 1 : 0.8,
-          fill: MARK_INK.brand,
-          opacity: 0.55,
-        }),
       )
     }
 
@@ -1451,27 +1187,25 @@ window.__ModuleLoader__.load({
     }
 
     /** One drawn mark per palette id; an unknown id falls back to the seal. */
+    /**
+     * One drawn mark per palette: the stock whale re-inked, never a new logo.
+     * A paper page keeps a quiet mark; the pressed pages get a plate of their own.
+     */
     const MARK_ART = {
-      seal: plainArt,
-      sage: plainArt,
-      mist: mistArt,
       moss: mossArt,
-      crt: plainArt,
-      indigo: indigoArt,
       amber: amberArt,
-      phosphor: phosphorArt,
-      ibm: plainArt,
-      c64: plainArt,
-      eink: einkArt,
-      darkroom: darkroomArt,
       ink: inkArt,
       cobalt: cobaltArt,
       riso: risoArt,
+      crt: plainArt,
+      phosphor: phosphorArt,
+      ibm: plainArt,
+      c64: plainArt,
     }
 
     /** The brand seat's mark: one palette's whale on the 24-unit grid. */
     function MarkArt({ palette, size }) {
-      const draw = MARK_ART[palette] ?? MARK_ART.seal
+      const draw = MARK_ART[palette] ?? MARK_ART.ink
       const pixels = size ?? 22
       return h(
         'svg',
@@ -1489,7 +1223,7 @@ window.__ModuleLoader__.load({
     /** The welcome mark: the same whale mounted in a printed vignette. */
     /** The welcome mark: the whale alone, no frame around it. */
     function HeroMark({ palette, size }) {
-      const draw = MARK_ART[palette] ?? MARK_ART.seal
+      const draw = MARK_ART[palette] ?? MARK_ART.ink
       const pixels = size ?? 48
       return h(
         'svg',

@@ -1,6 +1,6 @@
 # Retro Press 交接文档（HANDOFF）
 
-> 最后更新：2026-11-07 · 包版本 **3.9.0**（十五套配色，新增三套单色编辑印刷海报页）· 3.8.4 为 npm 上的 latest，3.9.0 待发 · 仓库 https://github.com/andy-7-andy/dsh-theme-retro-press
+> 最后更新：2026-11-07 · 包版本 **3.10.0**（九套配色，全部以实物命名，每套一套自己的中英文字面）· 3.8.4 为 npm 上的 latest，3.10.0 待发 · 仓库 https://github.com/andy-7-andy/dsh-theme-retro-press
 
 这份文档写给"下一次接手的人（或下一个会话的 AI）"。目标是：**不用重读历史对话，也能改一个配色、发一个版本**。
 
@@ -50,23 +50,19 @@ retro-press/
 
 `client.js` 里的 `PALETTES` 数组，每项一套配色：
 
-| id | 中文名 | 英文名 | 页面性格 |
-|---|---|---|---|
-| `seal` | 朱印 | Vermilion seal | 暖白纸 + 墨黑 + 一点朱红 |
-| `sage` | 鼠尾草 | Sage linen | 鼠尾草绿/亚麻白，华文中宋 + Goudy 老铅字 |
-| `mist` | 靛蓝 | Cool indigo | 冷白 + 靛蓝，**全黑体页** |
-| `moss` | 苔绿 | Moss green | 浅灰绿 + 苔绿，**宋体标题 + 黑体正文** |
-| `crt` | 显像管 | CRT amber | 深色走琥珀字符，浅色保持素净 |
-| `indigo` | 铜青 | Brass indigo | 米白/深靛蓝/铜金，港埠印刷的冷调子 |
-| `amber` | 琥珀 | Daylight amber | 米黄纸做底、深褐字，白天的显像管 |
-| `phosphor` | 磷光 | P1 phosphor | 近黑底配 P1 荧光绿 |
-| `ibm` | 主机蓝 | Mainframe blue | 深蓝底、青白字，大型机终端 |
-| `c64` | 八位紫 | Eight-bit violet | 紫蓝底、米白字 |
-| `eink` | 墨水屏 | E-ink | 米灰纸面无色，久读最省眼 |
-| `darkroom` | 暗房红 | Darkroom red | 褐色暗调，安全灯的红 |
-| `ink` | 墨黑 | Ink only | **单色海报**：只有一版墨，小标宋报头 + Archivo Black |
-| `cobalt` | 钴蓝 | Cobalt | **单色海报**：骨白纸 + 钴蓝，深色是蓝晒法 |
-| `riso` | 孔版 | Risograph | **单色海报**：黑版 + 一版荧光粉，900 标题 |
+| id | 中文名 | 英文名 | 实物 | 标题 / 正文字面 |
+|---|---|---|---|---|
+| `moss` | 鼠尾草 | Sage | 一束干鼠尾草、亚麻布 | Fraunces＋华文中宋 / Alegreya＋华文中宋 |
+| `amber` | 牛皮纸 | Kraft paper | 牛皮纸信封 | Bookman＋方正姚体 / Georgia＋华文中宋 |
+| `ink` | 铅字 | Lead type | 一枚活字、一份报头 | Archivo Black＋方正小标宋 / Libre Franklin＋思源黑体 |
+| `cobalt` | 蓝晒纸 | Cyanotype | 一张蓝晒相纸 | Bodoni MT＋经典宋体简 / Archivo＋思源黑体 |
+| `riso` | 孔版 | Risograph | 一版孔版油墨 | Bricolage 800＋思源黑体 / Space Grotesk＋思源黑体 |
+| `crt` | 显像管 | CRT tube | 一支显像管 | VT323＋思源黑体 / Courier Prime＋思源黑体 |
+| `phosphor` | 荧光屏 | Phosphor screen | 一块 P1 荧光屏 | DotGothic16 / Share Tech Mono＋思源黑体 |
+| `ibm` | 打孔卡 | Punch card | 一张打孔卡 | Archivo 700＋仿宋_GB2312 / Bitter＋思源黑体 |
+| `c64` | 软盘 | Floppy disk | 一张 5¼ 软盘 | Silkscreen＋DotGothic16 / Share Tech Mono＋思源黑体 |
+
+3.10.0 之前删掉的六套（id 已不存在，旧设置会回落到 `moss`）：`seal` 朱印、`sage` 鼠尾草原版、`mist` 靛蓝、`indigo` 铜青、`eink` 墨水屏、`darkroom` 暗房红。
 
 **palette id 永不改**——用户的本地设置按 id 存，改了配色就丢。
 
@@ -139,19 +135,25 @@ FONT_SERIF / FONT_SANS / FONT_MONO   老配色的通用栈
 
 ### 4.5 三套单色海报页（3.9.0）为什么这么排
 
-按「单色编辑印刷海报」做的三页，一版一色；区别不在色相，在**排印声音**：
+3.10.0 起九套各自有一对字面：拉丁与汉字共用同一种骨架（Didone 配宋、像素配像素、打字机配仿宋），而不是把一张现代黑体塞到老字面下面。
 
 | 配色 | 标题 | 正文 | 自己的记号 |
 |---|---|---|---|
-| 墨黑 ink | Archivo Black 大写 + 方正小标宋（报头） | Libre Franklin 1912 + 思源黑体 | 实心墨块里反白鲸鱼 |
-| 钴蓝 cobalt | Bodoni MT + 华文中宋（铜版刻线） | Archivo + 思源黑体 | 鲸鱼 + 四角裁切标记 |
-| 孔版 riso | Archivo Black 900 + 思源黑体 900（锁成一块） | Space Grotesk + 思源黑体 | 黑版/粉版错位套印 |
+| 鼠尾草 moss | Fraunces（SOFT/WONK）+ 华文中宋 | Alegreya + 华文中宋 | 双版微错位 |
+| 牛皮纸 amber | Bookman Old Style + 方正姚体 | Georgia + 华文中宋 | 反白圆章 |
+| 铅字 ink | Archivo Black 大写 + 方正小标宋 | Libre Franklin + 思源黑体 | 实心墨块里反白鲸鱼 |
+| 蓝晒纸 cobalt | Bodoni MT + 经典宋体简 | Archivo + 思源黑体 | 鲸鱼 + 四角裁切标记 |
+| 孔版 riso | Bricolage Grotesque 800 + 思源黑体 | Space Grotesk + 思源黑体 | 黑版/粉版错位套印 |
+| 显像管 crt | VT323 + 思源黑体 | Courier Prime + 思源黑体 | 素画 |
+| 荧光屏 phosphor | DotGothic16（像素汉字） | Share Tech Mono + 思源黑体 | 光晕 |
+| 打孔卡 ibm | Archivo 700 宽字距 + 仿宋_GB2312 | Bitter + 思源黑体 | 素画 |
+| 软盘 c64 | Silkscreen + DotGothic16 | Share Tech Mono + 思源黑体 | 素画 |
 
-- **墨黑没有第二色**：`brand` 就是墨色，所以链接、按钮、标记、段落线全是同一个黑——单色海报的说服力必须由字重和规则线给出。段落线 `2px solid label-primary`。
-- **钴蓝的深色是蓝晒法**（`#0A1E33` 普鲁士蓝底 + 纸白字），浅色是骨白纸印一版钴蓝。段落线 `3px double`。
-- **孔版是双色印刷**：粉色只落在「第二版会落的地方」——段落线（3px 实线）、链接、按钮、标记套印。段落线 `3px solid brand`，这条是 `sectionRule` 字段唯一的用法。
-- 三套都 `texture:'paper'`、`bodyWeight:400`，正文按 13.5px / 1.75 行高排，长段落先能读，标题才敢做重。
-- 字体是**真的装在本机**才敢用：Archivo Black、Libre Franklin、Space Grotesk、Bodoni MT、方正小标宋、华文中宋、思源黑体（含 900）都实测过；思源宋体未装，别往栈里放。
+- **铅字没有第二色**：`brand` 就是墨色，链接、按钮、标记、段落线全是同一个黑——单色海报的说服力必须由字重和规则线给出。段落线 `2px solid label-primary`。
+- **蓝晒纸的深色是蓝晒法**（`#0A1E33` 普鲁士蓝底 + 纸白字），浅色是骨白纸印一版钴蓝。段落线 `3px double`。
+- **孔版是双色印刷**：粉色只落在「第二版会落的地方」——段落线、链接、按钮、标记套印。段落线 `3px solid brand`。
+- 九套都 `texture: paper|scan`、`bodyWeight:400`（鼠尾草 500），正文按 13.5px / 1.75 行高排；终端三套 `headWeight:500`，否则浅色下标题压不住正文。
+- 字体是**真的装在本机**才敢用：Archivo/Archivo Black、Libre Franklin、Space Grotesk、Bricolage、Bitter、Fraunces、Alegreya、Georgia、Bookman Old Style、Bodoni MT、VT323、Share Tech Mono、Courier Prime、Silkscreen、DotGothic16，汉字有思源黑体（含 900）、方正小标宋、华文中宋、经典宋体简、方正姚体、仿宋_GB2312。**思源宋体未装，别往栈里放。**
 
 ### 4.6 宿主有 119 个别名，配色只给 14 个（3.9.0 修）
 
@@ -231,15 +233,17 @@ token 是 granular token（Read and write (publish and stage) + All packages + O
 - 3.8.2 把 adjust 从 .54 提到 .58（同样被撤）
 - 3.8.3 换字面 + 加字重（Archivo / Playfair）
 - **3.8.4 换有性格的字面**：靛蓝 Bricolage 700 + Bitter 450；苔绿 Fraunces 600（SOFT/WONK）+ Alegreya 500。新增 palette 字段 `headVariation`（写 font-variation-settings）
-- **3.9.0 三套单色海报页**：墨黑 / 钴蓝 / 孔版，十五套。新增字段 `headCaps`、`sectionRule`；三枚新标记（反白墨块、裁切标记、套印错位）；`assets/palettes.png` 重出成 15 格，新增 `assets/posters.png`（三套的浅色+深色对照）
+- **3.9.0 三套单色海报页**：墨黑 / 钴蓝 / 孔版，十五套。新增字段 `headCaps`、`sectionRule`；三枚新标记（反白墨块、裁切标记、套印错位）；`assets/palettes.png` 重出成 15 格
+- **3.9.0 补齐 105 个别名**：`ALIAS_BRIDGE`，见 §4.6
+- **3.10.0 收成九套 + 全部以实物命名 + 每套一对字面**：删 `seal` / `sage` / `mist` / `indigo` / `eink` / `darkroom`；`moss` 接手"鼠尾草"之名，`amber`→牛皮纸、`ink`→铅字、`cobalt`→蓝晒纸、`phosphor`→荧光屏、`ibm`→打孔卡、`c64`→软盘；九对字面见 §4.5；`assets/palettes.png` 重出为九宫格（每张卡用自己的标题字面），`assets/posters.png` 撤下待真机重拍
 
 ### 待办（按优先级）
 
-1. **上线 3.9.0**：代码与文档已就绪，等走 §5 的暂存发布（3.8.4 是当前 latest）。
-2. **市场 PR**：分支与条目已备好，2026-11-08 13:02 之后开 PR（见 §6）。条目描述已改为「十五套 + 三套单色海报页」，开 PR 前记得在 fork 里同步那版 yml。
-3. **3.8.3 暂存区**：仍留着一个被取代的 staged 包，去 https://www.npmjs.com/settings/andy-7/staged-packages 点 Reject 清掉。
-4. **确认观感**：三套是照着"单色编辑印刷海报 + 能长读"做的。若想更极端，可拧的旋钮：墨黑换 SimSun 正文（更旧但细）、钴蓝深色加深成真正的蓝晒（现在 `#0A1E33`）、孔版把段落线从 3px 加到 5px。
-5. **字体分发决策**：是否把 Archivo / Libre Franklin / Space Grotesk 等 OFL 字体打进包（现在只写名字 + 回退）。
+1. **上线 3.10.0**：代码与文档已就绪，先让用户**完全退出 DSH 再启动**看九套实际效果，确认后走 §5 的暂存发布（3.8.4 是当前 latest）。
+2. **真机重拍配图**：重启后用真实界面重出 `assets/posters.png`（现在 README 里那段没有图），比手搭 mock 可信。
+3. **市场 PR**：分支与条目已备好，2026-11-08 13:02 之后开 PR（见 §6）。条目描述要改成「九套 + 实物命名」，开 PR 前记得在 fork 里同步那版 yml。
+4. **3.8.3 暂存区**：仍留着一个被取代的 staged 包，去 https://www.npmjs.com/settings/andy-7/staged-packages 点 Reject 清掉。
+5. **字体分发决策**：是否把 Archivo / Bricolage / DotGothic16 等 OFL 字体打进包（现在只写名字 + 回退）。
 
 ---
 

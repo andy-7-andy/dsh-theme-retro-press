@@ -1,5 +1,25 @@
 # Changelog
 
+## 3.10.0
+
+**十五套收到九套，每套以一件实物命名，每套一套自己的中英文字面。**（破坏性：删掉六套，其余改名；palette id 不变的会保留用户选择。）
+
+- **删**：朱印 `seal`（唯一一套红色印章，与孔版的第二版重复）、鼠尾草原版 `sage`（与苔绿同为绿纸，Bodoni+Goudy 已无独占）、靛蓝 `mist` / 铜青 `indigo`（都与蓝晒纸的冷蓝纸重叠，排印也最弱）、墨水屏 `eink`（与铅字同样是"无色一版墨"，铅字更完整）、暗房红 `darkroom`（与孔版同属纸底暖红）。
+- **改名**（id 不变，用户选择保留）：苔绿 `moss` → **鼠尾草**（原鼠尾草删除，此名移交）；琥珀 `amber` → **牛皮纸**；墨黑 `ink` → **铅字**；钴蓝 `cobalt` → **蓝晒纸**；磷光 `phosphor` → **荧光屏**；主机蓝 `ibm` → **打孔卡**；八位紫 `c64` → **软盘**；显像管 `crt`、孔版 `riso` 名字留着，因为它们本来就是实物。
+- **每套一对字面**（标题 / 正文，拉丁 + 汉字）：
+  - 鼠尾草：Fraunces（SOFT/WONK）＋华文中宋 / Alegreya ＋华文中宋
+  - 牛皮纸：Bookman Old Style ＋方正姚体 / Georgia ＋华文中宋
+  - 铅字：Archivo Black ＋方正小标宋 / Libre Franklin ＋思源黑体
+  - 蓝晒纸：Bodoni MT ＋经典宋体简 / Archivo ＋思源黑体
+  - 孔版：Bricolage Grotesque 800 ＋思源黑体 / Space Grotesk ＋思源黑体
+  - 显像管：VT323 ＋思源黑体 / Courier Prime ＋思源黑体
+  - 荧光屏：DotGothic16（像素汉字） / Share Tech Mono ＋思源黑体
+  - 打孔卡：Archivo 700 宽字距 ＋仿宋_GB2312 / Bitter ＋思源黑体
+  - 软盘：Silkscreen ＋DotGothic16 / Share Tech Mono ＋思源黑体
+- 每套各有一条 `sectionRule`；终端三套（显像管 / 荧光屏 / 打孔卡）标题字重提到 500，浅色下层级才立得起来。
+- 标记：删除随配色一起删掉的四枚画法（错位套印、套准线、单墨、显影），保留并重排九枚。
+- `assets/palettes.png` 重出为九宫格，每张卡的标题用它自己的标题字面排；`assets/posters.png` 撤下（旧 mock 已不代表实际排印，待真机重拍）。
+
 ## 3.9.0
 
 三种"单色编辑印刷海报"页，一版一色，各自换的是**排印声音**而不只是颜色：
