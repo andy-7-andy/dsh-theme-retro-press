@@ -1,0 +1,62 @@
+{
+  "name": "dsh-theme-retro-press",
+  "version": "3.8.0",
+  "description": "Retro Press — a theme workshop for the DeepSeek Harness Web client: twelve print-shop and CRT palettes, each with its own paper, rules, type pairing and drawn whale mark, plus a dark-mode phosphor layer for code.",
+  "type": "module",
+  "license": "MIT",
+  "author": "andy-7-andy",
+  "homepage": "https://github.com/andy-7-andy/dsh-theme-retro-press#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andy-7-andy/dsh-theme-retro-press.git"
+  },
+  "bugs": {
+    "url": "https://github.com/andy-7-andy/dsh-theme-retro-press/issues"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "dsh-theme",
+    "deepseek-harness",
+    "theme",
+    "retro",
+    "palette",
+    "typography",
+    "letterpress",
+    "crt"
+  ],
+  "engines": {
+    "dsh": ">=0.2.0-0"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "assets/*.png",
+    "CHANGELOG.md"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-theme"
+      ]
+    }
+  }
+}
