@@ -1,6 +1,6 @@
 # Retro Press 交接文档（HANDOFF）
 
-> 最后更新：2026-11-07 · 包版本 **3.8.3**（已 staged，待本站批准）· 仓库 https://github.com/andy-7-andy/dsh-theme-retro-press
+> 最后更新：2026-11-07 · 包版本 **3.8.4**（已 staged，待本站批准）· 仓库 https://github.com/andy-7-andy/dsh-theme-retro-press
 
 这份文档写给"下一次接手的人（或下一个会话的 AI）"。目标是：**不用重读历史对话，也能改一个配色、发一个版本**。
 
@@ -96,10 +96,10 @@ retro-press/
 FONT_HEI          思源黑体 打头的黑体栈
 FONT_QUOTE        仿宋_GB2312（引文/blockquote 专用）
 FONT_CRT          VT323（代码层专用，中文兜思源黑体）
-FONT_MIST_HEAD    Archivo 700
-FONT_MIST_BODY    Archivo 500
-FONT_MOSS_HEAD    Playfair Display 600
-FONT_MOSS_BODY    Archivo 500
+FONT_MIST_HEAD    Bricolage Grotesque 700（+ headVariation opsz96/wdth88）
+FONT_MIST_BODY    Bitter 450（石板衬线）
+FONT_MOSS_HEAD    Fraunces 600（+ headVariation SOFT60/WONK1/opsz40）
+FONT_MOSS_BODY    Alegreya 500（书写体老式衬线）
 FONT_SERIF / FONT_SANS / FONT_MONO   老配色的通用栈
 ```
 
@@ -189,16 +189,13 @@ token 是 granular token（Read and write (publish and stage) + All packages + O
 - 3.8.0 十二套配色统一命名、深色磷光、包名改造、发布 GitHub + npm
 - 3.8.1 `font-size-adjust` 对齐西文 x-height（后被判定为补丁思路，已撤）
 - 3.8.2 把 adjust 从 .54 提到 .58（同样被撤）
-- **3.8.3 换字面 + 加字重**：靛蓝 Archivo 700/500，苔绿 Playfair 600 + Archivo 500，撤掉 adjust
+- 3.8.3 换字面 + 加字重（Archivo / Playfair）
+- **3.8.4 换有性格的字面**：靛蓝 Bricolage 700 + Bitter 450；苔绿 Fraunces 600（SOFT/WONK）+ Alegreya 500。新增 palette 字段 `headVariation`（写 font-variation-settings）
 
 ### 待办（按优先级）
 
-1. **A+B 定稿**：用户正在比较排印方向——
-   - A：靛蓝 `Bricolage Grotesque 700` + `Bitter 450`（列表见 `D:\Systems\dsh\workspace\retro-press-特色西文-*.png`）
-   - B：苔绿 `Fraunces 600（SOFT 60 / WONK 1）` + `Alegreya 500`
-   - C 备选：`Space Grotesk` + `Courier Prime`（只建议给编号/图注层，不做正文）
-   定稿后改 `FONT_MIST_*` / `FONT_MOSS_*` 四个常量 + `DICT` 里的描述，发 3.8.4。
-2. **3.8.3 上线**：staged id `81702cf5-23a9-4661-9849-e05541c9f1af`，等用户网页 Approve。
+1. **确认 A+B**：3.8.4 已落 A（Bricolage + Bitter）+ B（Fraunces + Alegreya）。备选方向图见 `D:\Systems\dsh\workspace\retro-press-排印方向-六格.png`（D 木刻 / E 窄体大写 / F 几何 / G 高对比 / H EB Garamond / I 打字机），若用户想再换，改四个 FONT_* 常量即可。
+2. **上线**：3.8.3 / 3.8.4 均在暂存区，等用户网页 Approve（3.8.4 是最新，批准即生效）。
 3. **市场 PR**：2026-11-08 之后用草稿条目提。
 4. **字体分发决策**：是否把 Archivo/Playfair 等 OFL 字体打进包（现在只写名字 + 回退）。
 

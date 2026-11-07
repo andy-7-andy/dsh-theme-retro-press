@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.8.4
+
+- 两套冷调配色换成有性格的西文字面：
+  - 靛蓝：标题 **Bricolage Grotesque 700**（opsz 96 / wdth 88，斜切收笔的报头黑体）、正文 **Bitter 450**（石板衬线，横画厚、字脚方）。
+  - 苔绿：标题 **Fraunces 600**（SOFT 60 / WONK 1，软衬线 + 故意的不对称）、正文 **Alegreya 500**（书法味老式衬线）。
+- 新增 palette 字段 `headVariation`：标题可写 `font-variation-settings`，让变量字体的光学尺寸/柔软度/俏皮度真正生效（默认档是"素"的）。
+- 字重仍按真实字面走，标题保持 `font-synthesis:none`。
+
 ## 3.8.3
 
 - 两套冷调配色换西文字面，并把字重加到"印刷黑"：

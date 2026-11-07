@@ -67,34 +67,33 @@ window.__ModuleLoader__.load({
     const FONT_QUOTE =
       '"仿宋_GB2312","FangSong_GB2312","仿宋","FangSong","STFangsong","华文仿宋",serif'
     /**
-     * Cool indigo headings: Archivo is the American newspaper grotesque — narrow
-     * and upright, with a .56 x-height, so at 13.5px it never thins out the way
-     * the system Franklin cut does. Set at 700 so the page reads as printed
-     * black rather than as a screen default.
+     * Cool indigo headings: Bricolage Grotesque at its display optical size —
+     * angled terminals, a squeezed counter, close to a newspaper nameplate of
+     * the 1970s. Set at 700 with negative tracking so it locks up as a line.
      */
     const FONT_MIST_HEAD =
-      '"Archivo","Libre Franklin","Franklin Gothic Medium","Source Han Sans SC","思源黑体","Microsoft YaHei","PingFang SC","DengXian",sans-serif'
+      '"Bricolage Grotesque","Archivo","Franklin Gothic Medium","Source Han Sans SC","思源黑体","Microsoft YaHei","PingFang SC",sans-serif'
     /**
-     * Cool indigo body: one grotesque family across Latin and Han, Archivo at
-     * 500 over 思源黑体. The medium weight is what keeps the column from looking
-     * hairline-thin on cool white.
+     * Cool indigo body: Bitter is a slab — thick horizontals, square feet, the
+     * look of type pushed into paper. It holds a .56 x-height, so at 13.5px it
+     * reads heavier than any grotesque without being bold.
      */
     const FONT_MIST_BODY =
-      '"Archivo","Libre Franklin","Source Han Sans SC","思源黑体","Noto Sans SC","Microsoft YaHei","PingFang SC","DengXian","SimHei",sans-serif'
+      '"Bitter","Archivo","Source Han Sans SC","思源黑体","Noto Sans SC","Microsoft YaHei","PingFang SC","SimHei",serif'
     /**
-     * Moss headings: Playfair Display keeps Bodoni's didone contrast but lifts
-     * the x-height from .38 to .50, so an English heading no longer reads a size
-     * under the 小标宋 beside it.
+     * Moss headings: Fraunces, the soft/wonky revival. SOFT rounds the serif
+     * corners, WONK turns on the deliberate asymmetries — the face reads hand-cut
+     * rather than engraved, which is the point on a 铜版 green.
      */
     const FONT_MOSS_HEAD =
-      '"Playfair Display","Bodoni MT",Elephant,"方正小标宋简体","FZXiaoBiaoSong-B05S","华文中宋","Noto Serif SC","Songti SC",SimSun,serif'
+      '"Fraunces","Playfair Display","Bodoni MT","方正小标宋简体","FZXiaoBiaoSong-B05S","华文中宋","Noto Serif SC","Songti SC",serif'
     /**
-     * Moss body: the Arts-and-Crafts green plates argued for Gill Sans, but at
-     * 13.5px its .45 x-height reads a size small and its light strokes cannot
-     * carry the Playfair heading above it. Archivo does the hauling; CJK on 思源黑体.
+     * Moss body: Alegreya is a calligraphic old-style — the strokes start and
+     * finish the way a pen would, so long paragraphs keep a handwriting pulse
+     * that a book Garamond loses at 13.5px.
      */
     const FONT_MOSS_BODY =
-      '"Archivo","Gill Sans MT","Gill Sans","Source Han Sans SC","思源黑体","Microsoft YaHei","PingFang SC","DengXian",sans-serif'
+      '"Alegreya","EB Garamond","Archivo","Source Han Sans SC","思源黑体","Microsoft YaHei","PingFang SC",serif'
 
     /**
      * Palettes. Color tokens carry both schemes; `font`, `heading`, `code` and
@@ -170,11 +169,15 @@ window.__ModuleLoader__.load({
         fontStack: FONT_MIST_BODY,
         headingStack: FONT_MIST_HEAD,
         headWeight: 700,
-        headTracking: '.06em',
-        // Archivo carries a .56 x-height of its own and the Han is at .54, so
+        headTracking: '-.01em',
+        // Bricolage is variable on two axes: the display optical size is what
+        // gives the headline its angled cuts, and a slightly narrow width keeps
+        // it in the job-print register instead of the fashion-poster one.
+        headVariation: "'opsz' 96,'wdth' 88",
+        // Bricolage carries a .56 x-height of its own and the Han is at .54, so
         // the pair needs no font-size-adjust fudge — only a medium body weight,
         // which is what stops the column reading thin.
-        bodyWeight: 500,
+        bodyWeight: 450,
         code: 'sepia(.08) saturate(.78)',
         tokens: {
           '--dsw-alias-bg-base': { light: '#F8FAFC', dark: '#0E1218' },
@@ -208,10 +211,14 @@ window.__ModuleLoader__.load({
         fontStack: FONT_MOSS_BODY,
         headingStack: FONT_MOSS_HEAD,
         headWeight: 600,
-        headTracking: '.05em',
-        // Playfair's .50 x-height already clears 小标宋's .46, and Archivo's .56
-        // clears 思源黑体's .54: no adjust needed, just a medium body weight so
-        // the lighter green page still holds its grey.
+        headTracking: '.005em',
+        // Fraunces is the "wonky" revivals axis set: SOFT rounds the corners of
+        // the serifs, WONK switches on the deliberate asymmetries (the R leg,
+        // the g ear). Both default to 0, which is why the sober face looks plain.
+        headVariation: "'SOFT' 60,'WONK' 1,'opsz' 40",
+        // Fraunces' .50 x-height clears 小标宋's .46, and Alegreya's .48 clears
+        // 思源黑体 — no adjust needed, just a medium body weight so the pale green
+        // page still holds its grey.
         bodyWeight: 500,
         code: 'saturate(.9) sepia(.04)',
         tokens: {
@@ -525,9 +532,9 @@ window.__ModuleLoader__.load({
         sageName: '鼠尾草',
         sageDesc: '鼠尾草绿、亚麻白，华文中宋配 Goudy 的老铅字',
         mistName: '靛蓝',
-        mistDesc: '冷白、靛蓝，全黑体页：Archivo 700 标题配 Archivo 500 与思源黑体正文',
+        mistDesc: '冷白、靛蓝，报头感：Bricolage 700 标题配 Bitter 石板衬线正文',
         mossName: '苔绿',
-        mossDesc: '浅灰绿、苔绿，Playfair 标题配 Archivo 正文，中文小标宋与思源黑体',
+        mossDesc: '浅灰绿、苔绿，Fraunces 软衬线标题配 Alegreya 书写体正文，中文小标宋与思源黑体',
         crtName: '显像管',
         crtDesc: '深色走琥珀字符，浅色保持素净',
         indigoName: '铜青',
@@ -593,9 +600,9 @@ window.__ModuleLoader__.load({
         sageName: 'Sage linen',
         sageDesc: 'Sage green, linen white, set in old letterpress Latin',
         mistName: 'Cool indigo',
-        mistDesc: 'Cool white and indigo, all-grotesque page: Archivo 700 headings over Archivo 500 and Han Sans text',
+        mistDesc: 'Cool white and indigo, nameplate register: Bricolage 700 headings over a Bitter slab body',
         mossName: 'Moss green',
-        mossDesc: 'Pale grey-green and moss: Playfair headings over an Archivo body, XiaoBiaoSong and Han Sans underneath',
+        mossDesc: 'Pale grey-green and moss: Fraunces soft-serif headings over a calligraphic Alegreya body',
         crtName: 'CRT amber',
         crtDesc: 'Amber characters in the dark, plain grey in daylight',
         indigoName: 'Brass indigo',
@@ -734,7 +741,7 @@ window.__ModuleLoader__.load({
           'body h3',
           'body [class*="titleGroup"]>span:first-child',
         ]
-        css.push(`${targets.join(',')}{font-family:${heading}!important;letter-spacing:${tracking};font-weight:${palette.headWeight ?? 600};font-synthesis:none${palette.headXHeight ? `;font-size-adjust:${palette.headXHeight}` : ''}}`)
+        css.push(`${targets.join(',')}{font-family:${heading}!important;letter-spacing:${tracking};font-weight:${palette.headWeight ?? 600};font-synthesis:none${palette.headVariation ? `;font-variation-settings:${palette.headVariation}` : ''}${palette.headXHeight ? `;font-size-adjust:${palette.headXHeight}` : ''}}`)
       }
       return css.join('\n')
     }
