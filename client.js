@@ -94,6 +94,52 @@ window.__ModuleLoader__.load({
      */
     const FONT_MOSS_BODY =
       '"Alegreya","EB Garamond","Archivo","Source Han Sans SC","思源黑体","Microsoft YaHei","PingFang SC",serif'
+    /**
+     * Editorial-poster family (3.9.0). Three single-ink pages, each with one
+     * typographic idea instead of one colour idea: a newspaper masthead, a
+     * cyanotype plate, and a two-drum risograph print.
+     *
+     * Ink headings: Archivo Black is the poster grotesque — tight, flat-sided,
+     * built for a nameplate. The Han under it is 方正小标宋, a display Song cut
+     * for exactly this job: hairlines thick enough to survive 34px, wedge
+     * terminals that hold the line. Latin uppercase, Han as drawn.
+     */
+    const FONT_INK_HEAD =
+      '"Archivo Black","Archivo","Franklin Gothic Heavy","方正小标宋简体","FZXiaoBiaoSong-B05S","Noto Serif SC","Songti SC",serif'
+    /**
+     * Ink body: Libre Franklin is the 1912 newspaper grotesque — a large
+     * x-height and open counters, so 13.5px stays readable in a narrow column
+     * where a book face would go grey.
+     */
+    const FONT_INK_BODY =
+      '"Libre Franklin","Archivo","Franklin Gothic Book","Source Han Sans SC","思源黑体","Microsoft YaHei","PingFang SC",sans-serif'
+    /**
+     * Cobalt headings: Bodoni MT — the Didone of engraved title pages, where
+     * the hairline serifs are the point. The Han is 华文中宋, whose sharp
+     * thick–thin is the Chinese equivalent of that engraving.
+     */
+    const FONT_COBALT_HEAD =
+      '"Bodoni MT","Playfair Display","华文中宋","STZhongsong","经典宋体简","Songti SC","Noto Serif SC",serif'
+    /**
+     * Cobalt body: Archivo at text size — a neutral grotesque that lets the
+     * Didone headings do the talking; the Han stays 思源黑体 for the same reason.
+     */
+    const FONT_COBALT_BODY =
+      '"Archivo","思源黑体","Source Han Sans SC","Microsoft YaHei","PingFang SC",sans-serif'
+    /**
+     * Riso headings: Archivo Black again, but set at 900 with negative tracking
+     * so it locks up as a solid block — the drum-printed poster voice. The Han
+     * is 思源黑体 Heavy: on a risograph the headline is a slab of ink, not a
+     * drawn letter.
+     */
+    const FONT_RISO_HEAD =
+      '"Archivo Black","Archivo","Franklin Gothic Heavy","思源黑体","Source Han Sans SC","Microsoft YaHei",sans-serif'
+    /**
+     * Riso body: Space Grotesk, whose slightly off-square bowls read as
+     * machine-set rather than typeset — the right register under a 900 block.
+     */
+    const FONT_RISO_BODY =
+      '"Space Grotesk","思源黑体","Source Han Sans SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif'
 
     /**
      * Palettes. Color tokens carry both schemes; `font`, `heading`, `code` and
@@ -438,6 +484,120 @@ window.__ModuleLoader__.load({
           '--dsw-specific-sidebar-fill': { light: '#EFE4DE', dark: '#1E100E' },
         },
       },
+      {
+        /**
+         * 墨黑 — the newspaper itself. No accent colour at all: brand is the
+         * ink, so links, buttons and the mark are all the same black the text
+         * is set in. The page reads by weight and rule, the way a front page
+         * does when the press ran one plate.
+         */
+        id: 'ink',
+        nameKey: 'inkName',
+        descKey: 'inkDesc',
+        texture: 'paper',
+        font: 'sans',
+        heading: 'serif',
+        fontStack: FONT_INK_BODY,
+        headingStack: FONT_INK_HEAD,
+        // Archivo Black carries its own weight; asking for 700 on top would
+        // only synthesise a bolder one. Same for 小标宋, which has one cut.
+        headWeight: 400,
+        headTracking: '-.006em',
+        headCaps: true,
+        bodyWeight: 400,
+        sectionRule: '2px solid var(--dsw-alias-label-primary)',
+        code: 'grayscale(1) contrast(1.04)',
+        tokens: {
+          '--dsw-alias-bg-base': { light: '#FAFAF6', dark: '#0F0F0C' },
+          '--dsw-alias-bg-layer-1': { light: '#FFFFFF', dark: '#171712' },
+          '--dsw-alias-bg-layer-2': { light: '#EFEFE8', dark: '#1F1F19' },
+          '--dsw-alias-bg-overlay': { light: '#FFFFFF', dark: '#1B1B15' },
+          '--dsw-alias-border-l1': { light: '#DEDED3', dark: '#2C2C25' },
+          '--dsw-alias-border-l2': { light: '#B4B4A7', dark: '#45453A' },
+          '--dsw-alias-brand-primary': { light: '#14140F', dark: '#F2F2EA' },
+          '--dsw-alias-label-primary': { light: '#121209', dark: '#F4F4EC' },
+          '--dsw-alias-label-secondary': { light: '#55554A', dark: '#A9A99D' },
+          '--dsw-alias-state-error-primary': { light: '#A32B22', dark: '#E0705E' },
+          '--dsw-alias-state-idle-primary': { light: '#8C8C80', dark: '#7C7C70' },
+          '--dsw-alias-state-success-primary': { light: '#33683F', dark: '#8CB48A' },
+          '--dsw-alias-state-warn-primary': { light: '#8A6414', dark: '#D8B464' },
+          '--dsw-specific-sidebar-fill': { light: '#F2F2EB', dark: '#0C0C09' },
+        },
+      },
+      {
+        /**
+         * 钴蓝 — a cyanotype. Daylight is a bone sheet printed in one cobalt
+         * ink; dark mode is the same plate under the wash, Prussian blue with
+         * the type showing through as exposed paper. Nothing warm anywhere.
+         */
+        id: 'cobalt',
+        nameKey: 'cobaltName',
+        descKey: 'cobaltDesc',
+        texture: 'paper',
+        font: 'sans',
+        heading: 'serif',
+        fontStack: FONT_COBALT_BODY,
+        headingStack: FONT_COBALT_HEAD,
+        headWeight: 400,
+        headTracking: '.015em',
+        bodyWeight: 400,
+        sectionRule: '3px double var(--dsw-alias-border-l2)',
+        code: 'sepia(.1) saturate(.7) contrast(1.02)',
+        tokens: {
+          '--dsw-alias-bg-base': { light: '#F3F0E4', dark: '#0A1E33' },
+          '--dsw-alias-bg-layer-1': { light: '#FAF8EE', dark: '#0F2740' },
+          '--dsw-alias-bg-layer-2': { light: '#E7E2D2', dark: '#14314E' },
+          '--dsw-alias-bg-overlay': { light: '#FDFBF3', dark: '#112B45' },
+          '--dsw-alias-border-l1': { light: '#D3CDBA', dark: '#1E3A56' },
+          '--dsw-alias-border-l2': { light: '#ABA48C', dark: '#2F5474' },
+          '--dsw-alias-brand-primary': { light: '#1B3FA6', dark: '#9CC2EC' },
+          '--dsw-alias-label-primary': { light: '#141C2E', dark: '#DCE9F6' },
+          '--dsw-alias-label-secondary': { light: '#4E5668', dark: '#93A9C0' },
+          '--dsw-alias-state-error-primary': { light: '#A3352C', dark: '#E07C6C' },
+          '--dsw-alias-state-idle-primary': { light: '#8A8B85', dark: '#647A93' },
+          '--dsw-alias-state-success-primary': { light: '#2C6357', dark: '#7FBFA6' },
+          '--dsw-alias-state-warn-primary': { light: '#86621A', dark: '#D9B36A' },
+          '--dsw-specific-sidebar-fill': { light: '#EDE9DB', dark: '#081828' },
+        },
+      },
+      {
+        /**
+         * 孔版 — two drums, one spot. The black is the key plate; the pink is
+         * the second run, so it appears only where a second run would: section
+         * rules, links, buttons, the mark's misregistration. Everything else
+         * stays ink and paper.
+         */
+        id: 'riso',
+        nameKey: 'risoName',
+        descKey: 'risoDesc',
+        texture: 'paper',
+        font: 'sans',
+        heading: 'sans',
+        fontStack: FONT_RISO_BODY,
+        headingStack: FONT_RISO_HEAD,
+        headWeight: 900,
+        headTracking: '-.012em',
+        headCaps: true,
+        bodyWeight: 400,
+        sectionRule: '3px solid var(--dsw-alias-brand-primary)',
+        code: 'saturate(1.04) contrast(1.02)',
+        tokens: {
+          '--dsw-alias-bg-base': { light: '#F8F5EF', dark: '#14100E' },
+          '--dsw-alias-bg-layer-1': { light: '#FFFDF8', dark: '#1C1715' },
+          '--dsw-alias-bg-layer-2': { light: '#EDE7DE', dark: '#251E1B' },
+          '--dsw-alias-bg-overlay': { light: '#FFFFFF', dark: '#211A18' },
+          '--dsw-alias-border-l1': { light: '#DCD3C8', dark: '#332824' },
+          '--dsw-alias-border-l2': { light: '#B8AC9E', dark: '#4E3D38' },
+          '--dsw-alias-brand-primary': { light: '#C42A5E', dark: '#FF739B' },
+          '--dsw-alias-label-primary': { light: '#191715', dark: '#F5EDE6' },
+          '--dsw-alias-label-secondary': { light: '#57504A', dark: '#B3A399' },
+          '--dsw-alias-state-error-primary': { light: '#B22238', dark: '#FF8A7A' },
+          '--dsw-alias-state-idle-primary': { light: '#8E877E', dark: '#8B7C72' },
+          '--dsw-alias-state-success-primary': { light: '#356B4F', dark: '#86C09A' },
+          '--dsw-alias-state-warn-primary': { light: '#93631A', dark: '#E8B96A' },
+          '--dsw-specific-sidebar-fill': { light: '#F1ECE4', dark: '#100C0A' },
+        },
+      },
     ]
 
     /**
@@ -458,6 +618,12 @@ window.__ModuleLoader__.load({
       c64: { shape: 'round', rule: 'hairline', density: 'normal' },
       eink: { shape: 'round', rule: 'hairline', density: 'normal' },
       darkroom: { shape: 'round', rule: 'double', density: 'normal' },
+      // The poster three: a nameplate is set square with heavy rules, an
+      // engraved plate is set round with hairlines, a drum print is square and
+      // tight. Their section rules travel with the palette (see sectionRule).
+      ink: { shape: 'square', rule: 'double', density: 'normal' },
+      cobalt: { shape: 'round', rule: 'hairline', density: 'normal' },
+      riso: { shape: 'square', rule: 'hairline', density: 'normal' },
     }
 
     const finishOf = (palette) => PALETTE_FINISH[palette?.id] ?? PALETTE_FINISH.seal
@@ -551,6 +717,12 @@ window.__ModuleLoader__.load({
         einkDesc: '米灰纸面无彩色，久读最省眼',
         darkroomName: '暗房红',
         darkroomDesc: '褐色暗调，安全灯的红',
+        inkName: '墨黑',
+        inkDesc: '只有一种墨：报纸头版，小标宋 + Archivo，粗细全靠字重与规则线',
+        cobaltName: '钴蓝',
+        cobaltDesc: '骨白纸上一版钴蓝，深色是蓝晒法；Bodoni 与华文中宋的铜版刻线',
+        risoName: '孔版',
+        risoDesc: '黑版 + 一版荧光粉：粗黑标题、粉色段落线，孔版印刷的双色',
       },
       en: {
         sectionTitle: 'Retro theme',
@@ -619,6 +791,12 @@ window.__ModuleLoader__.load({
         einkDesc: 'Grey paper, no colour, easiest on the eyes',
         darkroomName: 'Darkroom red',
         darkroomDesc: 'Brown dark tones and safelight red',
+        inkName: 'Ink only',
+        inkDesc: 'One ink, nothing else: a front page in 小标宋 and Archivo, weight and rules doing all the work',
+        cobaltName: 'Cobalt',
+        cobaltDesc: 'One cobalt plate on bone paper, cyanotype in the dark; engraved Bodoni and 华文中宋',
+        risoName: 'Risograph',
+        risoDesc: 'Key plate plus one fluorescent pink drum: 900 block headings and a pink section rule',
       },
     }
 
@@ -741,7 +919,7 @@ window.__ModuleLoader__.load({
           'body h3',
           'body [class*="titleGroup"]>span:first-child',
         ]
-        css.push(`${targets.join(',')}{font-family:${heading}!important;letter-spacing:${tracking};font-weight:${palette.headWeight ?? 600};font-synthesis:none${palette.headVariation ? `;font-variation-settings:${palette.headVariation}` : ''}${palette.headXHeight ? `;font-size-adjust:${palette.headXHeight}` : ''}}`)
+        css.push(`${targets.join(',')}{font-family:${heading}!important;letter-spacing:${tracking};font-weight:${palette.headWeight ?? 600};font-synthesis:none${palette.headCaps ? ';text-transform:uppercase' : ''}${palette.headVariation ? `;font-variation-settings:${palette.headVariation}` : ''}${palette.headXHeight ? `;font-size-adjust:${palette.headXHeight}` : ''}}`)
       }
       return css.join('\n')
     }
@@ -844,6 +1022,14 @@ window.__ModuleLoader__.load({
         parts.push(
           'body [class*="markdown"] h2,body [class*="markdown"] h3{border-bottom:1px solid var(--dsw-alias-border-l1);padding-bottom:.3em}',
         )
+        // A palette may overrule that hairline with the rule its own press would
+        // print: a 2px ink bar under a front-page section, an engraved double
+        // rule, a second-drum pink bar. It has to come after the rule above.
+        if (palette.sectionRule) {
+          parts.push(
+            `body [class*="markdown"] h2,body [class*="markdown"] h3{border-bottom:${palette.sectionRule}}`,
+          )
+        }
       }
 
       // 思源宋体 is a family with real weights: without asking for Medium the
@@ -1070,6 +1256,52 @@ window.__ModuleLoader__.load({
       )
     }
 
+    /** Ink only: the whale knocked out of a solid plate, the way a front page
+     *  prints its masthead — one ink, paper showing through the counter. */
+    function inkArt(id, compact) {
+      return h(
+        'g',
+        null,
+        h('rect', { x: 1.1, y: 1.1, width: 21.8, height: 21.8, fill: MARK_INK.ink }),
+        whale(whaleFit(compact ? 16.2 : 17.2), { fill: MARK_INK.paper }),
+      )
+    }
+
+    /** Cobalt: the whale inside a printer's crop marks. */
+    function cobaltArt(id, compact) {
+      const fit = whaleFit(compact ? 18 : 19)
+      const tick = (x, y, w, h_, key) =>
+        h('rect', { x, y, width: w, height: h_, fill: MARK_INK.brand, opacity: 0.5, key })
+      return h(
+        'g',
+        null,
+        whale(fit, { fill: MARK_INK.brand }),
+        tick(1.4, 1.4, 3.6, 0.5, 'tl-h'),
+        tick(1.4, 1.4, 0.5, 3.6, 'tl-v'),
+        tick(19, 1.4, 3.6, 0.5, 'tr-h'),
+        tick(22.1, 1.4, 0.5, 3.6, 'tr-v'),
+        tick(1.4, 22.1, 3.6, 0.5, 'bl-h'),
+        tick(1.4, 19, 0.5, 3.6, 'bl-v'),
+        tick(19, 22.1, 3.6, 0.5, 'br-h'),
+        tick(22.1, 19, 0.5, 3.6, 'br-v'),
+      )
+    }
+
+    /** Riso: key plate plus the spot drum, a drum-width off register. */
+    function risoArt(id, compact) {
+      const fit = whaleFit(compact ? 18.6 : 19.6)
+      const shift = compact ? 0.9 : 1.05
+      return h(
+        'g',
+        null,
+        whale({ ...fit, x: fit.x + shift, y: fit.y + shift }, {
+          fill: MARK_INK.brand,
+          opacity: 0.7,
+        }),
+        whale(fit, { fill: MARK_INK.ink }),
+      )
+    }
+
     /** One drawn mark per palette id; an unknown id falls back to the seal. */
     const MARK_ART = {
       seal: plainArt,
@@ -1084,6 +1316,9 @@ window.__ModuleLoader__.load({
       c64: plainArt,
       eink: einkArt,
       darkroom: darkroomArt,
+      ink: inkArt,
+      cobalt: cobaltArt,
+      riso: risoArt,
     }
 
     /** The brand seat's mark: one palette's whale on the 24-unit grid. */

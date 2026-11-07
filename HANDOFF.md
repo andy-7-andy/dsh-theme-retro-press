@@ -1,6 +1,6 @@
 # Retro Press 交接文档（HANDOFF）
 
-> 最后更新：2026-11-07 · 包版本 **3.8.4**（已上线 npm，`latest`）· 市场 PR 分支已就绪，等仓库满 1 天 · 仓库 https://github.com/andy-7-andy/dsh-theme-retro-press
+> 最后更新：2026-11-07 · 包版本 **3.9.0**（十五套配色，新增三套单色编辑印刷海报页）· 3.8.4 为 npm 上的 latest，3.9.0 待发 · 仓库 https://github.com/andy-7-andy/dsh-theme-retro-press
 
 这份文档写给"下一次接手的人（或下一个会话的 AI）"。目标是：**不用重读历史对话，也能改一个配色、发一个版本**。
 
@@ -29,7 +29,7 @@ profiles\node_modules\dsh-theme-retro-press           -> 源目录（Junction）
 
 ```
 retro-press/
-├── client.js          ← 全部逻辑：12 套配色、字体栈、CSS 生成、设置页 UI（约 1500 行）
+├── client.js          ← 全部逻辑：15 套配色、字体栈、CSS 生成、设置页 UI（约 1750 行）
 ├── index.js           ← 宿主侧入口（很薄）
 ├── cordis.patch.yml   ← 插件声明：- insert: [{id: retro-press, name: 'dsh-theme-retro-press'}]
 ├── package.json       ← name/version/engines.dsh/dsh.bundle/dsh.client/files
@@ -64,6 +64,9 @@ retro-press/
 | `c64` | 八位紫 | Eight-bit violet | 紫蓝底、米白字 |
 | `eink` | 墨水屏 | E-ink | 米灰纸面无色，久读最省眼 |
 | `darkroom` | 暗房红 | Darkroom red | 褐色暗调，安全灯的红 |
+| `ink` | 墨黑 | Ink only | **单色海报**：只有一版墨，小标宋报头 + Archivo Black |
+| `cobalt` | 钴蓝 | Cobalt | **单色海报**：骨白纸 + 钴蓝，深色是蓝晒法 |
+| `riso` | 孔版 | Risograph | **单色海报**：黑版 + 一版荧光粉，900 标题 |
 
 **palette id 永不改**——用户的本地设置按 id 存，改了配色就丢。
 
@@ -77,6 +80,8 @@ retro-press/
   heading: 'serif' | 'sans',       // 标题类别
   fontStack, headingStack,         // 显式字体栈（覆盖 font/heading）
   headWeight, headTracking,        // 标题字重、字距
+  headCaps,                        // 可选：标题转大写（拉丁部分）
+  sectionRule,                     // 可选：按配色覆盖段落底线（排在默认细线之后）
   bodyWeight,                      // 正文字重（可选，见 §4）
   xHeight, headXHeight,            // font-size-adjust（可选，见 §4）
   code,                            // 代码块滤镜：sepia()/saturate()...
@@ -100,6 +105,12 @@ FONT_MIST_HEAD    Bricolage Grotesque 700（+ headVariation opsz96/wdth88）
 FONT_MIST_BODY    Bitter 450（石板衬线）
 FONT_MOSS_HEAD    Fraunces 600（+ headVariation SOFT60/WONK1/opsz40）
 FONT_MOSS_BODY    Alegreya 500（书写体老式衬线）
+FONT_INK_HEAD     Archivo Black → 方正小标宋简体（报纸头版）
+FONT_INK_BODY     Libre Franklin → 思源黑体（1912 报纸 grotesque）
+FONT_COBALT_HEAD  Bodoni MT → 华文中宋（铜版刻线）
+FONT_COBALT_BODY  Archivo → 思源黑体
+FONT_RISO_HEAD    Archivo Black → 思源黑体（900 锁成一块墨）
+FONT_RISO_BODY    Space Grotesk → 思源黑体（机排感）
 FONT_SERIF / FONT_SANS / FONT_MONO   老配色的通用栈
 ```
 
@@ -125,6 +136,24 @@ FONT_SERIF / FONT_SANS / FONT_MONO   老配色的通用栈
 源文件散在 `D:\个人与收集\字体\` 与 `D:\tmp\latin*\`。
 
 **主题只引用字体名，不打包字体**：别人装了主题但没装字体会回退到系统字面（已写好回退链）。若要把字体随包分发，注意 OFL 需附许可证，方正系为商业字库**不可分发**。
+
+### 4.5 三套单色海报页（3.9.0）为什么这么排
+
+按「单色编辑印刷海报」做的三页，一版一色；区别不在色相，在**排印声音**：
+
+| 配色 | 标题 | 正文 | 自己的记号 |
+|---|---|---|---|
+| 墨黑 ink | Archivo Black 大写 + 方正小标宋（报头） | Libre Franklin 1912 + 思源黑体 | 实心墨块里反白鲸鱼 |
+| 钴蓝 cobalt | Bodoni MT + 华文中宋（铜版刻线） | Archivo + 思源黑体 | 鲸鱼 + 四角裁切标记 |
+| 孔版 riso | Archivo Black 900 + 思源黑体 900（锁成一块） | Space Grotesk + 思源黑体 | 黑版/粉版错位套印 |
+
+- **墨黑没有第二色**：`brand` 就是墨色，所以链接、按钮、标记、段落线全是同一个黑——单色海报的说服力必须由字重和规则线给出。段落线 `2px solid label-primary`。
+- **钴蓝的深色是蓝晒法**（`#0A1E33` 普鲁士蓝底 + 纸白字），浅色是骨白纸印一版钴蓝。段落线 `3px double`。
+- **孔版是双色印刷**：粉色只落在「第二版会落的地方」——段落线（3px 实线）、链接、按钮、标记套印。段落线 `3px solid brand`，这条是 `sectionRule` 字段唯一的用法。
+- 三套都 `texture:'paper'`、`bodyWeight:400`，正文按 13.5px / 1.75 行高排，长段落先能读，标题才敢做重。
+- 字体是**真的装在本机**才敢用：Archivo Black、Libre Franklin、Space Grotesk、Bodoni MT、方正小标宋、华文中宋、思源黑体（含 900）都实测过；思源宋体未装，别往栈里放。
+
+
 
 ---
 
@@ -194,13 +223,15 @@ token 是 granular token（Read and write (publish and stage) + All packages + O
 - 3.8.2 把 adjust 从 .54 提到 .58（同样被撤）
 - 3.8.3 换字面 + 加字重（Archivo / Playfair）
 - **3.8.4 换有性格的字面**：靛蓝 Bricolage 700 + Bitter 450；苔绿 Fraunces 600（SOFT/WONK）+ Alegreya 500。新增 palette 字段 `headVariation`（写 font-variation-settings）
+- **3.9.0 三套单色海报页**：墨黑 / 钴蓝 / 孔版，十五套。新增字段 `headCaps`、`sectionRule`；三枚新标记（反白墨块、裁切标记、套印错位）；`assets/palettes.png` 重出成 15 格，新增 `assets/posters.png`（三套的浅色+深色对照）
 
 ### 待办（按优先级）
 
-1. **上线**：已完成。3.8.4 于 2026-11-07 11:01Z 通过网页 Approve 发布，`npm view dsh-theme-retro-press version` = 3.8.4，shasum `5f237c8e…`，与本地 `npm pack` 产物逐字节一致（13 files）。**3.8.3 仍留在暂存区**（被 3.8.4 取代），下次去 https://www.npmjs.com/settings/andy-7/staged-packages 点 Reject 清掉即可，不要再 Approve。
-2. **市场 PR**：分支与条目已备好，2026-11-08 13:02 之后开 PR（见 §6）。
-3. **确认 A+B**：3.8.4 已落 A（Bricolage + Bitter）+ B（Fraunces + Alegreya）。备选方向图见 `D:\Systems\dsh\workspace\retro-press-排印方向-六格.png`（D 木刻 / E 窄体大写 / F 几何 / G 高对比 / H EB Garamond / I 打字机），若用户想再换，改四个 FONT_* 常量即可。
-4. **字体分发决策**：是否把 Archivo/Playfair 等 OFL 字体打进包（现在只写名字 + 回退）。
+1. **上线 3.9.0**：代码与文档已就绪，等走 §5 的暂存发布（3.8.4 是当前 latest）。
+2. **市场 PR**：分支与条目已备好，2026-11-08 13:02 之后开 PR（见 §6）。条目描述已改为「十五套 + 三套单色海报页」，开 PR 前记得在 fork 里同步那版 yml。
+3. **3.8.3 暂存区**：仍留着一个被取代的 staged 包，去 https://www.npmjs.com/settings/andy-7/staged-packages 点 Reject 清掉。
+4. **确认观感**：三套是照着"单色编辑印刷海报 + 能长读"做的。若想更极端，可拧的旋钮：墨黑换 SimSun 正文（更旧但细）、钴蓝深色加深成真正的蓝晒（现在 `#0A1E33`）、孔版把段落线从 3px 加到 5px。
+5. **字体分发决策**：是否把 Archivo / Libre Franklin / Space Grotesk 等 OFL 字体打进包（现在只写名字 + 回退）。
 
 ---
 
@@ -230,6 +261,8 @@ cd D:\内容与发行\插件发行\复古油墨主题-dsh-theme-retro-press
 node --check client.js
 powershell -NoProfile -ExecutionPolicy Bypass -File D:\Systems\dsh\plugins\health-check.ps1
 # 期望：HEALTHY + "OK source dsh-theme-retro-press <version>"
-npm pack --dry-run     # 期望 13 files，含 assets/*.png
+npm pack --dry-run     # 期望 14 files（新增 assets/posters.png），含 assets/*.png
 git status             # 期望干净
 ```
+
+预览工具在 `D:\Systems\dsh\workspace\theme-design\`：`preview.js`（三套新配色对照页）、`make-palettes-png.js`（15 格总览）、`load-palettes.js`（从 client.js 里直接抽出 PALETTES，保证出图和插件一致）。
