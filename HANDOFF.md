@@ -1,6 +1,6 @@
 # Retro Press 交接文档（HANDOFF）
 
-> 最后更新：2026-11-07 · 包版本 **3.10.1**（九套配色，实物命名，每套一对字面；蓝晒纸的纸改成蓝的，代码统一 Cascadia Mono）· 3.8.4 为 npm 上的 latest，3.10.0 待发 · 仓库 https://github.com/andy-7-andy/dsh-theme-retro-press
+> 最后更新：2026-11-07 · 包版本 **3.10.2**（九套配色，实物命名，每套一对字面；蓝晒纸的纸是蓝的，代码统一 Cutive Mono）· 3.8.4 为 npm 上的 latest，3.10.0 待发 · 仓库 https://github.com/andy-7-andy/dsh-theme-retro-press
 
 这份文档写给"下一次接手的人（或下一个会话的 AI）"。目标是：**不用重读历史对话，也能改一个配色、发一个版本**。
 
@@ -57,10 +57,10 @@ retro-press/
 | `ink` | 铅字 | Lead type | 一枚活字、一份报头 | Archivo Black＋方正小标宋 / Libre Franklin＋思源黑体 |
 | `cobalt` | 蓝晒纸 | Cyanotype | 一张蓝晒相纸 | Bodoni MT＋经典宋体简 / Archivo＋思源黑体 |
 | `riso` | 孔版 | Risograph | 一版孔版油墨 | Bricolage 800＋思源黑体 / Space Grotesk＋思源黑体 |
-| `crt` | 显像管 | CRT tube | 一支显像管 | VT323＋思源黑体 / Cascadia Mono＋思源黑体 |
-| `phosphor` | 荧光屏 | Phosphor screen | 一块 P1 荧光屏 | DotGothic16 / Cascadia Mono＋思源黑体 |
+| `crt` | 显像管 | CRT tube | 一支显像管 | VT323＋思源黑体 / Cutive Mono＋思源黑体 |
+| `phosphor` | 荧光屏 | Phosphor screen | 一块 P1 荧光屏 | DotGothic16 / Cutive Mono＋思源黑体 |
 | `ibm` | 打孔卡 | Punch card | 一张打孔卡 | Archivo 700＋仿宋_GB2312 / Bitter＋思源黑体 |
-| `c64` | 软盘 | Floppy disk | 一张 5¼ 软盘 | Silkscreen＋DotGothic16 / Cascadia Mono＋思源黑体 |
+| `c64` | 软盘 | Floppy disk | 一张 5¼ 软盘 | Silkscreen＋DotGothic16 / Cutive Mono＋思源黑体 |
 
 3.10.0 之前删掉的六套（id 已不存在，旧设置会回落到 `moss`）：`seal` 朱印、`sage` 鼠尾草原版、`mist` 靛蓝、`indigo` 铜青、`eink` 墨水屏、`darkroom` 暗房红。
 
@@ -144,14 +144,14 @@ FONT_SERIF / FONT_SANS / FONT_MONO   老配色的通用栈
 | 铅字 ink | Archivo Black 大写 + 方正小标宋 | Libre Franklin + 思源黑体 | 实心墨块里反白鲸鱼 |
 | 蓝晒纸 cobalt | Bodoni MT + 经典宋体简 | Archivo + 思源黑体 | 鲸鱼 + 四角裁切标记 |
 | 孔版 riso | Bricolage Grotesque 800 + 思源黑体 | Space Grotesk + 思源黑体 | 黑版/粉版错位套印 |
-| 显像管 crt | VT323 + 思源黑体 | Cascadia Mono + 思源黑体 | 素画 |
-| 荧光屏 phosphor | DotGothic16（像素汉字） | Cascadia Mono + 思源黑体 | 光晕 |
+| 显像管 crt | VT323 + 思源黑体 | Cutive Mono + 思源黑体 | 素画 |
+| 荧光屏 phosphor | DotGothic16（像素汉字） | Cutive Mono + 思源黑体 | 光晕 |
 | 打孔卡 ibm | Archivo 700 宽字距 + 仿宋_GB2312 | Bitter + 思源黑体 | 素画 |
-| 软盘 c64 | Silkscreen + DotGothic16 | Cascadia Mono + 思源黑体 | 素画 |
+| 软盘 c64 | Silkscreen + DotGothic16 | Cutive Mono + 思源黑体 | 素画 |
 
 - **铅字没有第二色**：`brand` 就是墨色，链接、按钮、标记、段落线全是同一个黑——单色海报的说服力必须由字重和规则线给出。段落线 `2px solid label-primary`。
 - **蓝晒纸的纸本身就是蓝的**：浅色 `#DCE6F0` 淡蓝纸 + `#0F1F2E` 普蓝字（正文对比 13.2:1），深色 `#0A1E33` 湿版蓝晒。段落线 `3px double`。3.10.1 修的就是这一条——原来浅色是骨白纸，跟卡上的蓝条对不上。
-- **代码与等宽正文只有一个字面**：`FONT_CODE` = Cascadia Mono（i 的方点、带尾的 l、单层 g，12.5px 在深色扫描线上仍立得住）。VT323 / Share Tech Mono / Courier Prime 只允许做标题，不许排正文和代码——它们在这个字号上会掉笔画，这是 3.10.1 换掉的第二个问题。
+- **代码与等宽正文只有一个字面**：`FONT_CODE` = Cutive Mono（打字机 slab，字幅宽、1/l/I 分明，13px 在纸色与深色上都立得住；先试的 Cascadia Mono 被判定太像系统字，没有性格）。VT323 / Share Tech Mono / Courier Prime 只允许做标题，不许排正文和代码——它们在这个字号上会掉笔画，这是 3.10.2 换掉的第二个问题。
 - **孔版是双色印刷**：粉色只落在「第二版会落的地方」——段落线、链接、按钮、标记套印。段落线 `3px solid brand`。
 - 九套都 `texture: paper|scan`、`bodyWeight:400`（鼠尾草 500），正文按 13.5px / 1.75 行高排；终端三套 `headWeight:500`，否则浅色下标题压不住正文。
 - 字体是**真的装在本机**才敢用：Archivo/Archivo Black、Libre Franklin、Space Grotesk、Bricolage、Bitter、Fraunces、Alegreya、Georgia、Bookman Old Style、Bodoni MT、VT323、Share Tech Mono、Courier Prime、Silkscreen、DotGothic16，汉字有思源黑体（含 900）、方正小标宋、华文中宋、经典宋体简、方正姚体、仿宋_GB2312。**思源宋体未装，别往栈里放。**
@@ -238,7 +238,7 @@ token 是 granular token（Read and write (publish and stage) + All packages + O
 - **3.9.0 补齐 105 个别名**：`ALIAS_BRIDGE`，见 §4.6
 - **3.10.0 收成九套 + 全部以实物命名 + 每套一对字面**：删 `seal` / `sage` / `mist` / `indigo` / `eink` / `darkroom`；`moss` 接手"鼠尾草"之名，`amber`→牛皮纸、`ink`→铅字、`cobalt`→蓝晒纸、`phosphor`→荧光屏、`ibm`→打孔卡、`c64`→软盘；九对字面见 §4.5；`assets/palettes.png` 重出为九宫格（每张卡用自己的标题字面），`assets/posters.png` 撤下待真机重拍
 
-- **3.10.1 修两处**：蓝晒纸浅色改成真蓝纸（底 DCE6F0、正文 0F1F2E、品牌 17457E）；新增 FONT_CODE = Cascadia Mono，代码与显像管/荧光屏/软盘正文全部换过去，VT323、Share Tech Mono、Courier Prime 只留标题。
+- **3.10.2 收尾：蓝晒纸浅色改成真蓝纸（底 DCE6F0、正文 0F1F2E、品牌 17457E）；代码与显像管/荧光屏/软盘正文统一 FONT_CODE = Cutive Mono（打字机 slab，安装于用户字体目录），VT323、Share Tech Mono、Courier Prime 只留标题；代码字号 13px/1.68。
 
 ### 待办（按优先级）
 

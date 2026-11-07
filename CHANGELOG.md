@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.10.2
+
+- **代码字面换成 Cutive Mono**（打字机 slab）：Cascadia Mono 够清楚但太像系统字，没有性格。Cutive 是有字幅宽、`1` / `l` / `I` 一望即辨、横画带打字机衬线的老稿纸字面，13px 在纸色和深色扫描线上都站得住。代码块 `13px / 1.68`，行内代码 `1.05em`、字距 `.03em`。
+- 用同一枚字面的还有显像管 / 荧光屏 / 软盘三套的正文——它们原来用 Courier Prime 与 Share Tech Mono，小字号掉笔画。
+- ⚠️ 字体需本机安装（OFL，已在 `https://github.com/google/fonts/tree/main/ofl/cutivemono` 取 Regular）；没装时回落到 Courier Prime → Consolas。是否把字体打进包（base64）见 HANDOFF §8 待办。
+
 ## 3.10.1
 
 - **蓝晒纸改成真正的蓝纸**：浅色的底从骨白 `#F3F0E4` 换成淡蓝 `#DCE6F0`，正文 `#0F1F2E` 普蓝，卡片层 `#EAF1F8`、边线 `#B6C6D9` / `#8CA1B9`、侧栏 `#D3DFEC`，品牌蓝收到 `#17457E`（对纸 7.6:1）。原来卡片上是一条蓝、铺开却是一张米白的纸，名字和实物对不上；现在纸本身就是蓝的，深色仍是 `#0A1E33` 的湿版蓝晒。

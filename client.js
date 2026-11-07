@@ -31,14 +31,14 @@ window.__ModuleLoader__.load({
     const FONT_MONO =
       'ui-monospace,"Cascadia Mono","SFMono-Regular",Consolas,"Noto Serif SC","Songti SC","华文中宋",monospace'
     /**
-     * The reading mono. Code and every fixed-pitch body use this one face:
-     * Cascadia Mono has a squared dot on the i, a tailed l, a single-storey g and
-     * enough stem weight to hold 12.5px on a dark scanline. VT323, Share Tech
-     * Mono and Courier Prime all lost their hairlines at that size, which is why
-     * they are now allowed to title only — never to set body or code.
+     * The reading mono. Code and every fixed-pitch body use this one face.
+     * Cutive Mono is a typewritten manuscript: slab serifs, wide advance, and an
+     * unmistakable 1 / l / I. It is what a page looked like when it came off a
+     * typewriter and pasted in — but unlike Courier Prime its stems hold at
+     * 13px. VT323, Share Tech Mono and Courier Prime may title, never set body.
      */
     const FONT_CODE =
-      '"Cascadia Mono","Cascadia Code",Consolas,"Source Han Sans SC","思源黑体","Microsoft YaHei",monospace'
+      '"Cutive Mono","Courier Prime",Consolas,"Source Han Sans SC","思源黑体","Microsoft YaHei",monospace'
     /**
      * The pixel layer. VT323 is a digitisation of DEC's VT320 screen font, and
      * DotGothic16 is the one pixel face that also carries Han glyphs — together
@@ -914,8 +914,8 @@ window.__ModuleLoader__.load({
         parts.push(
           `body pre,body pre code,body code,body kbd,body samp{font-family:${FONT_CODE}!important}`,
           'body pre,body pre code,body code,body kbd,body samp{font-size-adjust:none}',
-          'body pre{font-size:.96em;line-height:1.6;letter-spacing:.01em}',
-          'body :not(pre)>code{font-size:1.02em;letter-spacing:.02em}',
+          'body pre{font-size:.99em;line-height:1.68;letter-spacing:.012em}',
+          'body :not(pre)>code{font-size:1.05em;letter-spacing:.03em}',
         )
       }
 

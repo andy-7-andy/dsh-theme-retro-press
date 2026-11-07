@@ -80,15 +80,15 @@ Retro Press 是一间开在 DeepSeek Harness 里的复古印制车间。九套�
 | 西文正文（蓝晒纸） | Archivo | 思源黑体 → 微软雅黑 |
 | 西文标题（孔版） | Bricolage Grotesque | Archivo → Franklin Gothic Medium |
 | 西文正文（孔版） | Space Grotesk | 思源黑体 → 微软雅黑 |
-| 西文标题（显像管） | VT323 | Share Tech Mono → Cascadia Mono |
-| 西文正文（显像管） | Cascadia Mono | Consolas → 思源黑体 |
-| 西文（荧光屏） | DotGothic16 / Cascadia Mono | VT323 → 思源黑体 |
+| 西文标题（显像管） | VT323 | Share Tech Mono → Cutive Mono |
+| 西文正文（显像管） | Cutive Mono | Courier Prime → 思源黑体 |
+| 西文（荧光屏） | DotGothic16 / Cutive Mono | Courier Prime → 思源黑体 |
 | 西文标题（打孔卡） | Archivo 700 | Libre Franklin → Franklin Gothic |
 | 西文正文（打孔卡） | Bitter | Archivo → 思源黑体 |
 | 西文标题（软盘） | Silkscreen | DotGothic16 → VT323 |
-| 西文正文（软盘） | Cascadia Mono | Consolas → 思源黑体 |
+| 西文正文（软盘） | Cutive Mono | Courier Prime → 思源黑体 |
 
-> **代码与等宽正文只有一张脸**：所有配色的代码块、行内代码，以及显像管／荧光屏／软盘的正文，都用 **Cascadia Mono**；VT323、Share Tech Mono、Courier Prime 只做标题，它们在 12.5px 上会掉笔画。
+> **代码与等宽正文只有一张脸**：所有配色的代码块、行内代码，以及显像管／荧光屏／软盘的正文，都用 **Cutive Mono**；VT323、Share Tech Mono、Courier Prime 只做标题，它们在 12.5px 上会掉笔画。
 >
 > VT323、Share Tech Mono、Courier Prime、Space Grotesk、Bricolage Grotesque、Bitter、Fraunces、Alegreya、Archivo、Libre Franklin、DotGothic16、Silkscreen 都是 SIL OFL 字体，可从 [Google Fonts](https://fonts.google.com/) 免费安装；装上之后字形才完整，不装则按栈回退，功能不受影响。方正小标宋、方正姚体、华文中宋、经典宋体简是商业字库，需要自行授权。
 
