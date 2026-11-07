@@ -1,6 +1,6 @@
 # Retro Press 交接文档（HANDOFF）
 
-> 最后更新：2026-11-07 · 包版本 **3.8.4**（已 staged，待本站批准）· 仓库 https://github.com/andy-7-andy/dsh-theme-retro-press
+> 最后更新：2026-11-07 · 包版本 **3.8.4**（已上线 npm，`latest`）· 市场 PR 分支已就绪，等仓库满 1 天 · 仓库 https://github.com/andy-7-andy/dsh-theme-retro-press
 
 这份文档写给"下一次接手的人（或下一个会话的 AI）"。目标是：**不用重读历史对话，也能改一个配色、发一个版本**。
 
@@ -164,8 +164,11 @@ token 是 granular token（Read and write (publish and stage) + All packages + O
 - 一个插件一个文件：`data/plugins/<owner>__<repo>.yml`
 - 必需 `url`（与仓库完全一致）、`name` = `owner/repo`、`category`（用 `theme`）、`description.en`
 - 条件：仓库**建满 1 天**、`package.json` 必须声明 `dsh.bundle`（只有 `dsh.client` 会被拒）、根目录有 `cordis.patch.yml`
-- 条目草稿：`D:\Systems\dsh\workspace\retro-press-market-entry.yml`
-- 仓库建于 2026-11-07 → **2026-11-08 之后才能提 PR**
+- 仓库已有 `dsh-plugin` / `dsh-theme` / `theme` topics（2026-11-07 加）
+- 条目**已备好在 fork 的分支上**：`andy-7-andy/awesome-dsh-plugin` → 分支 `add-retro-press`，提交 `a514fe0`，只加 `data/plugins/andy-7-andy__dsh-theme-retro-press.yml`；本地克隆在 `D:\Systems\dsh\workspace\awesome-dsh-plugin`
+- 本地已跑过 `validateEntries`（0 problems）和 `generate-readme.mjs`（只在两个 README 各加自己那一行，未提交）
+- 门禁脚本 `scripts/check-submission.mjs` 的 `MIN_AGE_DAYS = 1`，按**创建时间 +24h** 算：仓库建于 `2026-11-07T05:02:33Z` → **北京时间 2026-11-08 13:02 之后** CI 才会绿
+- 开门见山：到期后 `gh pr create --repo awesome-dsh-plugin/awesome-dsh-plugin --head andy-7-andy:add-retro-press --base main`
 
 ---
 
@@ -194,9 +197,9 @@ token 是 granular token（Read and write (publish and stage) + All packages + O
 
 ### 待办（按优先级）
 
-1. **确认 A+B**：3.8.4 已落 A（Bricolage + Bitter）+ B（Fraunces + Alegreya）。备选方向图见 `D:\Systems\dsh\workspace\retro-press-排印方向-六格.png`（D 木刻 / E 窄体大写 / F 几何 / G 高对比 / H EB Garamond / I 打字机），若用户想再换，改四个 FONT_* 常量即可。
-2. **上线**：3.8.3 / 3.8.4 均在暂存区，等用户网页 Approve（3.8.4 是最新，批准即生效）。
-3. **市场 PR**：2026-11-08 之后用草稿条目提。
+1. **上线**：已完成。3.8.4 于 2026-11-07 11:01Z 通过网页 Approve 发布，`npm view dsh-theme-retro-press version` = 3.8.4，shasum `5f237c8e…`，与本地 `npm pack` 产物逐字节一致（13 files）。**3.8.3 仍留在暂存区**（被 3.8.4 取代），下次去 https://www.npmjs.com/settings/andy-7/staged-packages 点 Reject 清掉即可，不要再 Approve。
+2. **市场 PR**：分支与条目已备好，2026-11-08 13:02 之后开 PR（见 §6）。
+3. **确认 A+B**：3.8.4 已落 A（Bricolage + Bitter）+ B（Fraunces + Alegreya）。备选方向图见 `D:\Systems\dsh\workspace\retro-press-排印方向-六格.png`（D 木刻 / E 窄体大写 / F 几何 / G 高对比 / H EB Garamond / I 打字机），若用户想再换，改四个 FONT_* 常量即可。
 4. **字体分发决策**：是否把 Archivo/Playfair 等 OFL 字体打进包（现在只写名字 + 回退）。
 
 ---
