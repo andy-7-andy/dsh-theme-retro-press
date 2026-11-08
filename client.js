@@ -982,7 +982,7 @@ window.__ModuleLoader__.load({
       if (palette.xHeight) {
         // font-size-adjust equalises x-height across faces: the Latin is grown
         // to the Chinese measure, the Chinese (already at that measure) is left
-        // alone. Anything with its own cast 鈥?code, quotes 鈥?is opted out
+        // alone. Anything with its own cast — code, quotes — is opted out
         // further down, or the terminal face would balloon.
         css.push(`body{font-size-adjust:${palette.xHeight}}`)
       }
