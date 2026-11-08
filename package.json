@@ -42,7 +42,8 @@
     "icon.svg",
     "assets/*.png",
     "CHANGELOG.md",
-    "assets/*.txt"
+    "assets/*.txt",
+    "assets/*.jpg"
   ],
   "publishConfig": {
     "access": "public",
