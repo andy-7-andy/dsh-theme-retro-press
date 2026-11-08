@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.13.2
+
+- **字体真正落地**：样式表里的 `font-family` 在真实页面上有一部分节点不生效——代码块拿到了 Cutive Mono，正文和标题却仍是系统黑体。现在改为**内联写入**（`el.style.setProperty('font-family', …, 'important')`），样式表再没机会把它盖回去：
+  - `[class*="markdown"]` 容器统一写正文族并向下继承；
+  - `h1–h6` 与 `[class*="titleGroup"]>span:first-child` 单独写标题族和字距；
+  - 用 `MutationObserver`（240 ms 节流）在对话增长后补写，流式输出不掉字；
+  - 设置里选「系统」时不写内联，仍交给宿主。
+
 ## 3.13.1
 
 - **修字体没生效**：配色的字体栈以前只通过宿主的 `--dsw-font-family` 变量下发，这个变量不再落到正文节点上，于是九套全部掉回系统黑体。现在字体族同时直接写在 `body` 与 `body [class*="markdown"]` 上，变量保留做兼容。

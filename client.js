@@ -806,6 +806,55 @@ window.__ModuleLoader__.load({
       return () => tag.remove()
     }
 
+    /**
+     * Stylesheets were not enough: the palette face lost to the host's own rules
+     * on part of the tree (code blocks took Cutive, headings stayed sans), so the
+     * family is also written inline, where nothing can take it back. Inline
+     * declarations are re-applied when the transcript grows, and cleared when the
+     * user asks for the host's own face.
+     */
+    let fontWatch = null
+    let fontTimer = 0
+    function syncFonts(state, palette) {
+      const stack = state.font === 'auto' ? (palette.fontStack ?? FONT_SANS) : null
+      const heading =
+        state.font === 'auto'
+          ? (palette.headingStack ?? null)
+          : state.font === 'headline'
+            ? FONT_SERIF
+            : state.font === 'serif'
+              ? FONT_SERIF
+              : state.font === 'mono'
+                ? FONT_MONO
+                : null
+      const body = stack ?? (state.font === 'headline' ? FONT_SANS : null)
+      const targets = []
+      if (body) document.querySelectorAll('[class*="markdown"]').forEach((el) => targets.push([el, body, false]))
+      if (heading) {
+        document.querySelectorAll('body h1,body h2,body h3,body h4,body h5,body h6,body [class*="titleGroup"]>span:first-child').forEach((el) => targets.push([el, heading, true]))
+      }
+      for (const [el, family, isHeading] of targets) {
+        if (el.style.getPropertyValue('font-family') !== family || el.style.getPropertyPriority('font-family') !== 'important') {
+          el.style.setProperty('font-family', family, 'important')
+        }
+        const tracking = isHeading && palette.headTracking ? palette.headTracking : ''
+        if (tracking && el.style.getPropertyValue('letter-spacing') !== tracking) el.style.setProperty('letter-spacing', tracking)
+      }
+    }
+
+    /** Re-apply after the transcript grows; throttled so streaming stays smooth. */
+    function watchFonts(state, palette) {
+      if (fontWatch) return
+      fontWatch = new MutationObserver(() => {
+        if (fontTimer) return
+        fontTimer = setTimeout(() => {
+          fontTimer = 0
+          syncFonts(state, palette)
+        }, 240)
+      })
+      fontWatch.observe(document.body, { childList: true, subtree: true })
+    }
+
     /** Token declarations used only when the theme service refuses the palette. */
     function tokenDeclarations(palette) {
       const light = []
@@ -1815,6 +1864,8 @@ window.__ModuleLoader__.load({
             .filter(Boolean)
             .join('\n')
           finishDisposer = installStyles('finish', sheet)
+          syncFonts(state, palette)
+          watchFonts(state, palette)
         }
 
         ctx.effect(() => {
