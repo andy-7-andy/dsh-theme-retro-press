@@ -26,7 +26,7 @@ Retro Press 是一间开在 DeepSeek Harness 里的复古印制车间。九套�
 | 2 | 牛皮纸 | Kraft paper | 牛皮纸米黄、铁锈褐字：Bookman 信封标题 + Georgia 正文，中文姚体与宋体 |
 | 3 | 铅字 | Lead type | 白纸一版墨：小标宋 + Archivo Black 报头，正文 Libre Franklin 与思源黑体 |
 | 4 | 蓝晒纸 | Cyanotype | 一张晒出来的蓝纸：纸本身是蓝的，字是更深的普蓝，Bodoni 与经典宋体简刻线 |
-| 5 | 孔版 | Risograph | 黑版 + 一版荧光粉：Bricolage 800 锁成一块的标题，粉色段落线 |
+| 5 | 孔版 | Risograph | 黑版 + 一版酒红：Bricolage 800 锁成一块的标题，酒红段落线 |
 | 6 | 显像管 | CRT tube | 琥珀字符的显像管：VT323 屏显标题 + 看得清的等宽正文 |
 | 7 | 荧光屏 | Phosphor screen | P1 荧光绿终端：DotGothic16 像素标题 + 看得清的等宽正文 |
 | 8 | 打孔卡 | Punch card | 大型机的深蓝与青白：Archivo 宽字距标题 + 仿宋，正文 Bitter |
@@ -43,7 +43,7 @@ Retro Press 是一间开在 DeepSeek Harness 里的复古印制车间。九套�
 
 - **铅字** —— 只有一种墨。标题小标宋 + Archivo Black，正文思源黑体 + Libre Franklin。没有第二色：链接、按钮、标记全用同一个墨色，浓淡只由字重和 2px 实墨段落线给出。
 - **蓝晒纸** —— 纸本身就是蓝的：浅色是一张从显影液里捞出来的淡蓝纸、字是更深的普蓝；深色是还没干的那张，`#0A1E33` 到底。标题 Bodoni + 经典宋体简。
-- **孔版** —— 黑版 + 一版荧光粉。Bricolage 800 把标题锁成一块墨，粉色只落在第二版该落的地方：3px 段落线、链接、按钮、标记的套印错位。
+- **孔版** —— 黑版 + 一版酒红。Bricolage 800 把标题锁成一块墨，酒红只落在第二版该落的地方：3px 段落线、链接、按钮、标记的套印错位。
 
 ## 质感
 

@@ -286,7 +286,7 @@ window.__ModuleLoader__.load({
         },
       },
       {
-        /** Key plate plus one pink drum: Bricolage 800 locked up as a block. */
+        /** Key plate plus one burgundy drum: Bricolage 800 locked up as a block. */
         id: 'riso',
         nameKey: 'risoName',
         descKey: 'risoDesc',
@@ -306,7 +306,7 @@ window.__ModuleLoader__.load({
           '--dsw-alias-bg-overlay': { light: '#FFFFFF', dark: '#211A18' },
           '--dsw-alias-border-l1': { light: '#DCD3C8', dark: '#332824' },
           '--dsw-alias-border-l2': { light: '#B8AC9E', dark: '#4E3D38' },
-          '--dsw-alias-brand-primary': { light: '#C42A5E', dark: '#FF739B' },
+          '--dsw-alias-brand-primary': { light: '#7A2038', dark: '#CE8798' },
           '--dsw-alias-label-primary': { light: '#191715', dark: '#F5EDE6' },
           '--dsw-alias-label-secondary': { light: '#57504A', dark: '#B3A399' },
           '--dsw-alias-state-error-primary': { light: '#B22238', dark: '#FF8A7A' },
@@ -650,7 +650,7 @@ window.__ModuleLoader__.load({
         cobaltName: '蓝晒纸',
         cobaltDesc: '一张晒出来的蓝纸：纸本身就是蓝的，字是更深的普蓝，Bodoni 与经典宋体简刻线',
         risoName: '孔版',
-        risoDesc: '黑版加一版荧光粉：Bricolage 800 锁成一块的标题，粉色段落线',
+        risoDesc: '黑版加一版酒红：Bricolage 800 锁成一块的标题，酒红段落线',
         crtName: '显像管',
         crtDesc: '琥珀字符的显像管：VT323 屏显标题，正文用等宽字排得像终端输出',
         phosphorName: '荧光屏',
@@ -722,7 +722,7 @@ window.__ModuleLoader__.load({
         cobaltName: 'Cyanotype',
         cobaltDesc: 'A sheet pulled from the cyanotype wash: blue paper, deeper blue image, engraved Bodoni and 经典宋体简',
         risoName: 'Risograph',
-        risoDesc: 'Key plate plus one fluorescent pink drum: Bricolage 800 headings and a pink section rule',
+        risoDesc: 'Key plate plus one burgundy drum: Bricolage 800 headings and a wine section rule',
         crtName: 'CRT tube',
         crtDesc: 'Amber characters on a tube: VT323 screen headings over a readable fixed-pitch body',
         phosphorName: 'Phosphor screen',
