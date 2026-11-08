@@ -1,6 +1,6 @@
 {
   "name": "dsh-theme-retro-press",
-  "version": "3.13.0",
+  "version": "3.13.1",
   "description": "Retro Press — a letterpress theme workshop for the DeepSeek Harness Web client: nine palettes named after the objects they are printed on, each with its own Latin and Han type pairing, paper tooth, adjustable measure, and every face bundled.",
   "type": "module",
   "license": "MIT",
