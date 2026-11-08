@@ -831,7 +831,9 @@ window.__ModuleLoader__.load({
       const targets = []
       if (body) document.querySelectorAll('[class*="markdown"]').forEach((el) => targets.push([el, body, false]))
       if (heading) {
-        document.querySelectorAll('body h1,body h2,body h3,body h4,body h5,body h6,body [class*="titleGroup"]>span:first-child').forEach((el) => targets.push([el, heading, true]))
+        document.querySelectorAll(
+          'body h1,body h2,body h3,body h4,body h5,body h6,body [class*="titleGroup"]>span:first-child,body [class*="markdown"] [class*="heading"],body [class*="markdown"] [class*="title"]',
+        ).forEach((el) => targets.push([el, heading, true]))
       }
       for (const [el, family, isHeading] of targets) {
         if (el.style.getPropertyValue('font-family') !== family || el.style.getPropertyPriority('font-family') !== 'important') {
