@@ -78,7 +78,7 @@ window.__ModuleLoader__.load({
     const FONT_SAGE_HEAD =
       '"Fraunces RP","Fraunces","Playfair Display RP","Playfair Display","Bodoni MT","华文中宋","STZhongsong","Noto Serif SC","Songti SC","Song RP",serif'
     const FONT_SAGE_BODY =
-      '"Alegreya RP","Alegreya","EB Garamond","Archivo RP","Archivo","华文中宋","STZhongsong","Source Han Sans SC","思源黑体","Microsoft YaHei","Song RP",serif'
+      '"Alegreya RP","Alegreya","EB Garamond","Archivo RP","Archivo","华文中宋","STZhongsong","Song RP","Source Han Sans SC","思源黑体","Microsoft YaHei",serif'
 
     /**
      * 牛皮纸 — Bookman Old Style: the heavy, wide-footed American book face that
@@ -88,7 +88,7 @@ window.__ModuleLoader__.load({
     const FONT_KRAFT_HEAD =
       '"Bookman Old Style","Bookman","Georgia","方正姚体","FZYaoti","华文中宋","STZhongsong","Songti SC","Song RP",serif'
     const FONT_KRAFT_BODY =
-      '"Georgia","Bookman Old Style","Century Schoolbook","华文中宋","STZhongsong","Source Han Sans SC","思源黑体","Song RP",serif'
+      '"Georgia","Bookman Old Style","Century Schoolbook","华文中宋","STZhongsong","Song RP","Source Han Sans SC","思源黑体",serif'
 
     /**
      * 铅字 — Archivo Black is the poster grotesque, flat-sided and tight, and
@@ -106,7 +106,7 @@ window.__ModuleLoader__.load({
      * Body stays a neutral grotesque so the plate does the talking.
      */
     const FONT_COBALT_HEAD =
-      '"Bodoni MT","Playfair Display RP","Playfair Display","经典宋体简","华文中宋","STZhongsong","Songti SC","Noto Serif SC","Song RP",serif'
+      '"Bodoni MT","Playfair Display RP","Playfair Display","经典宋体简","华文中宋","STZhongsong","Song RP","Songti SC","Noto Serif SC",serif'
     const FONT_COBALT_BODY =
       '"Archivo RP","Archivo","思源黑体","Source Han Sans SC","Microsoft YaHei","PingFang SC","Song RP",sans-serif'
 
@@ -587,7 +587,7 @@ window.__ModuleLoader__.load({
 
     const DICT = {
       zh: {
-        sectionTitle: '复古主题',
+        sectionTitle: '复古油墨主题',
         intro:
           '配色定基调，下面几项定质感。改动立即生效，只保存在这台设备的浏览器里。',
         palette: '配色',
@@ -989,18 +989,18 @@ window.__ModuleLoader__.load({
     function fontCss(state, palette) {
       const bodyOf = (kind) => (kind === 'serif' ? FONT_SERIF : kind === 'mono' ? FONT_MONO : FONT_SANS)
       if (state.font === 'host') return ''
-      if (state.font === 'serif') return `body{--dsw-font-family:${FONT_SERIF}!important}`
-      if (state.font === 'mono') return `body{--dsw-font-family:${FONT_MONO}!important}`
+      if (state.font === 'serif') return `body,body [class*="markdown"]{--dsw-font-family:${FONT_SERIF}!important;font-family:${FONT_SERIF}!important}`
+      if (state.font === 'mono') return `body,body [class*="markdown"]{--dsw-font-family:${FONT_MONO}!important;font-family:${FONT_MONO}!important}`
       if (state.font === 'headline') {
         return [
-          `body{--dsw-font-family:${FONT_SANS}!important}`,
+          `body,body [class*="markdown"]{--dsw-font-family:${FONT_SANS}!important;font-family:${FONT_SANS}!important}`,
           `body h1,body h2,body h3{font-family:${FONT_SERIF}!important;letter-spacing:.01em}`,
         ].join('\n')
       }
       const stack = palette.fontStack ?? bodyOf(palette.font)
       const heading = palette.headingStack ?? (palette.heading === 'serif' ? FONT_SERIF : null)
       const tracking = palette.headTracking ?? '.02em'
-      const css = [`body{--dsw-font-family:${stack}!important}`]
+      const css = [`body,body [class*="markdown"]{--dsw-font-family:${stack}!important;font-family:${stack}!important}`]
       if (palette.bodyWeight) {
         // A medium body weight is the other half of "the Latin reads too thin":
         // 思源黑体 has a real 500, so the Han is set to it rather than synthesised.
