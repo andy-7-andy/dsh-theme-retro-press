@@ -1,6 +1,6 @@
 # Retro Press 交接文档（HANDOFF）
 
-> **3.12.0** — 加了一层压印（纸齿 / 纸不匀 / 墨晕与压痕），九套按实物给了默认强度。3.11.0 起西文全部随包（含 Cutive Mono），汉字仍是引用。**3.12.0 已发到 npm（latest，2026-11-07T19:14Z 上线，shasum `d97f0db4…`，16 files / 881 kB）**，空目录装包验证通过；暂存区已清空（3.8.3 同时清掉）。注意 `.npmrc` 的旧 token 已于 2026-11-08 失效（401），已用 `npm login --auth-type=web` 换新。
+> **3.13.0** — 六项打磨（字体只注入一次、2× 纸齿、第二色三处落点、版心、无障碍、汉字思源宋体子集随包）。**3.12.0 已发到 npm（latest，2026-11-07T19:14Z 上线，shasum `d97f0db4…`，16 files / 881 kB）**，空目录装包验证通过；暂存区里还留着 3.12.1 的包（未 Approve）。注意 `.npmrc` 的旧 token 已于 2026-11-08 失效（401），已用 `npm login --auth-type=web` 换新。
 
 这份文档写给"下一次接手的人（或下一个会话的 AI）"。目标是：**不用重读历史对话，也能改一个配色、发一个版本**。
 
@@ -252,13 +252,17 @@ token 是 granular token（Read and write (publish and stage) + All packages + O
 
 - **3.10.2 收尾：蓝晒纸浅色改成真蓝纸（底 DCE6F0、正文 0F1F2E、品牌 17457E）；代码与显像管/荧光屏/软盘正文统一 FONT_CODE = Cutive Mono（打字机 slab，安装于用户字体目录），VT323、Share Tech Mono、Courier Prime 只留标题；代码字号 13px/1.68。
 - **3.10.3 把 Cutive Mono 打进包**：client.js 末尾 `const CUTIVE_MONO_DATA`（base64 TTF，106,672 字符），`fontFaceCss()` 生成 `@font-face{font-family:"Cutive Mono RP"…url(data:font/ttf;base64,…)}`，排进 `render()` 的第一段；家族名带 `RP` 后缀，避免与本机安装的同名字体打架。许可原文 `assets/OFL-CutiveMono.txt`，已进 `package.json` 的 `files`。client.js 75k → 184k，`npm pack` 14 files / 371 kB。验证方法：静态页只用 `"Cutive Mono RP"` 单家族渲染（本机没有这个族名），字形出现即内嵌成功。
-- **3.11.0 西文全部随包**：Fraunces / Alegreya / Archivo(400,700) / Archivo Black / Libre Franklin / Playfair Display / Bricolage Grotesque / Space Grotesk / VT323 / DotGothic16 / Silkscreen / Bitter 的 **latin 子集 WOFF2**（共 231 kB，base64 后 309 kB）以 `const WEB_FONTS_CSS` 内嵌，`fontFaceCss()` 返回「Cutive 的 TTF + 这 13 条 @font-face」；每个字体栈首位换成 `"X RP"`。单字重像素字面（VT323/Silkscreen/DotGothic16）声明 `font-weight:100 900`，避免 500 被合成加粗。抓取与嵌入脚本：`D:Systemsdshworkspace	heme-designetch-webfonts.js`（走 fonts.googleapis.com css2 + Chrome UA，只取 `/* latin */` 块）与 `embed-webfonts.js`（重写字体栈 + 追加常量，注意**替换字体栈要用负向后顾 `(?<!"X RP",)"X"` 才幂等**，否则重复插入）。许可合并成 `assets/OFL-web-fonts.txt`（12 个家族的 OFL 原文）。汉字仍是商业字库，只写名字。client.js 494 kB，npm pack 15 files / 607 kB。
+- **3.11.0 西文全部随包**：Fraunces / Alegreya / Archivo(400,700) / Archivo Black / Libre Franklin / Playfair Display / Bricolage Grotesque / Space Grotesk / VT323 / DotGothic16 / Silkscreen / Bitter 的 **latin 子集 WOFF2**（共 231 kB，base64 后 309 kB）以 `const WEB_FONTS_CSS` 内嵌，`fontFaceCss()` 返回「Cutive 的 TTF + 这 13 条 @font-face」；每个字体栈首位换成 `"X RP"`。单字重像素字面（VT323/Silkscreen/DotGothic16）声明 `font-weight:100 900`，避免 500 被合成加粗。抓取与嵌入脚本：`D:/Systems/dsh/workspace/theme-design/fetch-webfonts.js`（走 fonts.googleapis.com css2 + Chrome UA，只取 `/* latin */` 块）与 `embed-webfonts.js`（重写字体栈 + 追加常量，注意**替换字体栈要用负向后顾 `(?<!"X RP",)"X"` 才幂等**，否则重复插入）。许可合并成 `assets/OFL-web-fonts.txt`（12 个家族的 OFL 原文）。汉字仍是商业字库，只写名字。client.js 494 kB，npm pack 15 files / 607 kB。
+
+- **3.12.0 压印**：见 §4.7；象牙白把铅字底色从 `#FAFAF6` 改成 `#FCFBF8`（旧值蓝通道低 4，大面积发黄）。
+- **3.12.1 改名 + 更正误判**：中文标题改「复古油墨主题」；同时更正了 3.12.1 当时"locale / package.json 被 GBK 重写"的说法——那是 PowerShell 5.1 读无 BOM UTF-8 的显示假象，原始字节一直是好的，真正坏的只有 client.js 一行注释。
+- **3.13.0 六项打磨**（无新配色）：①字体 `@font-face` 单独挂一层、只注入一次（切选项不再重解析 300 kB 字体）；②纸齿砖补 320px 版 + `@media (min-resolution:2dppx)`；③品牌色多两处落点（表头 9% 底纹、`h3::before` 小方块）；④新增「版心」`WIDTHS` 600/720/0；⑤`prefers-contrast: more` 撤纸齿与墨晕、`prefers-reduced-motion: reduce` 停标记动画；⑥内嵌思源宋体子集 `Song RP`（GB2312 一级 4239 字，1.32 MB WOFF2，`wght 200–900`），插在每个中文字体栈的通用族之前。`client.js` 538 kB → 2.5 MB，`npm pack` 16 files / 2.4 MB。
 
 ### 待办（按优先级）
 
-1. **上线 3.10.3**：代码与文档已就绪，先让用户**完全退出 DSH 再启动**看实际效果，确认后走 §5 的暂存发布（3.8.4 是当前 latest）。
-2. **真机重拍配图**：重启后用真实界面重出 `assets/posters.png`（现在 README 里那段没有图），比手搭 mock 可信。
-3. **市场 PR**：分支与条目已备好，2026-11-08 13:02 之后开 PR（见 §6）。条目描述要改成「九套 + 实物命名」，开 PR 前记得在 fork 里同步那版 yml。
+1. **真机验收 3.13.0**：完全退出 DSH 再启动，重点看四件事——汉字有没有落到 `Song RP`（本机装了方正小标宋时应该是小标宋）、纸齿在 2× 屏上是否更细、版心三档、表头与 `h3` 的第二色。
+2. **发布 3.13.0**：走 §5 的暂存发布；注意 3.12.1 的暂存包（`ec5dfa86-89c3-460c-8782-867d9d097029`）还在暂存区，发布前先 Reject 或让它被新版本替掉。
+3. **市场 PR**：PR #13171 已开且 CI 通过，等维护者合并（条目描述已是九套 + 压印）。
 4. **3.8.3 暂存区**：仍留着一个被取代的 staged 包，去 https://www.npmjs.com/settings/andy-7/staged-packages 点 Reject 清掉。
 5. **其余 OFL 字面是否也内嵌**：目前只打包了 Cutive Mono。Archivo / Bricolage / DotGothic16 / VT323 / Silkscreen 仍是"写名字 + 回退"；若市场用户反馈字形不对，按同一套 `fontFaceCss()` 模式再加（每个约 30–120 kB）。
 

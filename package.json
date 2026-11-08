@@ -1,7 +1,7 @@
 {
   "name": "dsh-theme-retro-press",
-  "version": "3.12.1",
-  "description": "Retro Press — a letterpress theme workshop for the DeepSeek Harness Web client: nine palettes named after the objects they are printed on (sage, kraft paper, lead type, cyanotype, risograph, CRT, phosphor, punch card, floppy), each with its own Latin and Han type pairing and a press pass.",
+  "version": "3.13.0",
+  "description": "Retro Press — a letterpress theme workshop for the DeepSeek Harness Web client: nine palettes named after the objects they are printed on, each with its own Latin and Han type pairing, paper tooth, adjustable measure, and every face bundled.",
   "type": "module",
   "license": "MIT",
   "author": "andy-7-andy",
