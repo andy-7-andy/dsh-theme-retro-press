@@ -1,6 +1,12 @@
 # Retro Press 交接文档（HANDOFF）
 
-> **3.13.2 已发 npm（latest，2026-11-08T09:24Z 上线，shasum `704b69c8…`，17 files / 2.4 MB）** — 字体改为**内联硬写** （样式表被宿主规则盖掉的那部分绕开了），设置里的分区名改为「复古油墨主题」。3.13.0 的六项打磨 （字体只注入一次、2× 纸齿、第二色三处落点、版心、无障碍、汉字思源宋体子集随包）一并进入本版。 注意 npm token 每次会话都会过期，`npm whoami` 报 401 时用 `npm login --auth-type=web` 换新；2.4 MB 的包 `stage publish` 后要等十几分钟才从 `validating` 变 `staged`，别当失败。
+> **市场已收录（2026-11-08T17:18Z 合并）** — PR [#13171](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/13171) merged into `awesome-dsh-plugin/awesome-dsh-plugin`；条目 `data/plugins/andy-7-andy__dsh-theme-retro-press.yml`，分类 `theme`，生成后的 README 落在 **Themes & Appearance**。会随夜间构建自动进入 dsh-market 的**主题 Tab**（一键装/切/卸）。仓库里另有 `screenshots.json`（4 张，控制详情页顺序：scenes → palettes → press → phosphor），改图只推仓库，不用再提 PR。
+>
+> **3.13.3 已发 npm（latest，2026-11-09T02:52Z 上线，shasum `9a0f3ac9…`，18 files / 2.6 MB tarball / 3.4 MB unpacked）** — 孔版的玫红改**酒红**（浅 `#7A2038` / 深 `#CE8798`），色卡与 CHANGELOG 同步。市场展示图是酒红，所以 npm 必须跟到 3.13.3，否则装下来还是玫红。
+>
+> ⚠️ **发版时踩的坑（下次直接照做）**：非交互终端下 `npm stage approve` 会把授权链接打码成 `https://www.npmjs.com/auth/cli/***`，看不到也没法点。而且那个网页会话只活几分钟，人工转发链接基本必然超时（`/-/v1/done` 404）。可用脚本 `D:\Systems\dsh\workspace\approve-staged.js <stage-id>`：它直接对 `POST /-/stage/<id>/approve` 发请求（必须带 `npm-auth-type: web` + `npm-session` + `npm-command` 三个头，registry 才肯回 `authUrl`/`doneUrl`），自动拉起浏览器，确认后重发并完成发布。
+>
+> **3.13.2（2026-11-08T09:24Z，shasum `704b69c8…`，17 files / 2.4 MB）** — 字体改为**内联硬写** （样式表被宿主规则盖掉的那部分绕开了），设置里的分区名改为「复古油墨主题」。3.13.0 的六项打磨 （字体只注入一次、2× 纸齿、第二色三处落点、版心、无障碍、汉字思源宋体子集随包）一并进入本版。 注意 npm token 每次会话都会过期，`npm whoami` 报 401 时用 `npm login --auth-type=web` 换新；2.4 MB 的包 `stage publish` 后要等十几分钟才从 `validating` 变 `staged`，别当失败。
 
 这份文档写给"下一次接手的人（或下一个会话的 AI）"。目标是：**不用重读历史对话，也能改一个配色、发一个版本**。
 
